@@ -13,8 +13,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public HttpStatus loginUser(@RequestBody LoginRequest loginRequest){
-        return userService.findUser(loginRequest.getUsername(), loginRequest.getPassword()) ? HttpStatus.OK : HttpStatus.NOT_FOUND;
+    @ResponseStatus(HttpStatus.OK)
+    public void loginUser(@RequestBody LoginRequest loginRequest){
+        userService.findUser(loginRequest.getUsername(), loginRequest.getPassword());
     }
 
 }

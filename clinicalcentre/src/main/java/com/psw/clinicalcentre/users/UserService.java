@@ -2,6 +2,6 @@ package com.psw.clinicalcentre.users;
 
 public interface UserService {
 
-    Boolean findUser(String username, String password);
+    void findUser(String username, String password);
 
 }

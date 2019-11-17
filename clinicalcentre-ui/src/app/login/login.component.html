@@ -5,6 +5,9 @@
     <input class="btn btn-lg btn-primary" type="button" value="Registration">
   </div>
 
+  <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
   <div class="login_block ">
     <h1 class="login_header">Login</h1><br><br>
     <label class="label_field h4"><b>Username</b></label>
