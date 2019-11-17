@@ -1,0 +1,23 @@
+<div class="background_image">
+
+  <h2 class="welcome_header">Welcome to our clinical centre application!</h2><br>
+  <div class="registration_button">
+    <input class="btn btn-lg btn-primary" type="button" value="Registration">
+  </div>
+
+  <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="login_block ">
+    <h1 class="login_header">Login</h1><br><br>
+    <label class="label_field h4"><b>Username</b></label>
+    <input class="input_field h5" type="text" name ="username" [(ngModel)]="username"><br><br>
+
+    <label class="label_field h4"><b>Password</b></label>
+    <input class="input_field h5" type="password" name ="password" [(ngModel)]="password"><br><br><br>
+    <div class="login_button">
+      <button class="btn btn-lg btn-primary" type="button" (click)="onLogin()">Login</button>
+    </div>
+  </div>
+
+</div>

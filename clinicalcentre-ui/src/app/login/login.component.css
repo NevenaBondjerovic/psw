@@ -1,0 +1,44 @@
+.background_image {
+  height:45em; background-size:cover; width:auto;
+  background-image: url(src/assets/img/login_backgroud_image.png);
+}
+
+.welcome_header {
+   padding: 60px 0px 0px 160px;
+}
+
+.login_header {
+  padding-left: 220px;
+}
+
+.login_block {
+  background-color: white;
+  position: absolute;
+  left: 300px;
+  top: 200px;
+  padding: 20px 10px 20px 30px;
+  width: 600px;
+}
+
+.login_button {
+  padding-left: 220px;
+}
+
+.registration_button{
+  position: absolute;
+  top: 60px;
+  right: 60px;
+}
+
+.label_field {
+  width: 150px;
+}
+
+.input_field {
+  width: 350px;
+}
+
+.error_block {
+  width: 600px;
+  left: 300px;
+}
