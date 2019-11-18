@@ -1,0 +1,50 @@
+<div class="background_image">
+
+  <h2 class="welcome_header">Welcome to our clinical centre application!</h2><br>
+  <div class="login_button">
+    <button class="btn btn-lg btn-primary" type="button" routerLink="/login"> Login </button>
+  </div>
+
+  <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="registration_block">
+    <h2 class="registration_header">Registration</h2><br><br>
+    <label class="label_field h4">Email:</label>
+    <input class="input_field h5" type="email" name ="email" [(ngModel)]="email"><br><br>
+
+    <label class="label_field h4">Password:</label>
+    <input class="input_field h5" type="password" name ="password" [(ngModel)]="password"><br><br>
+
+    <label class="label_field h4">Confirm password:</label>
+    <input class="input_field h5" type="password" name ="confirmPassword" [(ngModel)]="confirmPassword"><br><br>
+
+    <label class="label_field h4">Name:</label>
+    <input class="input_field h5" type="text" name ="name" [(ngModel)]="name"><br><br>
+
+    <label class="label_field h4">Surname:</label>
+    <input class="input_field h5" type="text" name ="surname" [(ngModel)]="surname"><br><br>
+
+    <label class="label_field h4">Address:</label>
+    <input class="input_field h5" type="text" name ="address" [(ngModel)]="address"><br><br>
+
+    <label class="label_field h4">City:</label>
+    <input class="input_field h5" type="text" name ="city" [(ngModel)]="city"><br><br>
+
+    <label class="label_field h4">State:</label>
+    <input class="input_field h5" type="text" name ="state" [(ngModel)]="state"><br><br>
+
+    <label class="label_field h4">Phone number:</label>
+    <input class="input_field h5" type="number" name ="phoneNumber" [(ngModel)]="phoneNumber"><br><br>
+
+    <label class="label_field h4">Insurance number:</label>
+    <input class="input_field h5" type="number" name ="insuranceNumber" [(ngModel)]="insuranceNumber"><br><br>
+
+
+    <br>
+    <div class="submit_button">
+      <button class="btn btn-lg btn-primary" type="button" (click)="onRegistration()">Submit</button>
+    </div>
+  </div>
+
+</div>
