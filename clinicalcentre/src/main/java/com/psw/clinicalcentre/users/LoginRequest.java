@@ -3,7 +3,6 @@ package com.psw.clinicalcentre.users;
 public class LoginRequest {
 
     private String username;
-
     private String password;
 
     public String getUsername() {

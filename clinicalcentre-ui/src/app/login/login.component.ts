@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
-  usersUrl: string = 'http://localhost:8080/users/';
+  loginUrl: string = 'http://localhost:8080/users/login';
   errorMessage = null;
 
   constructor(private http: HttpClient) { }
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-    this.http.post(this.usersUrl, {username: this.username, password: this.password})
+    this.http.post(this.loginUrl, {username: this.username, password: this.password})
       .subscribe(responseData => {
         console.log(responseData);
         this.errorMessage = null;
