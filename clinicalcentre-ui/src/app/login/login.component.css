@@ -1,6 +1,9 @@
 .background_image {
-  height:45em; background-size:cover; width:auto;
+  height: 70em;
+  background-size: cover;
   background-image: url(src/assets/img/login_backgroud_image.png);
+  width: 100%;
+  position: fixed;
 }
 
 .welcome_header {
@@ -36,6 +39,10 @@
 
 .input_field {
   width: 350px;
+}
+
+.white_text {
+  color: white;
 }
 
 .error_block {

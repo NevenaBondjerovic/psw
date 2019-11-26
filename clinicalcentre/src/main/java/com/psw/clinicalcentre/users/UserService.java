@@ -4,4 +4,6 @@ public interface UserService {
 
     void findUser(String username, String password);
 
+    void registerUser(User user);
+
 }
