@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user) {
-        //TODO add validation
         if(userRepository.findByUsername(user.getUsername()).isPresent())
             throw new AlreadyExistException(USER_ALREADY_EXISTS);
 

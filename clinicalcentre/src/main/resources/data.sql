@@ -17,3 +17,5 @@ CREATE TABLE users (
 
 INSERT INTO users (username, password, name, surname, address, city, state, phone_number, insurance_number, approved, activated) VALUES
   ('admin@admin.com', 'admin', 'Pera', 'Peric', 'Adresa 1', 'Novi Sad', 'Srbija', '1234567', '987654321', TRUE, TRUE);
+INSERT INTO users (username, password, name, surname, address, city, state, phone_number, insurance_number, approved, activated) VALUES
+  ('user1@email.com', 'user1', 'Zika', 'Peric', 'Adresa 2', 'Novi Sad', 'Srbija', '23456789', '876543210', TRUE, TRUE);

@@ -1,17 +1,43 @@
 package com.psw.clinicalcentre.users;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class RegistrationRequest {
 
+    @NotBlank
+    @Email
     private String username;
+
+    @NotBlank
     private String password;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String surname;
+
+    @NotBlank
     private String address;
+
+    @NotBlank
     private String city;
+
+    @NotBlank
     private String state;
+
+    @NotBlank
     private String phoneNumber;
+
+    @NotBlank
     private String insuranceNumber;
+
+    @NotNull
     private Boolean approvedByAdministrator;
+
+    @NotNull
     private Boolean activated;
 
     public String getUsername() {
