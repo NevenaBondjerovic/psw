@@ -9,43 +9,77 @@
     <p>{{ errorMessage }}</p>
   </div>
 
-  <div class="registration_block">
-    <h2 class="registration_header">Registration</h2><br><br>
-    <label class="label_field h4">Email:</label>
-    <input class="input_field h5" type="email" name ="email" [(ngModel)]="email" required><br><br>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="registration_block" id="registration-form">
+      <h2 class="registration_header">Registration</h2><br><br>
 
-    <label class="label_field h4">Password:</label>
-    <input class="input_field h5" type="password" name ="password" [(ngModel)]="password" required minlength="8"><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="email">Email:</label>
+        <input class="form-control input_field" type="email" name="email" id="email" ngModel required email #email="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!email.valid && email.touched">Please enter a valid email.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Confirm password:</label>
-    <input class="input_field h5" type="password" name ="confirmPassword" [(ngModel)]="confirmPassword" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="password">Password:</label>
+        <input class="form-control input_field" type="password" name="password" id="password" ngModel required minlength="8" #password="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!password.valid && password.touched">Password should have at least 8 characters.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Name:</label>
-    <input class="input_field h5" type="text" name ="name" [(ngModel)]="name" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="confirmPassword">Confirm password:</label>
+        <input class="form-control input_field" type="password" name="confirmPassword" id="confirmPassword" ngModel required #confirmPassword="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="password.value!==confirmPassword.value && password.touched && confirmPassword.touched">
+          Passwords should match.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Surname:</label>
-    <input class="input_field h5" type="text" name ="surname" [(ngModel)]="surname" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="name">Name:</label>
+        <input class="form-control input_field" type="text" name="name" id="name" ngModel required #name="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!name.valid && name.touched">Name is required.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Address:</label>
-    <input class="input_field h5" type="text" name ="address" [(ngModel)]="address" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="surname">Surname:</label>
+        <input class="form-control input_field" type="text" name="surname" id="surname" ngModel required #surname="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!surname.valid && surname.touched">Surname is required.</span><br><br>
+      </div>
 
-    <label class="label_field h4">City:</label>
-    <input class="input_field h5" type="text" name ="city" [(ngModel)]="city" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="address">Address:</label>
+        <input class="form-control input_field" type="text" name="address" id="address" ngModel required #address="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!address.valid && address.touched">Address is required.</span><br><br>
+      </div>
 
-    <label class="label_field h4">State:</label>
-    <input class="input_field h5" type="text" name ="state" [(ngModel)]="state" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="city">City:</label>
+        <input class="form-control input_field" type="text" name="city" id="city" ngModel required #city="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!city.valid && city.touched">City is required.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Phone number:</label>
-    <input class="input_field h5" type="text" name ="phoneNumber" [(ngModel)]="phoneNumber" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="state">State:</label>
+        <input class="form-control input_field" type="text" name="state" id="state" ngModel required #state="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!state.valid && state.touched">State is required.</span><br><br>
+      </div>
 
-    <label class="label_field h4">Insurance number:</label>
-    <input class="input_field h5" type="text" name ="insuranceNumber" [(ngModel)]="insuranceNumber" required><br><br>
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="phoneNumber">Phone number:</label>
+        <input class="form-control input_field" type="text" name="phoneNumber" id="phoneNumber" ngModel required #phoneNumber="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!phoneNumber.valid && phoneNumber.touched">Phone number is required.</span><br><br>
+      </div>
 
-
-    <br>
-    <div class="submit_button">
-      <button class="btn btn-lg btn-primary" type="button" (click)="onSubmit()">Submit</button>
+    <div class="form-group form-inline">
+      <label class="h5 label_field" for="insuranceNumber">Insurance number:</label>
+      <input class="form-control input_field" type="text" name="insuranceNumber" id="insuranceNumber" ngModel required #insuranceNumber="ngModel">
+      <span class="help-block input_field_error_message" *ngIf="!insuranceNumber.valid && insuranceNumber.touched">Insurance number is required.</span><br><br>
     </div>
-  </div>
+
+
+      <br>
+      <div class="submit_button">
+        <button class="btn btn-lg btn-primary" type="submit" [disabled]="!f.valid || password.value!==confirmPassword.value">Submit</button>
+      </div>
+    </div>
+  </form>
 
 </div>
