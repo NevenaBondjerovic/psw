@@ -18,6 +18,7 @@ export class RegistrationComponent implements OnInit {
   httpStatusConflict = 409;
   httpStatusInternalServerError = 500;
   httpStatusServerNotAvailable = 0;
+  registrationSuccessful = false;
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.registrationSuccessful = false;
     if(form.valid && form.value.password===form.value.confirmPassword){
       this.registrationRequest = {
         username: form.value.email,
@@ -43,6 +45,7 @@ export class RegistrationComponent implements OnInit {
       .subscribe(responseData => {
         console.log(responseData);
         this.errorMessage = null;
+        this.registrationSuccessful = true;
       }, error => {
         if(error.status === this.httpStatusConflict){
           this.errorMessage = error.error.message;

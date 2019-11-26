@@ -5,8 +5,13 @@
     <button class="btn btn-lg btn-primary" type="button" routerLink="/login"> Login </button>
   </div>
 
-  <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+  <div class="alert alert-danger text-center info_block" *ngIf="errorMessage">
     <p>{{ errorMessage }}</p>
+  </div>
+
+  <div class="alert alert-success text-center info_block" *ngIf="registrationSuccessful">
+    <p>The registration request has been sent to the administrator. When the request gets accepted, login data will be sent to your email.
+      Thank you for using our application.</p>
   </div>
 
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
@@ -77,7 +82,8 @@
 
       <br>
       <div class="submit_button">
-        <button class="btn btn-lg btn-primary" type="submit" [disabled]="!f.valid || password.value!==confirmPassword.value">Submit</button>
+        <button class="btn btn-lg btn-primary" type="submit"
+                [disabled]="!f.valid || password.value!==confirmPassword.value">Submit</button>
       </div>
     </div>
   </form>
