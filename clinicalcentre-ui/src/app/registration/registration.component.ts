@@ -13,7 +13,7 @@ export class RegistrationComponent implements OnInit {
   errorMessage = null;
   registrationRequest: {};
   defaultErrorMessage = 'Please enter valid data.';
-  serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try later.';
+  serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
   serverErrorMessage = 'Error happened while processing the data, please contact the administrator.';
   httpStatusConflict = 409;
   httpStatusInternalServerError = 500;
