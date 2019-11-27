@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,10 @@ export class LoginComponent implements OnInit {
   password: string = '';
   loginUrl: string = 'http://localhost:8080/users/login';
   errorMessage = null;
+  serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
+  httpStatusServerNotAvailable = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,8 +26,13 @@ export class LoginComponent implements OnInit {
       .subscribe(responseData => {
         console.log(responseData);
         this.errorMessage = null;
+        this.router.navigate(['/clinicalcentre/home']);
       }, error => {
-        this.errorMessage = error.error.message;
+        if (error.status === this.httpStatusServerNotAvailable) {
+          this.errorMessage = this.serviceNotAvailableErrorMessage;
+        } else {
+          this.errorMessage = error.error.message;
+        }
       });
   }
 

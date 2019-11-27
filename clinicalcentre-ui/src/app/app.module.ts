@@ -7,18 +7,28 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
+import { ClinicalcentreComponent } from './clinicalcentre/clinicalcentre.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { HomeComponent } from './clinicalcentre/home/home.component';
+import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
+import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ClinicalcentreComponent,
+    HomeComponent,
+    ClinicsComponent,
+    MyprofileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
