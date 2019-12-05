@@ -21,4 +21,10 @@ public class RegistrationRequest {
     private Boolean approved;
     private String declineReason;
 
+    public RegistrationRequest(User user, Boolean requestsProcessedByAdministrator, Boolean approved, String declineReason) {
+        this.user = user;
+        this.requestsProcessedByAdministrator = requestsProcessedByAdministrator;
+        this.approved = approved;
+        this.declineReason = declineReason;
+    }
 }

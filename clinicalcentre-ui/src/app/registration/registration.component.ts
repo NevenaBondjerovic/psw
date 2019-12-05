@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationUrl: string = 'http://localhost:8080/users/register';
+  registrationUrl: string = 'http://localhost:8080/registration';
   errorMessage = null;
   registrationRequest: {};
   defaultErrorMessage = 'Please enter valid data.';

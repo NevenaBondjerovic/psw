@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS registration_requests;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT  PRIMARY KEY,
@@ -21,7 +22,7 @@ INSERT INTO users (id, username, password, name, surname, address, city, state, 
 INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
   (3, 'user2@email.com', 'user2', 'Mika', 'Peric', 'Adresa 2', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
 
-CREATE TABLE registration_request (
+CREATE TABLE registration_requests (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   user_id INT NOT NULL,
   processed BOOLEAN NOT NULL DEFAULT FALSE,
@@ -31,9 +32,9 @@ CREATE TABLE registration_request (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-INSERT INTO registration_request (id, user_id, processed, approved, decline_reason) VALUES
-  (1, 1, TRUE, TRUE, '');
-INSERT INTO registration_request (id, user_id, processed, approved, decline_reason) VALUES
-  (2, 2, TRUE, TRUE, '');
-INSERT INTO registration_request (id, user_id, processed, approved, decline_reason) VALUES
-  (3, 3, FALSE, FALSE, '');
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (1, 1, TRUE, TRUE, null);
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (2, 2, TRUE, TRUE, null);
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (3, 3, FALSE, FALSE, null);

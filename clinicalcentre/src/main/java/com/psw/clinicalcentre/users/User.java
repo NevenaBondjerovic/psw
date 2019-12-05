@@ -21,6 +21,9 @@ public class User {
     private String insuranceNumber;
     private Boolean activated;
 
+    public User() {
+    }
+
     public User(Integer id, String username, String password, String name, String surname, String address,
                 String city, String state, String phoneNumber, String insuranceNumber, Boolean activated) {
         this.id = id;
