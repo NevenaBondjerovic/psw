@@ -19,17 +19,10 @@ public class User {
     private String state;
     private String phoneNumber;
     private String insuranceNumber;
-
-    @Column(name = "approved")
-    private Boolean approvedByAdministrator;
-
     private Boolean activated;
 
-    public User() {}
-
     public User(Integer id, String username, String password, String name, String surname, String address,
-                String city, String state, String phoneNumber, String insuranceNumber,
-                Boolean approvedByAdministrator, Boolean activated) {
+                String city, String state, String phoneNumber, String insuranceNumber, Boolean activated) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -40,7 +33,6 @@ public class User {
         this.state = state;
         this.phoneNumber = phoneNumber;
         this.insuranceNumber = insuranceNumber;
-        this.approvedByAdministrator = approvedByAdministrator;
         this.activated = activated;
     }
 
@@ -122,14 +114,6 @@ public class User {
 
     public void setInsuranceNumber(String insuranceNumber) {
         this.insuranceNumber = insuranceNumber;
-    }
-
-    public Boolean getApprovedByAdministrator() {
-        return approvedByAdministrator;
-    }
-
-    public void setApprovedByAdministrator(Boolean approvedByAdministrator) {
-        this.approvedByAdministrator = approvedByAdministrator;
     }
 
     public Boolean getActivated() {

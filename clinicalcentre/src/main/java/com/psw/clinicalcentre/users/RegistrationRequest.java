@@ -35,9 +35,6 @@ public class RegistrationRequest {
     private String insuranceNumber;
 
     @NotNull
-    private Boolean approvedByAdministrator;
-
-    @NotNull
     private Boolean activated;
 
     public String getUsername() {
@@ -74,10 +71,6 @@ public class RegistrationRequest {
 
     public String getInsuranceNumber() {
         return insuranceNumber;
-    }
-
-    public Boolean getApprovedByAdministrator() {
-        return approvedByAdministrator;
     }
 
     public Boolean getActivated() {

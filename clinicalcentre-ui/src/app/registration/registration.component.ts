@@ -38,7 +38,6 @@ export class RegistrationComponent implements OnInit {
         state: form.value.state,
         phoneNumber: form.value.phoneNumber,
         insuranceNumber: form.value.insuranceNumber,
-        approvedByAdministrator: false,
         activated: false
       };
       this.http.post(this.registrationUrl, this.registrationRequest)

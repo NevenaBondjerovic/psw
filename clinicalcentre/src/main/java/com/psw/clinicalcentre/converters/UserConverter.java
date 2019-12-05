@@ -8,7 +8,7 @@ public class UserConverter {
     public static User registrationRequestToUser(RegistrationRequest request){
         return new User(null, request.getUsername(), request.getPassword(), request.getName(), request.getSurname(),
                 request.getAddress(), request.getCity(), request.getState(), request.getPhoneNumber(),
-                request.getInsuranceNumber(), request.getApprovedByAdministrator(), request.getActivated());
+                request.getInsuranceNumber(), request.getActivated());
     }
 
 }
