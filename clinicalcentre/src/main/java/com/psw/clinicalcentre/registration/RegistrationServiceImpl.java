@@ -7,6 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.lang.Boolean.FALSE;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService{
@@ -28,5 +34,10 @@ public class RegistrationServiceImpl implements RegistrationService{
         userRepository.save(user);
         registrationRepository.save(new RegistrationRequest(
                 user,false, false, null));
+    }
+
+    @Override
+    public Set<User> findUnprocessedRequests() {
+        return registrationRepository.findByProcessed(FALSE).stream().map(RegistrationRequest::getUser).collect(Collectors.toSet());
     }
 }

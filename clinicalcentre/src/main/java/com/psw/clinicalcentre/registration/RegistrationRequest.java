@@ -16,15 +16,22 @@ public class RegistrationRequest {
     private User user;
 
     @Column(name = "processed")
-    private Boolean requestsProcessedByAdministrator;
+    private Boolean processed;
 
     private Boolean approved;
     private String declineReason;
 
-    public RegistrationRequest(User user, Boolean requestsProcessedByAdministrator, Boolean approved, String declineReason) {
+    public RegistrationRequest() {
+    }
+
+    public RegistrationRequest(User user, Boolean processed, Boolean approved, String declineReason) {
         this.user = user;
-        this.requestsProcessedByAdministrator = requestsProcessedByAdministrator;
+        this.processed = processed;
         this.approved = approved;
         this.declineReason = declineReason;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
