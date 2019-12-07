@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-requests',
@@ -7,18 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestsComponent implements OnInit {
 
-  requests;
+  requests: any[];
   selectedRequest: {} = null;
   reason: string = null;
   rejected: Boolean = false;
+  registrationUrl: string = 'http://localhost:8080/registration';
 
-  constructor() {
-    this.requests = [
-      {userData: {username: 'user@user1', name: 'Pera', surname: 'Peric'}},
-      {userData: {username: 'user@user2', name: 'Mika', surname: 'Peric'}},
-      {userData: {username: 'user@user3', name: 'Mika', surname: 'Peric'}},
-      {userData: {username: 'user@user4', name: 'Mika', surname: 'Peric'}}
-    ];
+  constructor(private http: HttpClient) {
+    this.http.get(this.registrationUrl)
+    .subscribe(responseData => {
+      this.requests = responseData.userData;
+    }, error => {
+      console.log(error);
+    });
   }
 
   ngOnInit() {

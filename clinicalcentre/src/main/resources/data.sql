@@ -18,9 +18,15 @@ CREATE TABLE users (
 INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
   (1, 'admin@admin.com', 'admin', 'Pera', 'Peric', 'Adresa 1', 'Novi Sad', 'Srbija', '1234567', '987654321', TRUE);
 INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
-  (2, 'user1@email.com', 'user1', 'Zika', 'Peric', 'Adresa 2', 'Novi Sad', 'Srbija', '23456789', '876543210', FALSE);
+  (2, 'user1@email.com', 'user2', 'Zika', 'Peric', 'Adresa 2', 'Novi Sad', 'Srbija', '23456789', '876543210', FALSE);
 INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
-  (3, 'user2@email.com', 'user2', 'Mika', 'Peric', 'Adresa 2', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
+  (3, 'user3@email.com', 'user3', 'Mika', 'Peric', 'Adresa 3', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
+INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
+  (4, 'user4@email.com', 'user4', 'Mika', 'Peric', 'Adresa 3', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
+INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
+  (5, 'user5@email.com', 'user5', 'Mika', 'Peric', 'Adresa 4', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
+INSERT INTO users (id, username, password, name, surname, address, city, state, phone_number, insurance_number, activated) VALUES
+  (6, 'user6@email.com', 'user6', 'Mika', 'Peric', 'Adresa 5', 'Novi Sad', 'Srbija', '23456780', '876543219', FALSE);
 
 CREATE TABLE registration_requests (
   id INT AUTO_INCREMENT  PRIMARY KEY,
@@ -38,3 +44,10 @@ INSERT INTO registration_requests (id, user_id, processed, approved, decline_rea
   (2, 2, TRUE, TRUE, null);
 INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
   (3, 3, FALSE, FALSE, null);
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (4, 4, FALSE, FALSE, null);
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (5, 5, FALSE, FALSE, null);
+INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
+  (6, 6, FALSE, FALSE, null);
+
