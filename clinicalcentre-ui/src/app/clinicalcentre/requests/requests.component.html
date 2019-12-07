@@ -1,1 +1,16 @@
-<p>requests works!</p>
+<div class="overview">
+  <h3 class="header">Registration requests</h3>
+  <div *ngFor="let request of requests">
+    <table>
+      <tr (click)="onSelect(request)"
+          [ngClass]="{requestSelected: selectedRequest !== null
+            && selectedRequest.userData.username === request.userData.username}">
+        <td>{{ request.userData.username }}</td>
+        <td>{{ request.userData.name }} {{ request.userData.surname }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="details">
+
+</div>
