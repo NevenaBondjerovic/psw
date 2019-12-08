@@ -9,17 +9,29 @@ import { HttpClient } from '@angular/common/http';
 export class RequestsComponent implements OnInit {
 
   requests: any[];
-  selectedRequest: {} = null;
-  reason: string = null;
+  selectedRequest: {
+    username: string,
+    name: string,
+    surname: string,
+    address: string,
+    city: string,
+    state: string,
+    phoneNumber: string,
+    insuranceNumber: string
+   };
   rejected: Boolean = false;
   registrationUrl: string = 'http://localhost:8080/registration';
+  acceptRejectRequest: {};
+  processingRequest: Boolean = false;
 
   constructor(private http: HttpClient) {
+    this.selectedRequest = null;
     this.http.get(this.registrationUrl)
-    .subscribe(responseData => {
+    .subscribe((responseData: { userData: any[]}) => {
       this.requests = responseData.userData;
     }, error => {
       console.log(error);
+      this.requests = [];
     });
   }
 
@@ -31,26 +43,44 @@ export class RequestsComponent implements OnInit {
   }
 
   onAccept() {
-    //TBD accept
-    this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
-    this.selectedRequest = null;
+  this.processingRequest = true;
+    this.acceptRejectRequest = {
+      username: this.selectedRequest.username,
+      approved: true,
+      declineReason: null
+    };
+    this.http.post(this.registrationUrl + '/requests', this.acceptRejectRequest)
+    .subscribe(responseData => {
+      this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
+      this.selectedRequest = null;
+      this.processingRequest = false;
+    }, error => {
+      console.log(error);
+      this.processingRequest = false;
+    });
   }
 
   onReject() {
     this.rejected = true;
   }
 
-  onReasonSubmit() {
-    //TBD reject process
-    this.rejected = false;
-    this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
-    this.selectedRequest = null;
-    this.reason = null;
-  }
-
-  isReasonEmpty(){
-    console.log(this.reason);
-    return this.reason === null || this.reason === undefined || this.reason === '';
+  onReasonSubmit(reasonInput) {
+    this.processingRequest = true;
+    this.acceptRejectRequest = {
+      username: this.selectedRequest.username,
+      approved: false,
+      declineReason: reasonInput
+    };
+    this.http.post(this.registrationUrl + '/requests', this.acceptRejectRequest)
+    .subscribe(responseData => {
+      this.rejected = false;
+      this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
+      this.selectedRequest = null;
+      this.processingRequest = false;
+    }, error => {
+      console.log(error);
+      this.processingRequest = false;
+    });
   }
 
 }

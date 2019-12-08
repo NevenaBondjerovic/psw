@@ -9,4 +9,9 @@ public interface RegistrationService {
     void registerUser(User user);
 
     Set<User> findUnprocessedRequests();
+
+    void acceptRegistrationRequest(AcceptRejectRequest request);
+
+    void rejectRegistrationRequest(AcceptRejectRequest request);
+
 }

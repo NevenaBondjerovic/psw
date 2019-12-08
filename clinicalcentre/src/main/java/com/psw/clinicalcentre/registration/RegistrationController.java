@@ -32,4 +32,15 @@ public class RegistrationController {
                         .map(UserConverter::userToUserResponse).collect(Collectors.toSet())), HttpStatus.OK);
     }
 
+    @PostMapping("/requests")
+    @ResponseStatus(HttpStatus.OK)
+    public void acceptRegistrationRequest(@RequestBody @Valid AcceptRejectRequest request){
+        if (request.getApproved())
+            registrationService.acceptRegistrationRequest(request);
+        else
+            registrationService.rejectRegistrationRequest(request);
+
+    }
+
+
 }

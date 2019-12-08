@@ -15,9 +15,7 @@ public class RegistrationRequest {
     @OneToOne
     private User user;
 
-    @Column(name = "processed")
     private Boolean processed;
-
     private Boolean approved;
     private String declineReason;
 
