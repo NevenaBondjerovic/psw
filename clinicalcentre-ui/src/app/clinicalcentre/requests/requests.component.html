@@ -13,11 +13,17 @@
     </div>
   </div>
   <div class="details">
-    <div *ngIf="selectedRequest === null">
+    <div class="alert alert-success info_block" *ngIf="requestProcessed">
+      <p>The registration request has successfully been processed.</p>
+    </div>
+    <div *ngIf="!requestProcessed && selectedRequest === null">
       <h5 class="detailsNotSelected">Please select request to see more details.</h5>
     </div>
     <div *ngIf="selectedRequest !== null">
       <div *ngIf="!processingRequest">
+        <div class="alert alert-danger info_block" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div><br>
         <h5>Request details</h5><br>
         <div>
           <div class="dataSection">
@@ -49,6 +55,14 @@
 <div *ngIf="requests === undefined">
   <h3 class="header">Loading...</h3>
 </div>
-<div *ngIf="requests !== undefined && requests.length === 0">
-  <h3 class="header">There are not requests at the moment.</h3>
+<div *ngIf="requests !== undefined && requests.length === 0 && !errorMessage">
+  <div class="alert alert-success info_block" *ngIf="requestProcessed">
+    <p>The registration request has successfully been processed.</p>
+  </div>
+  <h4 class="header">There are no requests at the moment.</h4>
+</div>
+<div *ngIf="requests !== undefined && requests.length === 0 && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
 </div>

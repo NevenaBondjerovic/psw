@@ -77,3 +77,8 @@ tr:hover {
   float: right;
   margin-top: 3%;
 }
+
+.info_block {
+  width: 90%;
+  text-align: center;
+}
