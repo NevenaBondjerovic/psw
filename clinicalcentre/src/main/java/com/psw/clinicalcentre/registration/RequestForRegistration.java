@@ -1,10 +1,10 @@
-package com.psw.clinicalcentre.users;
+package com.psw.clinicalcentre.registration;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class RegistrationRequest {
+public class RequestForRegistration {
 
     @NotBlank
     @Email
@@ -33,9 +33,6 @@ public class RegistrationRequest {
 
     @NotBlank
     private String insuranceNumber;
-
-    @NotNull
-    private Boolean approvedByAdministrator;
 
     @NotNull
     private Boolean activated;
@@ -76,11 +73,12 @@ public class RegistrationRequest {
         return insuranceNumber;
     }
 
-    public Boolean getApprovedByAdministrator() {
-        return approvedByAdministrator;
-    }
-
     public Boolean getActivated() {
         return activated;
     }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
 }

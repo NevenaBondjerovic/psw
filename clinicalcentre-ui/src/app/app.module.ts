@@ -12,6 +12,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HomeComponent } from './clinicalcentre/home/home.component';
 import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
+import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.compone
     ClinicalcentreComponent,
     HomeComponent,
     ClinicsComponent,
-    MyprofileComponent
+    MyprofileComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,

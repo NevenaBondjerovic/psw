@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationUrl: string = 'http://localhost:8080/users/register';
+  registrationUrl: string = 'http://localhost:8080/registration';
   errorMessage = null;
   registrationRequest: {};
   defaultErrorMessage = 'Please enter valid data.';
@@ -38,7 +38,6 @@ export class RegistrationComponent implements OnInit {
         state: form.value.state,
         phoneNumber: form.value.phoneNumber,
         insuranceNumber: form.value.insuranceNumber,
-        approvedByAdministrator: false,
         activated: false
       };
       this.http.post(this.registrationUrl, this.registrationRequest)

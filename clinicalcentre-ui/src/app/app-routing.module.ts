@@ -6,6 +6,7 @@ import { ClinicalcentreComponent } from './clinicalcentre/clinicalcentre.compone
 import { HomeComponent } from './clinicalcentre/home/home.component';
 import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
+import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },
+    { path: 'requests', component: RequestsComponent },
     { path: 'myprofile', component: MyprofileComponent }
    ] }
 ];
