@@ -13,6 +13,7 @@ import { HomeComponent } from './clinicalcentre/home/home.component';
 import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
+import { ActivationpageComponent } from './activationpage/activationpage.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RequestsComponent } from './clinicalcentre/requests/requests.component'
     HomeComponent,
     ClinicsComponent,
     MyprofileComponent,
-    RequestsComponent
+    RequestsComponent,
+    ActivationpageComponent
   ],
   imports: [
     BrowserModule,

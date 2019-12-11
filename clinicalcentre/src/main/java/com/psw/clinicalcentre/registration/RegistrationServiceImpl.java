@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class RegistrationServiceImpl implements RegistrationService{
     private static final String NOT_FOUND_ERROR_MESSAGE = "Registration request not found.";
     private static final String REASON_NOT_ADDED_ERROR_MESSAGE = "When the request is rejected, reason must be added. " +
             "Please add the reason for rejecting the request.";
-    private static final String ACTIVATION_LINK = "http://localhost:4200";
+    private static final String ACTIVATION_LINK = "http://localhost:4200/activation/";
 
     @Autowired
     private UserRepository userRepository;
@@ -60,8 +61,9 @@ public class RegistrationServiceImpl implements RegistrationService{
     @Transactional
     @Override
     public void acceptRegistrationRequest(AcceptRejectRequest request) {
-        if(registrationRepository.findByUserUsername(request.getUsername()).isPresent()) {
-            String text = String.format(template.getText(), acceptedMessage(ACTIVATION_LINK));
+        Optional<RegistrationRequest> registrationRequest = registrationRepository.findByUserUsername(request.getUsername());
+        if(registrationRequest.isPresent()) {
+            String text = String.format(template.getText(), acceptedMessage(ACTIVATION_LINK + registrationRequest.get().getUser().getId()));
             registrationRepository.acceptRegistrationRequest(request.getUsername());
             //sendSimpleMessage(request.getUsername(), SUBJECT, text);
         } else {

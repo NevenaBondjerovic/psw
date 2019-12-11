@@ -7,12 +7,15 @@ import { HomeComponent } from './clinicalcentre/home/home.component';
 import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
+import { ActivationpageComponent } from './activationpage/activationpage.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'activation', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'activation/:id', component: ActivationpageComponent},
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },

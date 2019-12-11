@@ -10,11 +10,7 @@
    margin: 5% 0 2% 10%;
 }
 
-.align_center {
-  text-align: center;
-}
-
-.login_block {
+.activation_block {
   background-color: white;
   position: absolute;
   margin-left: 15%;
@@ -26,12 +22,6 @@
   text-align: center;
 }
 
-.registration_button{
-  position: absolute;
-  top: 5%;
-  right: 3%;
-}
-
 .label_field {
   width: 25%;
   text-align: center;
@@ -39,10 +29,6 @@
 
 .input_field {
   width: 70%
-}
-
-.white_text {
-  color: white;
 }
 
 .error_block {
