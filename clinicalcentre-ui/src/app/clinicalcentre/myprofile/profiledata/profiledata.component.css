@@ -1,0 +1,29 @@
+.profile_data_block {
+  margin: 2% 2% 5% 10%;
+}
+
+.header {
+   margin: 2% 0 2% 7%;
+}
+
+.label_field {
+  width: 25%;
+  text-align: center;
+}
+
+.input_field {
+  width: 50%
+}
+
+.input_field_error_message {
+  width: 100%;
+  text-align: right;
+  color: red;
+  font-size: 10px;
+  padding-right: 25%;
+}
+
+.text-align {
+  padding-right: 25%;
+  text-align: right;
+}
