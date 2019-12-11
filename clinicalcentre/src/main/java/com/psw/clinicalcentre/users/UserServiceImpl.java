@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND_ERROR_MESSAGE));
     }
 
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id:" + id + " not found."));
+    }
+
 }
