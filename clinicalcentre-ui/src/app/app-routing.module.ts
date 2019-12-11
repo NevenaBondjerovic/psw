@@ -12,9 +12,10 @@ import { ActivationpageComponent } from './activationpage/activationpage.compone
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'activation', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'activation', component: ActivationpageComponent },
+  { path: 'activation/:id', component: ActivationpageComponent},
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },

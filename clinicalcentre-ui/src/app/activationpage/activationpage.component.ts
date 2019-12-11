@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-activationpage',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivationpageComponent implements OnInit {
 
-  constructor() { }
+  id: string = null;
+
+  constructor(private _Activatedroute:ActivatedRoute) {
+  }
 
   ngOnInit() {
+   this._Activatedroute.paramMap.subscribe(params => {
+       this.id = params.get('id');
+   });
   }
 
 }
