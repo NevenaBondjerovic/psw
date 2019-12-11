@@ -25,4 +25,10 @@ public class UserController {
     public void findUserById(@PathVariable("id") @Valid Integer id){
         userService.findById(id);
     }
+
+    @PostMapping("/activate")
+    @ResponseStatus(HttpStatus.OK)
+    public void activateAccount(@RequestBody @Valid ActivationDataRequest request){
+        userService.activateAccount(request.getId(), request.getUsername(), request.getPassword());
+    }
 }

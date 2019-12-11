@@ -32,4 +32,13 @@ public class RegistrationRequest {
     public User getUser() {
         return user;
     }
+
+    public Boolean getProcessed() {
+        return processed;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
 }

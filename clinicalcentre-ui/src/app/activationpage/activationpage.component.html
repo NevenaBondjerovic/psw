@@ -2,6 +2,10 @@
   <h3 class="welcome_header">Welcome to our clinical centre application!<br>
     Please activate the account by entering required data:</h3>
 
+  <div class="alert alert-danger align_center error_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+
   <div class="activation_block">
     <h3 class="align_center">Activation</h3><br>
     <label class="label_field h5">Username</label>

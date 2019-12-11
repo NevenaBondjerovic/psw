@@ -26,4 +26,6 @@ public interface RegistrationRepository extends CrudRepository<RegistrationReque
 
     Optional<RegistrationRequest> findByUserUsername(String username);
 
+    Optional<RegistrationRequest> findByUserId(Integer id);
+
 }

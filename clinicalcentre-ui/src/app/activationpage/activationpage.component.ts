@@ -10,7 +10,12 @@ import { ActivatedRoute, Router } from '@angular/router'
 export class ActivationpageComponent implements OnInit {
 
   id: string = null;
-  usersUrl: string = 'http://localhost:8080/users/'
+  username: string = '';
+  password: string = '';
+  usersUrl: string = 'http://localhost:8080/users/';
+  errorMessage: string = null;
+  serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
+  httpStatusServerNotAvailable = 0;
 
   constructor(private _Activatedroute:ActivatedRoute,
     private http: HttpClient, private router: Router) {
@@ -24,6 +29,19 @@ export class ActivationpageComponent implements OnInit {
           this.router.navigate(['/login']);
        });
    });
+  }
+
+  onSubmit(){
+    this.http.post(this.usersUrl + 'activate', {id: this.id, username: this.username, password: this.password})
+    .subscribe(() => {
+      this.router.navigate(['/clinicalcentre/home']);
+    }, error => {
+      if (error.status === this.httpStatusServerNotAvailable) {
+        this.errorMessage = this.serviceNotAvailableErrorMessage;
+      } else {
+        this.errorMessage = error.error.message;
+      }
+    });
   }
 
 }

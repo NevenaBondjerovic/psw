@@ -7,13 +7,13 @@
 }
 
 .welcome_header {
-   margin: 5% 0 0 10%;
+   margin: 5% 0 2% 10%;
 }
 
 .activation_block {
   background-color: white;
   position: absolute;
-  margin: 2% 0 0 15%;
+  margin-left: 15%;
   padding: 2% 2% 2% 2%;
   width: 35%;
 }
@@ -29,4 +29,9 @@
 
 .input_field {
   width: 70%
+}
+
+.error_block {
+  width: 35%;
+  left: 15%;
 }
