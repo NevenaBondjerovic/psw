@@ -1,0 +1,36 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #666666;
+  color: white;
+  width: 15%;
+}
+
+ul a {
+  display: inline-block;
+  width: 100%;
+  color: white;
+  text-align: center;
+  padding: 5% 2% 5% 2%;
+  text-decoration: none;
+}
+
+ul a:hover {
+  color: white;
+  background-color: #4d4d4d;
+}
+
+.selected {
+  background-color: #4d4d4d;
+}
+
+.content {
+  position: absolute;
+  top: 82px;
+  left: 18%;
+  right: 2%;
+  height: 85%;
+  border: 1px solid black;
+}
