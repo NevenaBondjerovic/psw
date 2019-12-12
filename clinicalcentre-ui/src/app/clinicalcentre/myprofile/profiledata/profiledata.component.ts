@@ -11,6 +11,12 @@ export class ProfiledataComponent implements OnInit {
   profileData: {} = null;
   userUrl: string = 'http://localhost:8080/users';
   username: string = 'admin@admin.com';
+  newPasswordData: {
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+  };
+  requestedChangePassword: Boolean = false;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -21,8 +27,8 @@ export class ProfiledataComponent implements OnInit {
   constructor(private http: HttpClient) {
     this.http.get(this.userUrl + '/myprofile/' + this.username)
     .subscribe(responseData => {
+      this.resetNewPasswordData();
       this.profileData = responseData;
-      console.log(this.profileData);
     }, error => {
       this.handleError(error);
       this.profileData = null;
@@ -30,6 +36,11 @@ export class ProfiledataComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onChangePassword() {
+    this.resetNewPasswordData();
+    this.requestedChangePassword = !this.requestedChangePassword;
   }
 
   handleError(error){
@@ -40,5 +51,13 @@ export class ProfiledataComponent implements OnInit {
       } else {
         this.errorMessage = error.error.message;
       }
+  }
+
+  resetNewPasswordData(){
+    this.newPasswordData = {
+      oldPassword: undefined,
+      newPassword: undefined,
+      confirmNewPassword: undefined
+    };
   }
 }
