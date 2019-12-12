@@ -6,7 +6,7 @@ import com.psw.clinicalcentre.users.User;
 public class UserConverter {
 
     public static UserResponse userToUserResponse(User user){
-        return new UserResponse(user.getUsername(), user.getName(), user.getSurname(), user.getAddress(),
+        return new UserResponse(user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getAddress(),
                 user.getCity(), user.getState(), user.getPhoneNumber(), user.getInsuranceNumber());
     }
 

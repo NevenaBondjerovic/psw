@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException(ACCOUNT_CANNOT_BE_ACTIVATED_ERROR_MESSAGE);
     }
 
+    @Override
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException(USER_NOT_FOUND_ERROR_MESSAGE));
+    }
+
     @Transactional
     @Override
     public void activateAccount(Integer id, String username, String password){
