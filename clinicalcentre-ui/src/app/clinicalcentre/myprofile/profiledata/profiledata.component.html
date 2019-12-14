@@ -8,14 +8,12 @@
         <label class="h5 label_field" for="email">Email:</label>
         <input class="form-control input_field" type="email" name="email" id="email"
                [(ngModel)]="profileData.username" required email #email="ngModel" disabled>
-        <span class="help-block input_field_error_message" *ngIf="!email.valid && email.touched">
-          Please enter a valid email.</span><br><br>
       </div>
 
       <div class="form-group form-inline" *ngIf="requestedChangePassword===false">
         <label class="h5 label_field" for="password">Password:</label>
         <input class="form-control input_field" type="password" name="password" id="password"
-               [(ngModel)]="profileData.password" required minlength="8" #password="ngModel" disabled>
+               [(ngModel)]="profileData.password" #password="ngModel" disabled>
         <button class="btn btn-sm btn-secondary change_password_btn" (click)="onChangePassword()">Change password</button>
         <span class="help-block input_field_error_message" *ngIf="!password.valid && password.touched">
           Password should have at least 8 characters.</span><br><br>
@@ -25,7 +23,7 @@
         <div class="form-group form-inline">
           <label class="h5 label_field" for="password">Old password:</label>
           <input class="form-control input_field" type="password" name="oldPassword" id="oldPassword"
-                 ngModel required minlength="8" #oldPassword="ngModel">
+                 [(ngModel)]="newPasswordData.oldPassword" #oldPassword="ngModel">
           <span class="help-block input_field_error_message"
                 *ngIf="profileData.password!==oldPassword.value && oldPassword.touched">
             Password does not match the old one.</span><br><br>
@@ -34,7 +32,7 @@
         <div class="form-group form-inline">
           <label class="h5 label_field" for="password">New password:</label>
           <input class="form-control input_field" type="password" name="newPassword" id="newPassword"
-                 ngModel required minlength="8" #newPassword="ngModel">
+                 [(ngModel)]="newPasswordData.newPassword" required minlength="8" #newPassword="ngModel">
           <span class="help-block input_field_error_message" *ngIf="!newPassword.valid && newPassword.touched">
             Password should have at least 8 characters.</span><br><br>
         </div>
@@ -42,11 +40,11 @@
         <div class="form-group form-inline">
           <label class="h5 label_field" for="confirmPassword">Confirm new password:</label>
           <input class="form-control input_field" type="password" name="confirmPassword" id="confirmPassword"
-                 ngModel required #confirmPassword="ngModel">
+                 [(ngModel)]="newPasswordData.confirmNewPassword" required #confirmPassword="ngModel">
           <button class="btn btn-sm btn-secondary change_password_btn" (click)="onChangePassword()">Don't change password</button>
           <span class="help-block input_field_error_message"
-                *ngIf="confirmPassword.touched && (confirmPassword.value===''
-                || newPassword.value!==confirmPassword.value && newPassword.touched)">
+                *ngIf="confirmPassword.touched && (newPasswordData.confirmNewPassword===''
+                || newPasswordData.newPassword!==newPasswordData.confirmNewPassword && newPassword.touched)">
             Passwords should match.</span><br><br>
         </div>
       </div>
@@ -96,16 +94,28 @@
       <div class="form-group form-inline">
         <label class="h5 label_field" for="insuranceNumber">Insurance number:</label>
         <input class="form-control input_field" type="text" name="insuranceNumber" id="insuranceNumber"
-               [(ngModel)]="profileData.insuranceNumber" required #insuranceNumber="ngModel">
-        <span class="help-block input_field_error_message" *ngIf="!insuranceNumber.valid && insuranceNumber.touched">Insurance number is required.</span><br><br>
+               [(ngModel)]="profileData.insuranceNumber" required #insuranceNumber="ngModel" disabled>
       </div>
 
 
       <br>
       <div class="text-align">
         <button class="btn btn-lg btn-primary" type="submit"
-                [disabled]="!f.valid || ( newPassword !== undefined && newPassword.value!==confirmPassword.value)">Edit</button>
+                [disabled]="!f.valid
+                || (requestedChangePassword &&
+                    (
+                    (profileData.password!==newPasswordData.oldPassword
+                    || newPasswordData.newPassword!==newPasswordData.confirmNewPassword)
+                    ))">
+          Edit</button>
       </div>
     </div>
   </form>
 </div>
+<div *ngIf="profileData === null && errorMessage === null">
+  <h3 class="header">Loading...</h3><br>
+</div>
+<div *ngIf="profileData === null && errorMessage !== null">
+  <h3 class="header">{{ errorMessage }}</h3><br>
+</div>
+

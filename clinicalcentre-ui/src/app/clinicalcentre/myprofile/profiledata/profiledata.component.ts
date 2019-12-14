@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profiledata',
@@ -19,6 +20,7 @@ export class ProfiledataComponent implements OnInit {
   requestedChangePassword: Boolean = false;
 
   errorMessage = null;
+  defaultErrorMessage = 'Please enter valid data.';
   httpStatusInternalServerError = 500;
   serverErrorMessage = 'Error happened while processing the data, please contact the administrator.';
   httpStatusServerNotAvailable = 0;
@@ -43,6 +45,17 @@ export class ProfiledataComponent implements OnInit {
     this.requestedChangePassword = !this.requestedChangePassword;
   }
 
+  onSubmit(form: NgForm) {
+    if(form.valid && this.checkPasswordValidity(form)){
+      if(this.requestedChangePassword){
+        this.profileData.password = this.newPasswordData.newPassword;
+      }
+        console.log(this.profileData);
+    } else {
+      this.errorMessage = this.defaultErrorMessage;
+    }
+  }
+
   handleError(error){
       if(error.status === this.httpStatusServerNotAvailable){
         this.errorMessage = this.serviceNotAvailableErrorMessage;
@@ -60,4 +73,11 @@ export class ProfiledataComponent implements OnInit {
       confirmNewPassword: undefined
     };
   }
+
+  checkPasswordValidity(form: NgForm){
+    return !this.requestedChangePassword ||
+            (this.newPasswordData.oldPassword===this.profileData.password
+              && this.newPasswordData.newPassword===this.newPasswordData.confirmNewPassword);
+  }
+
 }
