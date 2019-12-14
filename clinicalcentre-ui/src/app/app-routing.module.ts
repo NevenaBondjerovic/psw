@@ -8,6 +8,7 @@ import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 import { ActivationpageComponent } from './activationpage/activationpage.component';
+import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,9 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
-    { path: 'myprofile', component: MyprofileComponent }
+    { path: 'myprofile', component: MyprofileComponent, children: [
+      {path: 'profile', component: ProfiledataComponent}
+    ] }
    ] }
 ];
 

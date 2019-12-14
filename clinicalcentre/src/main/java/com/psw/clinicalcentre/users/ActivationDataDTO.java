@@ -3,7 +3,7 @@ package com.psw.clinicalcentre.users;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class ActivationDataRequest {
+public class ActivationDataDTO {
 
     @NotNull
     private Integer id;
@@ -14,7 +14,7 @@ public class ActivationDataRequest {
     @NotBlank
     private String password;
 
-    public ActivationDataRequest() {
+    public ActivationDataDTO() {
     }
 
     public Integer getId() {

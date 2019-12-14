@@ -1,1 +1,11 @@
-<p>myprofile works!</p>
+<div>
+  <ul><a routerLink="/clinicalcentre/myprofile/profile"
+         routerLinkActive="selected">Profile</a></ul>
+  <ul><a routerLink="/clinicalcentre/requests"
+         routerLinkActive="selected">History</a></ul>
+  <ul><a routerLink="/clinicalcentre/requests"
+       routerLinkActive="selected">Medical record</a></ul>
+</div>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

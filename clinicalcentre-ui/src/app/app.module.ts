@@ -14,6 +14,7 @@ import { ClinicsComponent } from './clinicalcentre/clinics/clinics.component';
 import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.component';
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 import { ActivationpageComponent } from './activationpage/activationpage.component';
+import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ActivationpageComponent } from './activationpage/activationpage.compone
     ClinicsComponent,
     MyprofileComponent,
     RequestsComponent,
-    ActivationpageComponent
+    ActivationpageComponent,
+    ProfiledataComponent
   ],
   imports: [
     BrowserModule,

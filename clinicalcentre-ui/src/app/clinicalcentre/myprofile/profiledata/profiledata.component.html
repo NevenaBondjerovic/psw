@@ -1,0 +1,129 @@
+<div *ngIf="profileData !== null">
+  <h3 class="header">Profile data</h3><br>
+
+  <div class="alert alert-success info_block" *ngIf="registrationSuccessful">
+    <p>All the data have been successfully updated.</p>
+  </div>
+
+  <div class="alert alert-danger info_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="profile_data_block" id="myprofile-form">
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="email">Email:</label>
+        <input class="form-control input_field" type="email" name="email" id="email"
+               [(ngModel)]="profileData.username" required email #email="ngModel" disabled>
+      </div>
+
+      <div class="form-group form-inline" *ngIf="requestedChangePassword===false">
+        <label class="h5 label_field" for="password">Password:</label>
+        <input class="form-control input_field" type="password" name="password" id="password"
+               [(ngModel)]="profileData.password" #password="ngModel" disabled>
+        <button class="btn btn-sm btn-secondary change_password_btn" (click)="onChangePassword()">Change password</button>
+        <span class="help-block input_field_error_message" *ngIf="!password.valid && password.touched">
+          Password should have at least 8 characters.</span><br><br>
+      </div>
+
+      <div *ngIf="requestedChangePassword===true">
+        <div class="form-group form-inline">
+          <label class="h5 label_field" for="password">Old password:</label>
+          <input class="form-control input_field" type="password" name="oldPassword" id="oldPassword"
+                 [(ngModel)]="newPasswordData.oldPassword" #oldPassword="ngModel">
+          <span class="help-block input_field_error_message"
+                *ngIf="profileData.password!==oldPassword.value && oldPassword.touched">
+            Password does not match the old one.</span><br><br>
+        </div>
+
+        <div class="form-group form-inline">
+          <label class="h5 label_field" for="password">New password:</label>
+          <input class="form-control input_field" type="password" name="newPassword" id="newPassword"
+                 [(ngModel)]="newPasswordData.newPassword" required minlength="8" #newPassword="ngModel">
+          <span class="help-block input_field_error_message" *ngIf="!newPassword.valid && newPassword.touched">
+            Password should have at least 8 characters.</span><br><br>
+        </div>
+
+        <div class="form-group form-inline">
+          <label class="h5 label_field" for="confirmPassword">Confirm new password:</label>
+          <input class="form-control input_field" type="password" name="confirmPassword" id="confirmPassword"
+                 [(ngModel)]="newPasswordData.confirmNewPassword" required #confirmPassword="ngModel">
+          <button class="btn btn-sm btn-secondary change_password_btn" (click)="onChangePassword()">Don't change password</button>
+          <span class="help-block input_field_error_message"
+                *ngIf="confirmPassword.touched && (newPasswordData.confirmNewPassword===''
+                || newPasswordData.newPassword!==newPasswordData.confirmNewPassword && newPassword.touched)">
+            Passwords should match.</span><br><br>
+        </div>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="name">Name:</label>
+        <input class="form-control input_field" type="text" name="name" id="name"
+               [(ngModel)]="profileData.name" required #name="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!name.valid && name.touched">Name is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="surname">Surname:</label>
+        <input class="form-control input_field" type="text" name="surname" id="surname"
+               [(ngModel)]="profileData.surname" required #surname="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!surname.valid && surname.touched">Surname is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="address">Address:</label>
+        <input class="form-control input_field" type="text" name="address" id="address"
+               [(ngModel)]="profileData.address" required #address="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!address.valid && address.touched">Address is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="city">City:</label>
+        <input class="form-control input_field" type="text" name="city" id="city"
+               [(ngModel)]="profileData.city" required #city="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!city.valid && city.touched">City is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="state">State:</label>
+        <input class="form-control input_field" type="text" name="state" id="state"
+               [(ngModel)]="profileData.state" required #state="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!state.valid && state.touched">State is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="phoneNumber">Phone number:</label>
+        <input class="form-control input_field" type="text" name="phoneNumber" id="phoneNumber"
+               [(ngModel)]="profileData.phoneNumber" required #phoneNumber="ngModel">
+        <span class="help-block input_field_error_message" *ngIf="!phoneNumber.valid && phoneNumber.touched">Phone number is required.</span><br><br>
+      </div>
+
+      <div class="form-group form-inline">
+        <label class="h5 label_field" for="insuranceNumber">Insurance number:</label>
+        <input class="form-control input_field" type="text" name="insuranceNumber" id="insuranceNumber"
+               [(ngModel)]="profileData.insuranceNumber" required #insuranceNumber="ngModel" disabled>
+      </div>
+
+
+      <br>
+      <div class="text-align">
+        <button class="btn btn-lg btn-primary" type="submit"
+                [disabled]="!f.valid || processingData
+                || (requestedChangePassword &&
+                    (
+                    (profileData.password!==newPasswordData.oldPassword
+                    || newPasswordData.newPassword!==newPasswordData.confirmNewPassword)
+                    ))">
+          Edit</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="profileData === null && errorMessage === null">
+  <h3 class="header">Loading...</h3><br>
+</div>
+<div *ngIf="profileData === null && errorMessage !== null">
+  <h5 class="header">{{ errorMessage }}</h5><br>
+</div>
+

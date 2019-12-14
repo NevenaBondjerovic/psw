@@ -1,19 +1,45 @@
-package com.psw.clinicalcentre.registration;
+package com.psw.clinicalcentre.users;
 
-public class UserResponse {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+public class UserDTO {
+
+    @NotNull
+    private Integer id;
+
+    @NotBlank
     private String username;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String surname;
+
+    @NotBlank
     private String address;
+
+    @NotBlank
     private String city;
+
+    @NotBlank
     private String state;
+
+    @NotBlank
     private String phoneNumber;
+
+    @NotBlank
     private String insuranceNumber;
 
-    public UserResponse(String username, String name, String surname, String address, String city,
-                        String state, String phoneNumber, String insuranceNumber) {
+    public UserDTO(Integer id, String username, String password, String name, String surname, String address, String city,
+                   String state, String phoneNumber, String insuranceNumber) {
+        this.id = id;
         this.username = username;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -35,55 +61,35 @@ public class UserResponse {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getInsuranceNumber() {
         return insuranceNumber;
     }
 
-    public void setInsuranceNumber(String insuranceNumber) {
-        this.insuranceNumber = insuranceNumber;
+    public String getPassword() {
+        return password;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }
