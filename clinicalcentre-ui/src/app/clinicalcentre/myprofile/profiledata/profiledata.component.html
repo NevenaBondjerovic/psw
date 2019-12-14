@@ -1,6 +1,14 @@
 <div *ngIf="profileData !== null">
   <h3 class="header">Profile data</h3><br>
 
+  <div class="alert alert-success info_block" *ngIf="registrationSuccessful">
+    <p>All the data have been successfully updated.</p>
+  </div>
+
+  <div class="alert alert-danger info_block" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>
+
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="profile_data_block" id="myprofile-form">
 
@@ -101,7 +109,7 @@
       <br>
       <div class="text-align">
         <button class="btn btn-lg btn-primary" type="submit"
-                [disabled]="!f.valid
+                [disabled]="!f.valid || processingData
                 || (requestedChangePassword &&
                     (
                     (profileData.password!==newPasswordData.oldPassword
@@ -116,6 +124,6 @@
   <h3 class="header">Loading...</h3><br>
 </div>
 <div *ngIf="profileData === null && errorMessage !== null">
-  <h3 class="header">{{ errorMessage }}</h3><br>
+  <h5 class="header">{{ errorMessage }}</h5><br>
 </div>
 

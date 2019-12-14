@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/clinicalcentre/user';
 
 @Component({
   selector: 'app-profiledata',
@@ -9,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ProfiledataComponent implements OnInit {
 
-  profileData: {} = null;
+  profileData: User = null;
   userUrl: string = 'http://localhost:8080/users';
   username: string = 'admin@admin.com';
   newPasswordData: {
@@ -18,6 +19,8 @@ export class ProfiledataComponent implements OnInit {
     confirmNewPassword: string;
   };
   requestedChangePassword: Boolean = false;
+  registrationSuccessful: Boolean = false;
+  processingData: Boolean = false;
 
   errorMessage = null;
   defaultErrorMessage = 'Please enter valid data.';
@@ -28,7 +31,7 @@ export class ProfiledataComponent implements OnInit {
 
   constructor(private http: HttpClient) {
     this.http.get(this.userUrl + '/myprofile/' + this.username)
-    .subscribe(responseData => {
+    .subscribe((responseData: User) => {
       this.resetNewPasswordData();
       this.profileData = responseData;
     }, error => {
@@ -46,11 +49,24 @@ export class ProfiledataComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.processingData = true;
     if(form.valid && this.checkPasswordValidity(form)){
       if(this.requestedChangePassword){
         this.profileData.password = this.newPasswordData.newPassword;
       }
-        console.log(this.profileData);
+      this.http.put(this.userUrl, this.profileData)
+      .subscribe((responseData: User) => {
+        this.resetNewPasswordData();
+        this.requestedChangePassword = false;
+        this.errorMessage = null;
+        this.registrationSuccessful = true;
+        this.profileData = responseData;
+        this.processingData = false;
+      }, error => {
+        this.handleError(error);
+        this.profileData = null;
+        this.processingData = false;
+      });
     } else {
       this.errorMessage = this.defaultErrorMessage;
     }

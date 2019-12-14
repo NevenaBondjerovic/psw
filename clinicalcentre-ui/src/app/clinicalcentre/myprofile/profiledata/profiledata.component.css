@@ -32,3 +32,8 @@
   margin-left: 2%;
 }
 
+.info_block {
+  width: 80%;
+  left: 10%;
+  text-align: center;
+}
