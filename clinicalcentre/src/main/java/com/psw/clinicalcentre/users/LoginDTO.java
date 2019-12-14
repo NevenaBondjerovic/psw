@@ -1,6 +1,6 @@
 package com.psw.clinicalcentre.users;
 
-public class LoginRequest {
+public class LoginDTO {
 
     private String username;
     private String password;

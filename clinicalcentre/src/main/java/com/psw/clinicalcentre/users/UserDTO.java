@@ -1,13 +1,14 @@
-package com.psw.clinicalcentre.registration;
+package com.psw.clinicalcentre.users;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class RequestForRegistration {
+public class UserDTO {
+
+    @NotNull
+    private Integer id;
 
     @NotBlank
-    @Email
     private String username;
 
     @NotBlank
@@ -34,15 +35,26 @@ public class RequestForRegistration {
     @NotBlank
     private String insuranceNumber;
 
-    @NotNull
-    private Boolean activated;
+    public UserDTO(Integer id, String username, String password, String name, String surname, String address, String city,
+                   String state, String phoneNumber, String insuranceNumber) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.insuranceNumber = insuranceNumber;
+    }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPassword() {
-        return password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -73,12 +85,11 @@ public class RequestForRegistration {
         return insuranceNumber;
     }
 
-    public Boolean getActivated() {
-        return activated;
+    public String getPassword() {
+        return password;
     }
 
-    public void setActivated(Boolean activated) {
-        this.activated = activated;
+    public Integer getId() {
+        return id;
     }
-
 }

@@ -3,7 +3,7 @@ package com.psw.clinicalcentre.registration;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class AcceptRejectRequest {
+public class AcceptRejectDTO {
 
     @NotBlank
     private String username;
@@ -12,7 +12,7 @@ public class AcceptRejectRequest {
     private Boolean approved;
     private String declineReason;
 
-    public AcceptRejectRequest() {
+    public AcceptRejectDTO() {
     }
 
     public String getUsername() {
