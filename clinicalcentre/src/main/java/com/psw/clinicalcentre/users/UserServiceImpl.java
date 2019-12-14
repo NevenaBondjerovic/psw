@@ -58,6 +58,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    @Transactional
+    public User save(User user){
+        userRepository.findById(user.getId())
+                .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND_ERROR_MESSAGE));
+        return userRepository.save(user);
+    }
+
     private Boolean isRequestWaitingForActivation(RegistrationRequest request){
         return request.getProcessed() == TRUE && request.getApproved() == TRUE && request.getUser().getActivated() == FALSE;
     }

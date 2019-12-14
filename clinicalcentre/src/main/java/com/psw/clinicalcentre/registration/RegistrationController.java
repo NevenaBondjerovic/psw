@@ -20,21 +20,21 @@ public class RegistrationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void registerUser(@RequestBody @Valid RequestForRegistration request){
+    public void registerUser(@RequestBody @Valid RegistrationDTO request){
         request.setActivated(Boolean.FALSE);
-        registrationService.registerUser(RegistrationConverter.requestForRegistrationToUser(request));
+        registrationService.registerUser(RegistrationConverter.registrationDtoToUser(request));
     }
 
     @GetMapping
-    public ResponseEntity<ResponseForUnprocessedRequests> findUnprocessedRequests(){
-        return new ResponseEntity<ResponseForUnprocessedRequests>(new ResponseForUnprocessedRequests(
+    public ResponseEntity<UnprocessedRequestsDTO> findUnprocessedRequests(){
+        return new ResponseEntity<UnprocessedRequestsDTO>(new UnprocessedRequestsDTO(
                 registrationService.findUnprocessedRequests().stream()
-                        .map(UserConverter::userToUserResponse).collect(Collectors.toSet())), HttpStatus.OK);
+                        .map(UserConverter::userToUserDto).collect(Collectors.toSet())), HttpStatus.OK);
     }
 
     @PostMapping("/requests")
     @ResponseStatus(HttpStatus.OK)
-    public void acceptRegistrationRequest(@RequestBody @Valid AcceptRejectRequest request){
+    public void acceptRegistrationRequest(@RequestBody @Valid AcceptRejectDTO request){
         if (request.getApproved())
             registrationService.acceptRegistrationRequest(request);
         else

@@ -10,8 +10,8 @@ public interface RegistrationService {
 
     Set<User> findUnprocessedRequests();
 
-    void acceptRegistrationRequest(AcceptRejectRequest request);
+    void acceptRegistrationRequest(AcceptRejectDTO request);
 
-    void rejectRegistrationRequest(AcceptRejectRequest request);
+    void rejectRegistrationRequest(AcceptRejectDTO request);
 
 }

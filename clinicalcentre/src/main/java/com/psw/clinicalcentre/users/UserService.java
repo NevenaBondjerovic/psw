@@ -6,4 +6,5 @@ public interface UserService {
     void findById(Integer id);
     User findByUsername(String username);
     void activateAccount(Integer id, String username, String password);
+    User save(User user);
 }

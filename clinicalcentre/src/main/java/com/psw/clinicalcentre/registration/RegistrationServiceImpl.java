@@ -1,6 +1,5 @@
 package com.psw.clinicalcentre.registration;
 
-import com.psw.clinicalcentre.config.EmailMessages;
 import com.psw.clinicalcentre.exceptions.AlreadyExistException;
 import com.psw.clinicalcentre.exceptions.BadRequestException;
 import com.psw.clinicalcentre.exceptions.NotFoundException;
@@ -60,7 +59,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 
     @Transactional
     @Override
-    public void acceptRegistrationRequest(AcceptRejectRequest request) {
+    public void acceptRegistrationRequest(AcceptRejectDTO request) {
         Optional<RegistrationRequest> registrationRequest = registrationRepository.findByUserUsername(request.getUsername());
         if(registrationRequest.isPresent()) {
             String text = String.format(template.getText(), acceptedMessage(ACTIVATION_LINK + registrationRequest.get().getUser().getId()));
@@ -73,7 +72,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 
     @Transactional
     @Override
-    public void rejectRegistrationRequest(AcceptRejectRequest request) {
+    public void rejectRegistrationRequest(AcceptRejectDTO request) {
         if(request.getDeclineReason() == null || request.getDeclineReason().isEmpty())
             throw new BadRequestException(REASON_NOT_ADDED_ERROR_MESSAGE);
         if(registrationRepository.findByUserUsername(request.getUsername()).isPresent()) {
