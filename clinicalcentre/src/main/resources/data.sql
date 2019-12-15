@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS registration_requests;
+DROP TABLE IF EXISTS clinics;
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT  PRIMARY KEY,
@@ -51,3 +52,27 @@ INSERT INTO registration_requests (id, user_id, processed, approved, decline_rea
 INSERT INTO registration_requests (id, user_id, processed, approved, decline_reason) VALUES
   (6, 6, FALSE, FALSE, null);
 
+
+CREATE TABLE clinics (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  address VARCHAR(100) NOT NULL,
+  score INT DEFAULT NUll
+);
+
+INSERT INTO clinics (id, name, address, score) VALUES
+  (1, 'First clinic', 'Some address 1', null);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (2, 'Clinic with some name', 'Some address 1', 5);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (3, 'Bla bla clinic', 'Some address 1', 3);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (4, 'Some clinic', 'Some address 1', 4);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (5, 'Clinic number 5', 'Some address 1', 1);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (6, 'Clinic number 6', 'Some address 1', 5);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (7, 'Clinic number 7', 'Some address 1', 4);
+INSERT INTO clinics (id, name, address, score) VALUES
+  (8, 'Clinic 8', 'Some address 1', null);
