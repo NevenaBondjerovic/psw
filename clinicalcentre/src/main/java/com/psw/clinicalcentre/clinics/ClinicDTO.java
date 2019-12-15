@@ -1,26 +1,24 @@
 package com.psw.clinicalcentre.clinics;
 
-import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "CLINICS")
-public class Clinic {
+public class ClinicDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private Integer id;
 
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String address;
 
     @Max(5)
     private Integer score;
 
-    public Clinic() {
-    }
-
-    public Clinic(Integer id, String name, String address, @Max(5) Integer score) {
+    public ClinicDTO(@NotNull Integer id, @NotBlank String name, @NotBlank String address, Integer score) {
         this.id = id;
         this.name = name;
         this.address = address;
