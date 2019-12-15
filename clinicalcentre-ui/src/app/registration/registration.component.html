@@ -1,6 +1,6 @@
-<div class="background_image">
-
-  <h2 class="welcome_header">Welcome to our clinical centre application!</h2><br>
+<div class="background_image"></div>
+<div class="page_content">
+  <h3 class="welcome_header">Welcome to our clinical centre application!</h3><br>
   <div class="login_button">
     <button class="btn btn-lg btn-primary" type="button" routerLink="/login"> Login </button>
   </div>
@@ -16,7 +16,7 @@
 
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="registration_block" id="registration-form">
-      <h2 class="registration_header">Registration</h2><br><br>
+      <h3 class="align_center">Registration</h3><br><br>
 
       <div class="form-group form-inline">
         <label class="h5 label_field" for="email">Email:</label>
@@ -81,11 +81,10 @@
 
 
       <br>
-      <div class="submit_button">
+      <div class="align_center">
         <button class="btn btn-lg btn-primary" type="submit"
                 [disabled]="!f.valid || password.value!==confirmPassword.value">Submit</button>
       </div>
     </div>
   </form>
-
 </div>
