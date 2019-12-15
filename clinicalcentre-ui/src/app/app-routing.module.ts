@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'activation/:id', component: ActivationpageComponent},
+  { path: 'clinicalcentre', redirectTo: '/clinicalcentre/home', pathMatch: 'full' },
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },
