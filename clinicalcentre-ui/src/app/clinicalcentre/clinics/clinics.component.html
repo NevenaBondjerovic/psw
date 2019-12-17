@@ -1,1 +1,39 @@
-<p>clinics works!</p>
+<div *ngIf="clinics !== undefined && clinics.length > 0">
+  <div class="overview">
+    <h3 class="header">Clinics</h3>
+    <div *ngFor="let clinic of clinics">
+      <table>
+        <tr (click)="onSelect(clinic)"
+            [ngClass]="{clinicSelected: selectedClinic !== null
+              && selectedClinic.id === clinic.id}">
+          <td>{{ clinic.name }}</td>
+          <td>{{ clinic.address }}</td>
+          <td><fa *ngFor="let i of convertScoreToStars(clinic.score)"
+                  name="fas fa-star" aria-hidden="true"></fa></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details">
+    <div *ngIf="selectedClinic === null">
+      <h5 class="detailsNotSelected">Please select clinic to see more details.</h5>
+    </div>
+    <div *ngIf="selectedClinic !== null">
+      <div class="alert alert-danger info_block" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div><br>
+      <h5>Clinic details</h5><br>
+    </div>
+  </div>
+</div>
+<div *ngIf="clinics === undefined && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>
+<div *ngIf="clinics === undefined && !errorMessage">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="clinics !== undefined && clinics.length === 0 && !errorMessage">
+  <h4 class="header">There are no available clinics.</h4>
+</div>
