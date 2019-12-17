@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="clinics !== undefined && clinics.length > 0">
   <div class="overview">
     <h3 class="header">Clinics</h3>
     <div *ngFor="let clinic of clinics">
@@ -8,7 +8,8 @@
               && selectedClinic.id === clinic.id}">
           <td>{{ clinic.name }}</td>
           <td>{{ clinic.address }}</td>
-          <td><fa *ngFor="let i of clinic.score"  name="fas fa-star" aria-hidden="true"></fa></td>
+          <td><fa *ngFor="let i of convertScoreToStars(clinic.score)"
+                  name="fas fa-star" aria-hidden="true"></fa></td>
         </tr>
       </table>
     </div>
@@ -24,4 +25,15 @@
       <h5>Clinic details</h5><br>
     </div>
   </div>
+</div>
+<div *ngIf="clinics === undefined && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>
+<div *ngIf="clinics === undefined && !errorMessage">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="clinics !== undefined && clinics.length === 0 && !errorMessage">
+  <h4 class="header">There are no available clinics.</h4>
 </div>
