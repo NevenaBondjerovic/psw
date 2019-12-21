@@ -48,10 +48,9 @@
 			<version>2.2.1.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-			<version>1.4.199</version>
 		</dependency>
 
 		<dependency>
