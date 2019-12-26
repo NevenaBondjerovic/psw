@@ -45,11 +45,13 @@ public class UserControllerTest {
         username = "username@username.com";
         password = "some pass";
         id = 56789;
-        user = new User(id, username, password, "name", "surname", "address", "city",
-                "state", "phoneNumber", "insurance", Boolean.TRUE);
-        userDTO = new UserDTO(id, username, password, "name", "surname", "address", "city",
-                "state", "phoneNumber", "insurance");
-        activationRequest = new ActivationDataDTO(id, username, password);
+        user = User.builder().id(id).username(username).password(password).name("name")
+                .surname("surname").address("address").city("city").state("state").phoneNumber("phoneNumber")
+                .insuranceNumber("insurance").activated(Boolean.TRUE).build();
+        userDTO = UserDTO.builder().id(id).username(username).password(password).name("name")
+                .surname("surname").address("address").city("city").state("state").phoneNumber("phoneNumber")
+                .insuranceNumber("insurance").build();
+        activationRequest = ActivationDataDTO.builder().id(id).username(username).password(password).build();
     }
 
     @Test
@@ -58,7 +60,9 @@ public class UserControllerTest {
         when(loginDTO.getPassword()).thenReturn(password);
         doNothing().when(userService).findUser(username, password);
         mockMvc.perform(post("/users/login").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(LoginDTO.class).toJson(new LoginDTO(username,password))))
+                .content(gson.getAdapter(LoginDTO.class).toJson(
+                        LoginDTO.builder().username(username).password(password).build()
+                )))
                 .andExpect(status().isOk());
     }
 
@@ -68,21 +72,27 @@ public class UserControllerTest {
         when(loginDTO.getPassword()).thenReturn(password);
         doThrow(NotFoundException.class).when(userService).findUser(username, password);
         mockMvc.perform(post("/users/login").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(LoginDTO.class).toJson(new LoginDTO(username,password))))
+                .content(gson.getAdapter(LoginDTO.class).toJson(
+                        LoginDTO.builder().username(username).password(password).build()
+                )))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void loginUser_badRequest_usernameIsNull() throws Exception {
         mockMvc.perform(post("/users/login").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(LoginDTO.class).toJson(new LoginDTO(null, password))))
+                .content(gson.getAdapter(LoginDTO.class).toJson(
+                        LoginDTO.builder().username(username).password(password).build()
+                )))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void loginUser_badRequest_passwordIsNull() throws Exception {
         mockMvc.perform(post("/users/login").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(LoginDTO.class).toJson(new LoginDTO(null, password))))
+                .content(gson.getAdapter(LoginDTO.class).toJson(
+                        LoginDTO.builder().username(username).password(password).build()
+                )))
                 .andExpect(status().isBadRequest());
     }
 
@@ -150,21 +160,27 @@ public class UserControllerTest {
     @Test
     public void activateAccount_badRequest_idIsNull() throws Exception {
         mockMvc.perform(post("/users/activate").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(ActivationDataDTO.class).toJson(new ActivationDataDTO(null, username, password))))
+                .content(gson.getAdapter(ActivationDataDTO.class).toJson(
+                        ActivationDataDTO.builder().id(null).username(username).password(password).build()
+                )))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void activateAccount_badRequest_usernameIsNull() throws Exception {
         mockMvc.perform(post("/users/activate").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(ActivationDataDTO.class).toJson(new ActivationDataDTO(id, null, password))))
+                .content(gson.getAdapter(ActivationDataDTO.class).toJson(
+                        ActivationDataDTO.builder().id(id).username(null).password(password).build()
+                )))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void activateAccount_badRequest_passwordIsBlank() throws Exception {
         mockMvc.perform(post("/users/activate").contentType("application/json; charset=utf-8")
-                .content(gson.getAdapter(ActivationDataDTO.class).toJson(new ActivationDataDTO(id, username, ""))))
+                .content(gson.getAdapter(ActivationDataDTO.class).toJson(
+                        ActivationDataDTO.builder().id(id).username(username).password("").build()
+                )))
                 .andExpect(status().isBadRequest());
     }
 
