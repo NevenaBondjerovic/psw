@@ -6,13 +6,17 @@ import com.psw.clinicalcentre.users.User;
 public class UserConverter {
 
     public static UserDTO userToUserDto(User user){
-        return new UserDTO(user.getId(), user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getAddress(),
-                user.getCity(), user.getState(), user.getPhoneNumber(), user.getInsuranceNumber());
+        return UserDTO.builder().id(user.getId()).username(user.getUsername()).password(user.getPassword())
+                .name(user.getName()).surname(user.getSurname()).address(user.getAddress())
+                .city(user.getCity()).state(user.getState()).phoneNumber(user.getPhoneNumber())
+                .insuranceNumber(user.getInsuranceNumber()).build();
     }
 
     public static User userDtoToUser(UserDTO user, Boolean activated){
-        return new User(user.getId(), user.getUsername(), user.getPassword(), user.getName(), user.getSurname(),
-                user.getAddress(), user.getCity(), user.getState(), user.getPhoneNumber(), user.getInsuranceNumber(), activated);
+        return User.builder().id(null).username(user.getUsername()).password(user.getPassword())
+                .name(user.getName()).surname(user.getSurname()).address(user.getAddress())
+                .city(user.getCity()).state(user.getState()).phoneNumber(user.getPhoneNumber())
+                .insuranceNumber(user.getInsuranceNumber()).activated(activated).build();
     }
 
 }
