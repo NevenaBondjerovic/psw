@@ -49,6 +49,7 @@ export class RequestsComponent implements OnInit {
     this.errorMessage = null;
     this.selectedRequest = request;
     this.requestProcessed = false;
+    this.rejected = false;
   }
 
   onAccept() {
