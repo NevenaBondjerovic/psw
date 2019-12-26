@@ -1,7 +1,16 @@
 package com.psw.clinicalcentre.users;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class LoginDTO {
 
     @NotBlank
@@ -10,16 +19,4 @@ public class LoginDTO {
     @NotBlank
     private String password;
 
-    public LoginDTO(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }
