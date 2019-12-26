@@ -37,6 +37,22 @@ public class RegistrationDTO {
     @NotNull
     private Boolean activated;
 
+    public RegistrationDTO(@NotBlank @Email String username, @NotBlank String password, @NotBlank String name,
+                           @NotBlank String surname, @NotBlank String address, @NotBlank String city,
+                           @NotBlank String state, @NotBlank String phoneNumber, @NotBlank String insuranceNumber,
+                           @NotNull Boolean activated) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.insuranceNumber = insuranceNumber;
+        this.activated = activated;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -81,4 +97,11 @@ public class RegistrationDTO {
         this.activated = activated;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

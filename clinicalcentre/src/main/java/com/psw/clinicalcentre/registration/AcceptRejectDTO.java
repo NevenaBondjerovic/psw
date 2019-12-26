@@ -15,6 +15,12 @@ public class AcceptRejectDTO {
     public AcceptRejectDTO() {
     }
 
+    public AcceptRejectDTO(@NotBlank String username, @NotNull Boolean approved, String declineReason) {
+        this.username = username;
+        this.approved = approved;
+        this.declineReason = declineReason;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -25,5 +31,13 @@ public class AcceptRejectDTO {
 
     public String getDeclineReason() {
         return declineReason;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

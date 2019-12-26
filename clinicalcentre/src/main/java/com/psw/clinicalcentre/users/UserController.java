@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public void loginUser(@RequestBody LoginDTO loginRequest){
+    public void loginUser(@RequestBody @Valid LoginDTO loginRequest){
         userService.findUser(loginRequest.getUsername(), loginRequest.getPassword());
     }
 
