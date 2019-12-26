@@ -47,8 +47,8 @@ public class RegistrationServiceImpl implements RegistrationService{
             throw new AlreadyExistException(USER_ALREADY_EXISTS_ERROR_MESSAGE);
 
         userRepository.save(user);
-        registrationRepository.save(new RegistrationRequest(
-                user,false, false, null));
+        registrationRepository.save(RegistrationRequest.builder().id(null)
+                .user(user).processed(FALSE).approved(FALSE).declineReason(null).build());
     }
 
     @Override
