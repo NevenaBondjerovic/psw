@@ -4,15 +4,11 @@ import com.psw.clinicalcentre.exceptions.BadRequestException;
 import com.psw.clinicalcentre.exceptions.NotFoundException;
 import com.psw.clinicalcentre.registration.RegistrationRepository;
 import com.psw.clinicalcentre.registration.RegistrationRequest;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;

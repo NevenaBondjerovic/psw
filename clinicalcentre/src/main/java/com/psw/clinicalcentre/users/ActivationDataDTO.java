@@ -17,6 +17,12 @@ public class ActivationDataDTO {
     public ActivationDataDTO() {
     }
 
+    public ActivationDataDTO(@NotNull Integer id, @NotBlank String username, @NotBlank String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }
