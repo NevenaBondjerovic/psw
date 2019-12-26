@@ -1,8 +1,17 @@
 package com.psw.clinicalcentre.registration;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AcceptRejectDTO {
 
     @NotBlank
@@ -12,32 +21,4 @@ public class AcceptRejectDTO {
     private Boolean approved;
     private String declineReason;
 
-    public AcceptRejectDTO() {
-    }
-
-    public AcceptRejectDTO(@NotBlank String username, @NotNull Boolean approved, String declineReason) {
-        this.username = username;
-        this.approved = approved;
-        this.declineReason = declineReason;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public Boolean getApproved() {
-        return approved;
-    }
-
-    public String getDeclineReason() {
-        return declineReason;
-    }
-
-    public void setApproved(Boolean approved) {
-        this.approved = approved;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

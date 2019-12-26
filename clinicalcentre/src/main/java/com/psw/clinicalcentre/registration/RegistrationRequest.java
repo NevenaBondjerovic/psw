@@ -1,11 +1,19 @@
 package com.psw.clinicalcentre.registration;
 
 import com.psw.clinicalcentre.users.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "REGISTRATION_REQUESTS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RegistrationRequest {
 
     @Id
@@ -18,27 +26,5 @@ public class RegistrationRequest {
     private Boolean processed;
     private Boolean approved;
     private String declineReason;
-
-    public RegistrationRequest() {
-    }
-
-    public RegistrationRequest(User user, Boolean processed, Boolean approved, String declineReason) {
-        this.user = user;
-        this.processed = processed;
-        this.approved = approved;
-        this.declineReason = declineReason;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Boolean getProcessed() {
-        return processed;
-    }
-
-    public Boolean getApproved() {
-        return approved;
-    }
 
 }

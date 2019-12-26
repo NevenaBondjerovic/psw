@@ -6,7 +6,8 @@ import com.psw.clinicalcentre.clinics.ClinicDTO;
 public class ClinicConverter {
 
     public static ClinicDTO clinicToClinicDto(Clinic clinic){
-        return new ClinicDTO(clinic.getId(), clinic.getName(), clinic.getAddress(), clinic.getScore());
+        return ClinicDTO.builder().id(clinic.getId()).name(clinic.getName())
+                .address(clinic.getAddress()).score(clinic.getScore()).build();
     }
 
 }

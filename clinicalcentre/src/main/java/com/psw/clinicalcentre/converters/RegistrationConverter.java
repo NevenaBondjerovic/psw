@@ -6,9 +6,10 @@ import com.psw.clinicalcentre.users.User;
 public class RegistrationConverter {
 
     public static User registrationDtoToUser(RegistrationDTO request){
-        return new User(null, request.getUsername(), request.getPassword(), request.getName(), request.getSurname(),
-                request.getAddress(), request.getCity(), request.getState(), request.getPhoneNumber(),
-                request.getInsuranceNumber(), request.getActivated());
+        return User.builder().id(null).username(request.getUsername()).password(request.getPassword())
+                .name(request.getName()).surname(request.getSurname()).address(request.getAddress())
+                .city(request.getCity()).state(request.getState()).phoneNumber(request.getPhoneNumber())
+                .insuranceNumber(request.getInsuranceNumber()).activated(request.getActivated()).build();
     }
 
 

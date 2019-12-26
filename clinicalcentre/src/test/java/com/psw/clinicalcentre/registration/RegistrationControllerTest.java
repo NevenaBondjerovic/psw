@@ -39,19 +39,21 @@ public class RegistrationControllerTest {
     private RegistrationDTO registrationDTO;
     private User user;
     private Set<User> unprocessedRequests;
-
     private AcceptRejectDTO acceptRejectDTO;
 
     @Before
     public void setUp() throws Exception {
         gson = new Gson();
-        registrationDTO = new RegistrationDTO("email@email.com","pass", "name", "surname",
-                "address", "city", "state", "number", "insurance", Boolean.FALSE);
-        user = new User(null, "email@email.com","pass", "name", "surname",
-                "address", "city", "state", "number", "insurance", Boolean.FALSE);
+        registrationDTO = RegistrationDTO.builder().username("email@email.com").password("pass").name("name")
+                .surname("surname").address("address").city("city").state("state").phoneNumber("number")
+                .insuranceNumber("insurance").activated(Boolean.FALSE).build();
+        user = User.builder().id(null).username("email@email.com").password("pass").name("name")
+                .surname("surname").address("address").city("city").state("state").phoneNumber("number")
+                .insuranceNumber("insurance").activated(Boolean.FALSE).build();
         unprocessedRequests = new HashSet<>();
         unprocessedRequests.add(user);
-        acceptRejectDTO = new AcceptRejectDTO("email@email.com", Boolean.TRUE, "");
+        acceptRejectDTO = AcceptRejectDTO.builder().username("email@email.com")
+                .approved(Boolean.TRUE).declineReason("").build();
     }
 
     @Test

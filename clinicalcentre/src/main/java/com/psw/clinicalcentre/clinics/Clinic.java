@@ -1,10 +1,16 @@
 package com.psw.clinicalcentre.clinics;
 
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
 @Entity
 @Table(name = "CLINICS")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Clinic {
 
     @Id
@@ -17,29 +23,4 @@ public class Clinic {
     @Max(5)
     private Integer score;
 
-    public Clinic() {
-    }
-
-    public Clinic(Integer id, String name, String address, @Max(5) Integer score) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.score = score;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
 }

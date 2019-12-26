@@ -10,9 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashSet;
@@ -50,10 +48,13 @@ public class RegistrationServiceImplTest {
     @Before
     public void setUp() throws Exception {
         username = "username";
-        registrationRequest = new RegistrationRequest(user,false, false, null);
+        registrationRequest = RegistrationRequest.builder().id(null).user(user).processed(Boolean.FALSE)
+                .approved(Boolean.FALSE).declineReason(null).build();
         registrationRequests = new HashSet<>();
-        registrationRequests.add(new RegistrationRequest(user,false, false, null));
-        registrationRequests.add(new RegistrationRequest(user,true, false, null));
+        registrationRequests.add(RegistrationRequest.builder().id(null).user(user).processed(Boolean.FALSE)
+                .approved(Boolean.FALSE).declineReason(null).build());
+        registrationRequests.add(RegistrationRequest.builder().id(null).user(user).processed(Boolean.TRUE)
+                .approved(Boolean.FALSE).declineReason(null).build());
     }
 
     @Test

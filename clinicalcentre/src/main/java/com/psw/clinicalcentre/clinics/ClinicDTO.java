@@ -1,9 +1,15 @@
 package com.psw.clinicalcentre.clinics;
 
+import lombok.*;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ClinicDTO {
 
     @NotNull
@@ -18,26 +24,4 @@ public class ClinicDTO {
     @Max(5)
     private Integer score;
 
-    public ClinicDTO(@NotNull Integer id, @NotBlank String name, @NotBlank String address, Integer score) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.score = score;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
 }
