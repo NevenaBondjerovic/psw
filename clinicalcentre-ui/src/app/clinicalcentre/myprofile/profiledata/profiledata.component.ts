@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/clinicalcentre/user';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
 
 @Component({
   selector: 'app-profiledata',
@@ -12,7 +13,7 @@ export class ProfiledataComponent implements OnInit {
 
   profileData: User = null;
   userUrl: string = 'http://localhost:8080/users';
-  username: string = 'admin@admin.com';
+  username: string = '';
   newPasswordData: {
     oldPassword: string;
     newPassword: string;
@@ -29,7 +30,8 @@ export class ProfiledataComponent implements OnInit {
   httpStatusServerNotAvailable = 0;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalVariables: GlobalVariablesService) {
+    this.username = this.globalVariables.loggedInUser.username;
     this.http.get(this.userUrl + '/myprofile/' + this.username)
     .subscribe((responseData: User) => {
       this.resetNewPasswordData();
