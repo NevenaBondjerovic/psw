@@ -44,4 +44,10 @@ public class UserDTO {
     @NotBlank
     private String insuranceNumber;
 
+    @NotNull
+    private Boolean activated;
+
+    @NotNull
+    private UserType userType;
+
 }

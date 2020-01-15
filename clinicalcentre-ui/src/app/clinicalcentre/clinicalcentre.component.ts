@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-clinicalcentre',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClinicalcentreComponent implements OnInit {
 
-  constructor() { }
+  email: String = '';
+  userType: String = '';
+
+  constructor(private router: Router, private globalVariables: GlobalVariablesService) {
+    if(this.globalVariables.loggedInUser === null){
+        this.router.navigate(['/login']);
+    }
+    this.email = this.globalVariables.loggedInUser.username;
+    this.userType = this.globalVariables.loggedInUser.userType;
+   }
 
   ngOnInit() {
+  }
+
+  onLogout() {
+    this.globalVariables.loggedInUser = null;
+    this.router.navigate(['/login']);
   }
 
 }

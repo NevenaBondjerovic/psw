@@ -4,14 +4,14 @@
            routerLinkActive="selected"><fa name="fas fa-home fa-2x"></fa></a></li>
     <li><a class="li" routerLink="/clinicalcentre/clinics"
            routerLinkActive="selected">Clinics</a></li>
-    <li><a class="li" routerLink="/clinicalcentre/requests"
+    <li><a class="li" routerLink="/clinicalcentre/requests" *ngIf="userType === 'CLINICAL_CENTRE_ADMIN'"
            routerLinkActive="selected">Registration requests</a></li>
     <li class="li_on_the_right dropdown">
-      <a class="li dropbtn">email@email.com</a>
-      <div class="dropdown-content">
+      <a class="li dropbtn">{{email}}</a>
+      <div class="li_on_the_right dropdown-content ">
         <a routerLink="/clinicalcentre/myprofile"
            routerLinkActive="selected"><fa class="profile_icon" name="fas fa-user fa-3x"></fa>  My profile</a>
-        <a routerLink="/login"><fa name="fas fa-sign-out"></fa> Logout</a>
+        <a (click)="onLogout()" ><fa name="fas fa-sign-out"></fa> Logout</a>
       </div>
     </li>
   </ul>

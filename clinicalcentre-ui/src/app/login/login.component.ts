@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Router} from "@angular/router"
+import { Router } from "@angular/router";
+import { User } from 'src/app/clinicalcentre/user';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
 
 @Component({
   selector: 'app-login',
@@ -15,18 +17,27 @@ export class LoginComponent implements OnInit {
   errorMessage = null;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
   httpStatusServerNotAvailable = 0;
+  loggedInUser: User = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(private http: HttpClient, private router: Router, private globalVariables: GlobalVariablesService) { }
 
   ngOnInit() {
   }
 
   onLogin(){
     this.http.post(this.loginUrl, {username: this.username, password: this.password})
-      .subscribe(responseData => {
-        console.log(responseData);
-        this.errorMessage = null;
-        this.router.navigate(['/clinicalcentre/home']);
+      .subscribe((responseData: User) => {
+        if(responseData.activated === true){
+          this.loggedInUser = responseData;
+          this.globalVariables.loggedInUser = responseData;
+          this.errorMessage = null;
+          this.router.navigate(['/clinicalcentre/home']);
+          console.log(this.globalVariables.loggedInUser);
+        } else {
+          this.globalVariables.loggedInUser = null;
+          this.errorMessage = "User is still not activated.";
+        }
       }, error => {
         if (error.status === this.httpStatusServerNotAvailable) {
           this.errorMessage = this.serviceNotAvailableErrorMessage;

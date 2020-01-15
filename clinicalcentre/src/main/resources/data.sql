@@ -76,3 +76,14 @@ INSERT INTO clinics (id, name, address, score) VALUES
   (7, 'Clinic number 7', 'Some address 1', 4);
 INSERT INTO clinics (id, name, address, score) VALUES
   (8, 'Clinic 8', 'Some address 1', null);
+
+
+ALTER TABLE clinical_centre.users
+ADD type ENUM('PATIENT', 'MEDICAL_STAFF','DOCTOR', 'NURSE', 'CLINIC_ADMIN', 'CLINICAL_CENTRE_ADMIN', 'NEW_USER')
+DEFAULT 'NEW_USER' NOT NULL;
+
+
+UPDATE clinical_centre.users
+    SET type = 'CLINICAL_CENTRE_ADMIN' where id = 1;
+UPDATE clinical_centre.users
+    SET type = 'PATIENT' where id = 2;
