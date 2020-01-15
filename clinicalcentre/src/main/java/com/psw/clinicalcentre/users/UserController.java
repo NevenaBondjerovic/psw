@@ -39,9 +39,10 @@ public class UserController {
     }
 
     @PostMapping("/activate")
-    @ResponseStatus(HttpStatus.OK)
-    public void activateAccount(@RequestBody @Valid ActivationDataDTO request){
-        userService.activateAccount(request.getId(), request.getUsername(), request.getPassword());
+    public ResponseEntity<UserDTO> activateAccount(@RequestBody @Valid ActivationDataDTO request){
+        return new ResponseEntity<>(
+                userToUserDto(userService.activateAccount(request.getId(), request.getUsername(), request.getPassword())),
+                HttpStatus.OK);
     }
 
     @PutMapping

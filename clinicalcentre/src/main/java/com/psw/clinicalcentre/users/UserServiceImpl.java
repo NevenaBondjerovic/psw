@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void activateAccount(Integer id, String username, String password){
+    public User activateAccount(Integer id, String username, String password){
         RegistrationRequest request = registrationRepository.findByUserUsername(username)
                 .orElseThrow(() -> new NotFoundException(USER_NOT_FOUND_ERROR_MESSAGE));
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
         User user = request.getUser();
         user.setActivated(TRUE);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override

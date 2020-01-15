@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
 
 @Component({
   selector: 'app-activationpage',
@@ -18,7 +19,7 @@ export class ActivationpageComponent implements OnInit {
   httpStatusServerNotAvailable = 0;
 
   constructor(private _Activatedroute:ActivatedRoute,
-    private http: HttpClient, private router: Router) {
+    private http: HttpClient, private router: Router, private globalVariables: GlobalVariablesService) {
   }
 
   ngOnInit() {
@@ -33,7 +34,8 @@ export class ActivationpageComponent implements OnInit {
 
   onSubmit(){
     this.http.post(this.usersUrl + 'activate', {id: this.id, username: this.username, password: this.password})
-    .subscribe(() => {
+    .subscribe((responseData: User) => {
+      this.globalVariables.loggedInUser = responseData;
       this.router.navigate(['/clinicalcentre/home']);
     }, error => {
       if (error.status === this.httpStatusServerNotAvailable) {
