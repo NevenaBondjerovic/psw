@@ -4,7 +4,7 @@
            routerLinkActive="selected"><fa name="fas fa-home fa-2x"></fa></a></li>
     <li><a class="li" routerLink="/clinicalcentre/clinics"
            routerLinkActive="selected">Clinics</a></li>
-    <li><a class="li" routerLink="/clinicalcentre/requests"
+    <li><a class="li" routerLink="/clinicalcentre/requests" *ngIf="userType === 'CLINICAL_CENTRE_ADMIN'"
            routerLinkActive="selected">Registration requests</a></li>
     <li class="li_on_the_right dropdown">
       <a class="li dropbtn">{{email}}</a>

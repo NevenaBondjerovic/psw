@@ -10,12 +10,14 @@ import { Router } from "@angular/router";
 export class ClinicalcentreComponent implements OnInit {
 
   email: String = '';
+  userType: String = '';
 
   constructor(private router: Router, private globalVariables: GlobalVariablesService) {
     if(this.globalVariables.loggedInUser === null){
         this.router.navigate(['/login']);
     }
     this.email = this.globalVariables.loggedInUser.username;
+    this.userType = this.globalVariables.loggedInUser.userType;
    }
 
   ngOnInit() {
