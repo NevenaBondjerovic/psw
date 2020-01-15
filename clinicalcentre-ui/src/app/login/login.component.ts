@@ -28,10 +28,15 @@ export class LoginComponent implements OnInit {
   onLogin(){
     this.http.post(this.loginUrl, {username: this.username, password: this.password})
       .subscribe((responseData: User) => {
-        this.loggedInUser = responseData;
-        this.globalVariables.loggedInUser = responseData;
-        this.errorMessage = null;
-        this.router.navigate(['/clinicalcentre/home']);
+        if(responseData.activated === true){
+          this.loggedInUser = responseData;
+          this.globalVariables.loggedInUser = responseData;
+          this.errorMessage = null;
+          this.router.navigate(['/clinicalcentre/home']);
+        } else {
+          this.globalVariables.loggedInUser = null;
+          this.errorMessage = "User is still not activated.";
+        }
       }, error => {
         if (error.status === this.httpStatusServerNotAvailable) {
           this.errorMessage = this.serviceNotAvailableErrorMessage;

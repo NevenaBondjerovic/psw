@@ -9,7 +9,7 @@ public class UserConverter {
         return UserDTO.builder().id(user.getId()).username(user.getUsername()).password(user.getPassword())
                 .name(user.getName()).surname(user.getSurname()).address(user.getAddress())
                 .city(user.getCity()).state(user.getState()).phoneNumber(user.getPhoneNumber())
-                .insuranceNumber(user.getInsuranceNumber()).build();
+                .insuranceNumber(user.getInsuranceNumber()).activated(user.getActivated()).build();
     }
 
     public static User userDtoToUser(UserDTO user, Boolean activated){
