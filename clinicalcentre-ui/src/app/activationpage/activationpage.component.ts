@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { User } from 'src/app/clinicalcentre/user';
 
 @Component({
   selector: 'app-activationpage',

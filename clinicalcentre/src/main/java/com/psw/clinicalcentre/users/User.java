@@ -30,4 +30,7 @@ public class User {
     private String insuranceNumber;
     private Boolean activated;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE")
+    private UserType userType;
 }

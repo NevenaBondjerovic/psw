@@ -47,4 +47,7 @@ public class UserDTO {
     @NotNull
     private Boolean activated;
 
+    @NotNull
+    private UserType userType;
+
 }

@@ -9,5 +9,6 @@ export interface User {
   state: string,
   phoneNumber: string,
   insuranceNumber: string,
-  activated: boolean
+  activated: boolean,
+  userType: string
 };
