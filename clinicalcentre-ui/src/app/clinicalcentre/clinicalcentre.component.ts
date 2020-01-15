@@ -21,4 +21,9 @@ export class ClinicalcentreComponent implements OnInit {
   ngOnInit() {
   }
 
+  onLogout() {
+    this.globalVariables.loggedInUser = null;
+    this.router.navigate(['/login']);
+  }
+
 }

@@ -11,7 +11,7 @@
       <div class="li_on_the_right dropdown-content ">
         <a routerLink="/clinicalcentre/myprofile"
            routerLinkActive="selected"><fa class="profile_icon" name="fas fa-user fa-3x"></fa>  My profile</a>
-        <a routerLink="/login"><fa name="fas fa-sign-out"></fa> Logout</a>
+        <a (click)="onLogout()" ><fa name="fas fa-sign-out"></fa> Logout</a>
       </div>
     </li>
   </ul>

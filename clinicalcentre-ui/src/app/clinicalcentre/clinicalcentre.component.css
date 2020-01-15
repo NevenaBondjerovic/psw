@@ -63,6 +63,7 @@ li.dropdown {
   text-align: left;
   text-align: center;
   min-width: 170px;
+  cursor: pointer;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1;}
