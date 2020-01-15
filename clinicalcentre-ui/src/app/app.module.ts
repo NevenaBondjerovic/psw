@@ -15,6 +15,7 @@ import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.compone
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 import { ActivationpageComponent } from './activationpage/activationpage.component';
 import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
+import { GlobalVariablesService } from './global-variables.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/pro
     FormsModule,
     AngularFontAwesomeModule
   ],
-  providers: [],
+  providers: [GlobalVariablesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

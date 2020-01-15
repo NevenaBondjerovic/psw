@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     private RegistrationRepository registrationRepository;
 
     @Override
-    public void findUser(String username, String password) {
-        userRepository.findByUsernameAndPassword(username, password)
+    public User findUser(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password)
                 .orElseThrow(() -> new NotFoundException(USERNAME_OR_PASS_NOT_EXIST_ERROR_MESSAGE));
     }
 

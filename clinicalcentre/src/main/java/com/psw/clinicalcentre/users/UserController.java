@@ -20,9 +20,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    @ResponseStatus(HttpStatus.OK)
-    public void loginUser(@RequestBody @Valid LoginDTO loginRequest){
-        userService.findUser(loginRequest.getUsername(), loginRequest.getPassword());
+    public ResponseEntity<UserDTO> loginUser(@RequestBody @Valid LoginDTO loginRequest){
+        return new ResponseEntity<>(
+                userToUserDto(userService.findUser(loginRequest.getUsername(), loginRequest.getPassword())),
+                HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -33,7 +34,7 @@ public class UserController {
 
     @GetMapping("/myprofile/{username}")
     public ResponseEntity<UserDTO> findUserByUsername(@PathVariable("username") @Valid String username){
-        return new ResponseEntity<UserDTO>(userToUserDto(userService.findByUsername(username)),
+        return new ResponseEntity<>(userToUserDto(userService.findByUsername(username)),
                 HttpStatus.OK);
     }
 
