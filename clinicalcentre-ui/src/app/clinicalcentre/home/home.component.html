@@ -1,15 +1,15 @@
 <div *ngIf="userType === 'PATIENT'">
   <h3>Welcome!</h3>
   <div class="block_style">
-    <h5>Go to the list of all clinics: <a href="/clinicalcentre/clinics">Clinics</a></h5>
+    <h5>Go to the list of all clinics: <a routerLink="/clinicalcentre/clinics">Clinics</a></h5>
   </div>
   <div class="block_style">
-    <h5>History of all your appointments and operations: <a href="/clinicalcentre/home">History</a></h5>
+    <h5>History of all your appointments and operations: <a routerLink="/clinicalcentre/myprofile/history">History</a></h5>
   </div>
   <div class="block_style">
-    <h5>You can view you medical record on the following address: <a href="/clinicalcentre/home">Medical record</a></h5>
+    <h5>You can view you medical record on the following address: <a routerLink="/clinicalcentre/home">Medical record</a></h5>
   </div>
   <div class="block_style">
-    <h5>Go to your profile data: <a href="/clinicalcentre/myprofile/profile">My profile</a></h5>
+    <h5>Go to your profile data: <a routerLink="/clinicalcentre/myprofile/profile">My profile</a></h5>
   </div>
 </div>
