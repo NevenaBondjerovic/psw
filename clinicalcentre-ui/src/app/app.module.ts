@@ -17,6 +17,7 @@ import { ActivationpageComponent } from './activationpage/activationpage.compone
 import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
 import { GlobalVariablesService } from './global-variables.service';
 import { HistoryComponent } from './clinicalcentre/myprofile/history/history.component';
+import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HistoryComponent } from './clinicalcentre/myprofile/history/history.com
     RequestsComponent,
     ActivationpageComponent,
     ProfiledataComponent,
-    HistoryComponent
+    HistoryComponent,
+    MedicalrecordComponent
   ],
   imports: [
     BrowserModule,
