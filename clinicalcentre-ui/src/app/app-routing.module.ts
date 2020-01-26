@@ -9,6 +9,7 @@ import { MyprofileComponent } from './clinicalcentre/myprofile/myprofile.compone
 import { RequestsComponent } from './clinicalcentre/requests/requests.component';
 import { ActivationpageComponent } from './activationpage/activationpage.component';
 import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
+import { HistoryComponent } from './clinicalcentre/myprofile/history/history.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
     { path: 'myprofile', component: MyprofileComponent, children: [
-      {path: 'profile', component: ProfiledataComponent}
+      {path: 'profile', component: ProfiledataComponent},
+      {path: 'history', component: HistoryComponent}
     ] }
    ] }
 ];
