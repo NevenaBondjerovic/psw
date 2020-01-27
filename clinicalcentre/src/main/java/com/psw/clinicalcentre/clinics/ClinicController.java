@@ -19,7 +19,7 @@ public class ClinicController {
 
     @GetMapping
     public ResponseEntity<Set<ClinicDTO>> findAll(){
-        return new ResponseEntity<Set<ClinicDTO>>(
+        return new ResponseEntity<>(
                 clinicsService.findAll().stream().map(ClinicConverter::clinicToClinicDto).collect(Collectors.toSet()),
                 HttpStatus.OK);
     }
