@@ -1,13 +1,22 @@
 <div *ngIf="appointments !== undefined && appointments.length > 0">
   <div class="overview">
     <h3 class="header">Available appointments</h3>
-    <div *ngFor="let appointment of appointments">
+    <div>
       <table>
-        <tr (click)="onSelect(appointment)"
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Doctor</th>
+          <th>Type</th>
+        </tr>
+        <tr *ngFor="let appointment of appointments"
+            (click)="onSelect(appointment)"
             [ngClass]="{selected: selectedAppointment !== null
               && selectedAppointment.id === appointment.id}">
           <td>{{ appointment.dateOfAppointment }}</td>
           <td>{{ appointment.timeOfAppointment }}</td>
+          <td>{{ appointment.doctor.name }} {{ appointment.doctor.surname }}</td>
+          <td>{{ appointment.type.name }}</td>
         </tr>
       </table>
     </div>
