@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
           this.globalVariables.loggedInUser = responseData;
           this.errorMessage = null;
           this.router.navigate(['/clinicalcentre/home']);
-          console.log(this.globalVariables.loggedInUser);
         } else {
           this.globalVariables.loggedInUser = null;
           this.errorMessage = "User is still not activated.";

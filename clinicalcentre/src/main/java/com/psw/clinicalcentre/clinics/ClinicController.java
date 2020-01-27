@@ -4,10 +4,7 @@ import com.psw.clinicalcentre.converters.ClinicConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,6 +21,12 @@ public class ClinicController {
     public ResponseEntity<Set<ClinicDTO>> findAll(){
         return new ResponseEntity<Set<ClinicDTO>>(
                 clinicsService.findAll().stream().map(ClinicConverter::clinicToClinicDto).collect(Collectors.toSet()),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClinicDTO> findById(@PathVariable("i(d") Integer id){
+        return new ResponseEntity<>(ClinicConverter.clinicToClinicDto(clinicsService.findById(id)),
                 HttpStatus.OK);
     }
 
