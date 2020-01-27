@@ -1,12 +1,13 @@
 <div *ngIf="appointments !== undefined && appointments.length > 0">
   <div class="overview">
-    <h3 class="header">Future appointments</h3>
+    <h3 class="header">Your today's and future appointments</h3>
     <div>
       <table>
         <tr>
           <th>Date</th>
           <th>Time</th>
           <th>Type</th>
+          <th>Patient</th>
         </tr>
         <tr *ngFor="let appointment of appointments"
             (click)="onSelect(appointment)"
@@ -15,6 +16,9 @@
           <td>{{ appointment.dateOfAppointment }}</td>
           <td>{{ appointment.timeOfAppointment }}</td>
           <td>{{ appointment.type.name }}</td>
+          <td *ngIf="appointment.scheduledFor === null"></td>
+          <td *ngIf="appointment.scheduledFor !== null">
+            {{ appointment.scheduledFor.name }} {{ appointment.scheduledFor.surname }}</td>
         </tr>
       </table>
     </div>
@@ -45,7 +49,11 @@
             <label>Discount: <b>{{ selectedAppointment.pricelist.discount }} % </b></label><br>
             <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
               <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
-            <label>Patient: <b>{{ selectedAppointment.scheduledFor.name }} {{ selectedAppointment.scheduledFor.surname }}</b></label><br>
+            <label *ngIf="selectedAppointment.scheduledFor === null">
+              <b>This appointment is still not scheduled.</b></label>
+            <label *ngIf="selectedAppointment.scheduledFor !== null">
+              Patient: <b>{{ selectedAppointment.scheduledFor.name }} {{ selectedAppointment.scheduledFor.surname }}</b></label>
+            <br>
           </div>
         </div>
 

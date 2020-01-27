@@ -6,4 +6,5 @@ public interface AppointmentService {
 
     Set<Appointment> findAllAvailable();
     Appointment findById(Integer id);
+    Set<Appointment> findAllFutureForDoctor(Integer id);
 }

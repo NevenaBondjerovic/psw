@@ -25,6 +25,14 @@ public class AppointmentController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/doctor/{id}")
+    public ResponseEntity<Set<AppointmentDTO>> findAllFutureScheduledAppointmentsForDoctorId(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(
+                appointmentService.findAllFutureForDoctor(id).stream().map(AppointmentConverter::appointmentToAppointmentDTO)
+                        .collect(Collectors.toSet()),
+                HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> findById(@PathVariable("id") Integer id){
         return new ResponseEntity<>(

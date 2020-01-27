@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/clinicalcentre/appointments/appointment';
 import { HttpClient } from '@angular/common/http';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
 
 @Component({
   selector: 'app-workcalendar',
@@ -22,10 +23,11 @@ export class WorkcalendarComponent implements OnInit {
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+      private globalVariables: GlobalVariablesService) {
     this.loadingData = true;
     this.selectedAppointment = null;
-    this.http.get(this.appointmentsUrl)
+    this.http.get(this.appointmentsUrl + "/doctor/" + this.globalVariables.loggedInUser.id)
     .subscribe((responseData: [Appointment]) => {
       this.appointments = responseData;
       this.loadingData = false;
