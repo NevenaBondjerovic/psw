@@ -33,6 +33,8 @@
             <label>Address: <b>{{ selectedClinic.address }}</b></label><br>
             <label>Score: <b><fa *ngFor="let i of convertScoreToStars(selectedClinic.score)"
                                  name="fas fa-star" aria-hidden="true"></fa></b></label><br>
+            <label>Available appointments: <b>
+              <a routerLink="/clinicalcentre/home">Click here to schedule the appointment</a></b></label><br>
           </div>
         </div>
 
