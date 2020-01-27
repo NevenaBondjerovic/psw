@@ -43,8 +43,6 @@ export class ClinicsComponent implements OnInit {
   }
 
   onSelect(clinic){
-    console.log(clinic);
-    console.log(clinic.id);
     this.loadingData = true;
     this.http.get(this.clinicsUrl + "/" + clinic.id)
     .subscribe((responseData: Clinic) => {

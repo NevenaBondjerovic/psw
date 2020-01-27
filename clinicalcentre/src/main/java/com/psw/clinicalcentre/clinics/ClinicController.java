@@ -25,7 +25,7 @@ public class ClinicController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClinicDTO> findById(@PathVariable("i(d") Integer id){
+    public ResponseEntity<ClinicDTO> findById(@PathVariable("id") Integer id){
         return new ResponseEntity<>(ClinicConverter.clinicToClinicDto(clinicsService.findById(id)),
                 HttpStatus.OK);
     }
