@@ -12,7 +12,7 @@ export class AppointmentsComponent implements OnInit {
   appointments: [Appointment];
   selectedAppointment: Appointment;
   appointmentsUrl: string = 'http://localhost:8080/appointments';
-
+  finalPrice: number = null;
   loadingData: boolean = false;
 
   errorMessage = null;
@@ -48,7 +48,16 @@ export class AppointmentsComponent implements OnInit {
   }
 
   onSelect(appointment){
-    console.log(appointment);
+    this.loadingData = true;
+    this.http.get(this.appointmentsUrl + "/" + appointment.id)
+    .subscribe((responseData: Appointment) => {
+      this.selectedAppointment = responseData;
+      this.loadingData = false;
+      this.finalPrice = this.selectedAppointment.pricelist.price
+          - (this.selectedAppointment.pricelist.price * this.selectedAppointment.pricelist.discount / 100);
+    }, error => {
+      this.handleError(error);
+    });
   }
 
 }

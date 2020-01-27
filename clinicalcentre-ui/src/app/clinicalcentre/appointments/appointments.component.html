@@ -29,6 +29,15 @@
           <div class="dataSection">
             <label>Date: <b>{{ selectedAppointment.dateOfAppointment }}</b></label><br>
             <label>Time: <b>{{ selectedAppointment.timeOfAppointment }}</b></label><br>
+            <label>Clinic: <b>{{ selectedAppointment.clinic.name }}, {{ selectedAppointment.clinic.address }}</b></label><br>
+            <label>Hall: <b>{{ selectedAppointment.hall.name }}</b></label><br>
+            <label>Doctor: <b>{{ selectedAppointment.doctor.name }} {{ selectedAppointment.doctor.surname }}</b></label><br>
+            <label>Type of the appointment: <b>{{ selectedAppointment.type.name }}</b></label><br>
+            <label>Original price: <b>{{ selectedAppointment.pricelist.price }} </b>
+              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+            <label>Discount: <b>{{ selectedAppointment.pricelist.discount }} % </b></label><br>
+            <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
+              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
           </div>
         </div>
 
