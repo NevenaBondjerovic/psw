@@ -1,0 +1,85 @@
+.overview {
+  border-right: 1px solid gray;
+  height: 80%;
+  position: absolute;
+}
+
+.header {
+  margin-bottom: 50px;
+  margin-left: 60px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 600px;
+  margin-right: 20px;
+}
+
+td {
+  border: 1px solid white;
+  width: 25%;
+}
+
+tr {
+  border: 1px solid white;
+  border-left: 15px solid white;
+  border-right: 15px solid white;
+  text-align: center;
+  padding: 8px;
+  background-color: #f2f2f2;
+  height: 40px;
+  font-size: 15px;
+}
+
+tr:hover {
+  background-color: #808080;
+  color: white;
+}
+
+.selected {
+  height: 50px;
+  font-size: 20px;
+  background-color: #808080;
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.details {
+  position: absolute;
+  top: 90px;
+  left: 700px;
+  width: 50%;
+}
+
+.detailsNotSelected {
+  margin-left: 50px;
+}
+
+.buttonMargin {
+  margin: 5px;
+}
+
+.buttons {
+  padding-left: 20%;
+}
+
+.dataSection {
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+
+.reasonSection {
+  margin-top: 3%;
+  width: 90%;
+}
+
+.reasonButton {
+  float: right;
+  margin-top: 3%;
+}
+
+.info_block {
+  width: 90%;
+  text-align: center;
+}
