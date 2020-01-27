@@ -11,6 +11,7 @@ import { ActivationpageComponent } from './activationpage/activationpage.compone
 import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/profiledata.component';
 import { HistoryComponent } from './clinicalcentre/myprofile/history/history.component';
 import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
+import { AppointmentsComponent } from './clinicalcentre/appointments/appointments.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
+    { path: 'appointments', component: AppointmentsComponent},
     { path: 'myprofile', component: MyprofileComponent, children: [
       {path: 'profile', component: ProfiledataComponent},
       {path: 'history', component: HistoryComponent},

@@ -19,13 +19,13 @@ public class ClinicController {
 
     @GetMapping
     public ResponseEntity<Set<ClinicDTO>> findAll(){
-        return new ResponseEntity<Set<ClinicDTO>>(
+        return new ResponseEntity<>(
                 clinicsService.findAll().stream().map(ClinicConverter::clinicToClinicDto).collect(Collectors.toSet()),
                 HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClinicDTO> findById(@PathVariable("i(d") Integer id){
+    public ResponseEntity<ClinicDTO> findById(@PathVariable("id") Integer id){
         return new ResponseEntity<>(ClinicConverter.clinicToClinicDto(clinicsService.findById(id)),
                 HttpStatus.OK);
     }

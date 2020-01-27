@@ -1,0 +1,67 @@
+<div *ngIf="appointments !== undefined && appointments.length > 0">
+  <div class="overview">
+    <h3 class="header">Available appointments</h3>
+    <div>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Doctor</th>
+          <th>Type</th>
+        </tr>
+        <tr *ngFor="let appointment of appointments"
+            (click)="onSelect(appointment)"
+            [ngClass]="{selected: selectedAppointment !== null
+              && selectedAppointment.id === appointment.id}">
+          <td>{{ appointment.dateOfAppointment }}</td>
+          <td>{{ appointment.timeOfAppointment }}</td>
+          <td>{{ appointment.doctor.name }} {{ appointment.doctor.surname }}</td>
+          <td>{{ appointment.type.name }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details">
+    <div *ngIf="selectedAppointment === null && loadingData === false">
+      <h5 class="detailsNotSelected">Please select appointment to see more details.</h5>
+    </div>
+    <div *ngIf="selectedAppointment !== null">
+      <div class="alert alert-danger info_block" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div><br>
+      <div *ngIf="loadindData">
+        <h3 class="header">Loading...</h3>
+      </div>
+      <div *ngIf="loadingData === false">
+        <h5>Appointment details</h5><br>
+        <div>
+          <div class="dataSection">
+            <label>Date: <b>{{ selectedAppointment.dateOfAppointment }}</b></label><br>
+            <label>Time: <b>{{ selectedAppointment.timeOfAppointment }}</b></label><br>
+            <label>Clinic: <b>{{ selectedAppointment.clinic.name }}, {{ selectedAppointment.clinic.address }}</b></label><br>
+            <label>Hall: <b>{{ selectedAppointment.hall.name }}</b></label><br>
+            <label>Doctor: <b>{{ selectedAppointment.doctor.name }} {{ selectedAppointment.doctor.surname }}</b></label><br>
+            <label>Type of the appointment: <b>{{ selectedAppointment.type.name }}</b></label><br>
+            <label>Original price: <b>{{ selectedAppointment.pricelist.price }} </b>
+              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+            <label>Discount: <b>{{ selectedAppointment.pricelist.discount }} % </b></label><br>
+            <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
+              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="appointments === undefined && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>
+<div *ngIf="appointments === undefined && !errorMessage">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="appointments !== undefined && appointments.length === 0 && !errorMessage">
+  <h4 class="header">There are no available appointments.</h4>
+</div>
