@@ -6,6 +6,8 @@
            routerLinkActive="selected">Clinics</a></li>
     <li><a class="li" routerLink="/clinicalcentre/requests" *ngIf="userType === 'CLINICAL_CENTRE_ADMIN'"
            routerLinkActive="selected">Registration requests</a></li>
+    <li><a class="li" routerLink="/clinicalcentre/workcalendar" *ngIf="userType === 'DOCTOR'"
+           routerLinkActive="selected">Work calendar</a></li>
     <li class="li_on_the_right dropdown">
       <a class="li dropbtn">{{email}}</a>
       <div class="li_on_the_right dropdown-content ">

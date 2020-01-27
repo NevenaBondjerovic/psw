@@ -12,6 +12,7 @@ import { ProfiledataComponent } from './clinicalcentre/myprofile/profiledata/pro
 import { HistoryComponent } from './clinicalcentre/myprofile/history/history.component';
 import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
 import { AppointmentsComponent } from './clinicalcentre/appointments/appointments.component';
+import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalendar.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
     { path: 'appointments', component: AppointmentsComponent},
+    { path: 'workcalendar', component: WorkcalendarComponent},
     { path: 'myprofile', component: MyprofileComponent, children: [
       {path: 'profile', component: ProfiledataComponent},
       {path: 'history', component: HistoryComponent},
