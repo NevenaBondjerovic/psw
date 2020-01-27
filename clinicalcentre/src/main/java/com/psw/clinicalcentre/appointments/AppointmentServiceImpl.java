@@ -21,4 +21,9 @@ public class AppointmentServiceImpl implements AppointmentService{
     public Appointment findById(Integer id) {
         return appointmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Appointment not found."));
     }
+
+    @Override
+    public Set<Appointment> findAllFutureForDoctor(Integer id) {
+        return appointmentRepository.findAllFutureAppointmentsForDoctor(id);
+    }
 }

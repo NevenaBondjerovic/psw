@@ -19,6 +19,7 @@ import { GlobalVariablesService } from './global-variables.service';
 import { HistoryComponent } from './clinicalcentre/myprofile/history/history.component';
 import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
 import { AppointmentsComponent } from './clinicalcentre/appointments/appointments.component';
+import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalendar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AppointmentsComponent } from './clinicalcentre/appointments/appointment
     ProfiledataComponent,
     HistoryComponent,
     MedicalrecordComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    WorkcalendarComponent
   ],
   imports: [
     BrowserModule,
