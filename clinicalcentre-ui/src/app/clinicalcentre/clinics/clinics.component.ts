@@ -43,7 +43,16 @@ export class ClinicsComponent implements OnInit {
   }
 
   onSelect(clinic){
-    this.selectedClinic = clinic;
+    console.log(clinic);
+    console.log(clinic.id);
+    this.loadingData = true;
+    this.http.get(this.clinicsUrl + "/" + clinic.id)
+    .subscribe((responseData: Clinic) => {
+      this.selectedClinic = responseData;
+      this.loadingData = false;
+    }, error => {
+      this.handleError(error);
+    });
   }
 
   handleError(error){

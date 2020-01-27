@@ -15,14 +15,28 @@
     </div>
   </div>
   <div class="details">
-    <div *ngIf="selectedClinic === null">
+    <div *ngIf="selectedClinic === null && loadingData === false">
       <h5 class="detailsNotSelected">Please select clinic to see more details.</h5>
     </div>
     <div *ngIf="selectedClinic !== null">
       <div class="alert alert-danger info_block" *ngIf="errorMessage">
         <p>{{ errorMessage }}</p>
       </div><br>
-      <h5>Clinic details</h5><br>
+      <div *ngIf="loadindData">
+        <h3 class="header">Loading...</h3>
+      </div>
+      <div *ngIf="loadingData === false">
+        <h5>Clinic details</h5><br>
+        <div>
+          <div class="dataSection">
+            <label>Name: <b>{{ selectedClinic.name }}</b></label><br>
+            <label>Address: <b>{{ selectedClinic.address }}</b></label><br>
+            <label>Score: <b><fa *ngFor="let i of convertScoreToStars(selectedClinic.score)"
+                                 name="fas fa-star" aria-hidden="true"></fa></b></label><br>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
