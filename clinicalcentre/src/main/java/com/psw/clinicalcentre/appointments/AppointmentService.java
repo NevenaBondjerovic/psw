@@ -5,4 +5,5 @@ import java.util.Set;
 public interface AppointmentService {
 
     Set<Appointment> findAllAvailable();
+    Appointment findById(Integer id);
 }

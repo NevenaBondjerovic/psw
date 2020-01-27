@@ -1,5 +1,6 @@
 package com.psw.clinicalcentre.appointments;
 
+import com.psw.clinicalcentre.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,10 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public Set<Appointment> findAllAvailable() {
         return appointmentRepository.findAllByScheduledFor(null);
+    }
+
+    @Override
+    public Appointment findById(Integer id) {
+        return appointmentRepository.findById(id).orElseThrow(() -> new NotFoundException("Appointment not found."));
     }
 }
