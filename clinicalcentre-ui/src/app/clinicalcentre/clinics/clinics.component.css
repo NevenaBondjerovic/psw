@@ -83,3 +83,27 @@ tr:hover {
   width: 90%;
   text-align: center;
 }
+
+.searchButton {
+  color: white;
+  background-color: gray;
+  position: absolute;
+  top: 5%;
+  left: 65%
+}
+
+.filterButtons {
+  color: white;
+  background-color: gray;
+  margin: 0 2% 0 2%;
+}
+
+.filterHeader {
+  margin-bottom: 20px;
+  margin-left: 30%;
+  margin-top: -30px;
+}
+
+.filters {
+  margin-left: 20%;
+}

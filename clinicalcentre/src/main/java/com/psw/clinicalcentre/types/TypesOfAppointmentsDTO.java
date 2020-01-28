@@ -1,4 +1,4 @@
-package com.psw.clinicalcentre.appointments;
+package com.psw.clinicalcentre.types;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +19,7 @@ public class TypesOfAppointmentsDTO {
 
     @NotBlank
     private String name;
+
+    private Integer clinicId;
 
 }

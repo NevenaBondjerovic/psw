@@ -1,4 +1,4 @@
-package com.psw.clinicalcentre.appointments;
+package com.psw.clinicalcentre.types;
 
 
 import com.psw.clinicalcentre.clinics.Clinic;

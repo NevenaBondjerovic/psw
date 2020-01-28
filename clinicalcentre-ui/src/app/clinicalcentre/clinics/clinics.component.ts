@@ -17,8 +17,11 @@ export class ClinicsComponent implements OnInit {
     score: number
    };
    clinicsUrl: string = 'http://localhost:8080/clinics';
+   typesUrl: string = 'http://localhost:8080/types';
    stars: any[] = [];
    loadingData: boolean = false;
+   searchEnabled: boolean = false;
+   allTypesOfAppointments: [string];
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -33,10 +36,16 @@ export class ClinicsComponent implements OnInit {
     this.http.get(this.clinicsUrl)
     .subscribe((responseData: [Clinic]) => {
       this.clinics = responseData;
-      this.loadingData = false;
     }, error => {
       this.handleError(error);
     });
+    this.http.get(this.typesUrl)
+      .subscribe((responseData: [string]) => {
+        this.allTypesOfAppointments = responseData;
+      }, error => {
+        this.handleError(error);
+      });
+    this.loadingData = false;
   }
 
   ngOnInit() {
@@ -69,6 +78,10 @@ export class ClinicsComponent implements OnInit {
       this.stars.push(i);
     }
     return this.stars;
+  }
+
+  enableDisableSearch(){
+    this.searchEnabled = !this.searchEnabled;
   }
 
 }
