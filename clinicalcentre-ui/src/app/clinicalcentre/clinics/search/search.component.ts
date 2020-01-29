@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, NgForm } from '@angular/forms';
+import { Clinic } from 'src/app/clinicalcentre/clinic';
 
 @Component({
   selector: 'app-search',
@@ -8,28 +10,30 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchComponent implements OnInit {
 
-   allTypesOfAppointments: [string];
-   typesUrl: string = 'http://localhost:8080/types';
+  allTypesOfAppointments: [string];
+  clinics: [{clinic: Clinic, price: number}];
+
+  clinicsUrl: string = 'http://localhost:8080/clinics';
+  typesUrl: string = 'http://localhost:8080/types';
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
   serverErrorMessage = 'Error happened while processing the data, please contact the administrator.';
   httpStatusServerNotAvailable = 0;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
-
+  formValid: boolean = true;
 
   constructor(private http: HttpClient) {
     this.http.get(this.typesUrl)
-      .subscribe((responseData: [string]) => {
-        this.allTypesOfAppointments = responseData;
-      }, error => {
-        this.handleError(error);
-      });
+    .subscribe((responseData: [string]) => {
+      this.allTypesOfAppointments = responseData;
+    }, error => {
+      this.handleError(error);
+    });
   }
 
   ngOnInit() {
   }
-
 
   handleError(error){
       if(error.status === this.httpStatusServerNotAvailable){
@@ -39,6 +43,29 @@ export class SearchComponent implements OnInit {
       } else {
         this.errorMessage = error.error.message;
       }
+  }
+
+  searchClinics(form: NgForm){
+    if(this.isEmpty(form.value.date) || this.isEmpty(form.value.type)){
+      this.formValid = false;
+    }
+    else{
+      this.formValid = true;
+      this.http.post(this.clinicsUrl + "/search",
+          {date: form.value.date, type: form.value.type})
+      .subscribe(responseData => {
+        console.log(responseData);
+      }, error => {
+        this.handleError(error);
+      });
+    }
+  }
+
+  isEmpty(value) {
+    if(value === null || value === undefined || value === '')
+      return true;
+    else
+      return false;
   }
 
 }

@@ -2,10 +2,14 @@
   <fa name="fas fa-arrow-left" aria-hidden="true"></fa> Back</a>
 <h3 class="filterHeader">Search appointments that you need</h3>
 <div class="filters">
-  <label>Date: </label><input type="date" name="date" class="btn filterButtons">
-  <label>Type: </label>
-  <select class="btn filterButtons">
-    <option *ngFor="let type of allTypesOfAppointments" value="type">{{ type }}</option>
-  </select>
-  <button class="btn filterButtons" (click)="enableDisableSearch()">Search</button>
+  <form (ngSubmit)="searchClinics(f)" #f="ngForm">
+    <label>Date: </label>
+    <input type="date" name="date" id="date" ngModel  required #date="ngModel" class="btn filterButtons">
+    <label>Type: </label>
+    <select class="btn filterButtons" name="type" id="type" required ngModel #type="ngModel">
+      <option *ngFor="let type of allTypesOfAppointments" value="{{type}}">{{ type }}</option>
+    </select>
+    <button class="btn filterButtons" type="submit">Search</button>
+    <label *ngIf="!formValid" style="color:red;text-size:10px;">Both date and type should be filled in.</label>
+  </form>
 </div>
