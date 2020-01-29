@@ -276,3 +276,17 @@ INSERT INTO clinical_centre.appointments VALUES
 update clinical_centre.clinics
 set score = 4
 where id = 1;
+
+-----------Added score column to users table-----------
+ALTER TABLE clinical_centre.users
+ADD score INT DEFAULT NULL;
+
+update clinical_centre.users
+set score = 3
+where id = 3;
+
+update clinical_centre.users
+set score = 4
+where id = 4;
+
+
