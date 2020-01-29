@@ -1,0 +1,11 @@
+<a class="btn filterButtons" routerLink="/clinicalcentre/clinics">
+  <fa name="fas fa-arrow-left" aria-hidden="true"></fa> Back</a>
+<h3 class="filterHeader">Search appointments that you need</h3>
+<div class="filters">
+  <label>Date: </label><input type="date" name="date" class="btn filterButtons">
+  <label>Type: </label>
+  <select class="btn filterButtons">
+    <option *ngFor="let type of allTypesOfAppointments" value="type">{{ type }}</option>
+  </select>
+  <button class="btn filterButtons" (click)="enableDisableSearch()">Search</button>
+</div>

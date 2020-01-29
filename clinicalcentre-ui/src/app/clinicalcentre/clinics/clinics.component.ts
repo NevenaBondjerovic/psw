@@ -17,11 +17,8 @@ export class ClinicsComponent implements OnInit {
     score: number
    };
    clinicsUrl: string = 'http://localhost:8080/clinics';
-   typesUrl: string = 'http://localhost:8080/types';
    stars: any[] = [];
    loadingData: boolean = false;
-   searchEnabled: boolean = false;
-   allTypesOfAppointments: [string];
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -39,12 +36,6 @@ export class ClinicsComponent implements OnInit {
     }, error => {
       this.handleError(error);
     });
-    this.http.get(this.typesUrl)
-      .subscribe((responseData: [string]) => {
-        this.allTypesOfAppointments = responseData;
-      }, error => {
-        this.handleError(error);
-      });
     this.loadingData = false;
   }
 
@@ -78,10 +69,6 @@ export class ClinicsComponent implements OnInit {
       this.stars.push(i);
     }
     return this.stars;
-  }
-
-  enableDisableSearch(){
-    this.searchEnabled = !this.searchEnabled;
   }
 
 }

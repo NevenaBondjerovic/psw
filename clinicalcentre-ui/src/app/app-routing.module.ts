@@ -13,6 +13,7 @@ import { HistoryComponent } from './clinicalcentre/myprofile/history/history.com
 import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
 import { AppointmentsComponent } from './clinicalcentre/appointments/appointments.component';
 import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalendar.component';
+import { SearchComponent } from './clinicalcentre/clinics/search/search.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'clinicalcentre', redirectTo: '/clinicalcentre/home', pathMatch: 'full' },
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
+    { path: 'searchclinics', component: SearchComponent },
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
     { path: 'appointments', component: AppointmentsComponent},

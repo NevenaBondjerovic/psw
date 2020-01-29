@@ -1,7 +1,7 @@
 <div *ngIf="clinics !== undefined && clinics.length > 0">
-  <div class="overview" *ngIf="searchEnabled === false">
+  <div class="overview">
     <h3 class="header">Clinics</h3>
-    <button class="btn searchButton" (click)="enableDisableSearch()">Search for appointment</button>
+    <a class="btn searchButton" routerLink="/clinicalcentre/searchclinics">Search for appointment</a>
     <div *ngFor="let clinic of clinics">
       <table>
         <tr (click)="onSelect(clinic)"
@@ -15,7 +15,7 @@
       </table>
     </div>
   </div>
-  <div class="details" *ngIf="searchEnabled === false">
+  <div class="details">
     <div *ngIf="selectedClinic === null && loadingData === false">
       <h5 class="detailsNotSelected">Please select clinic to see more details.</h5>
     </div>
@@ -53,17 +53,4 @@
 </div>
 <div *ngIf="clinics !== undefined && clinics.length === 0 && !errorMessage">
   <h4 class="header">There are no available clinics.</h4>
-</div>
-<div *ngIf="searchEnabled">
-  <button class="btn filterButtons" (click)="enableDisableSearch()">
-    <fa name="fas fa-arrow-left" aria-hidden="true"></fa> Back</button>
-  <h3 class="filterHeader">Search appointments that you need</h3>
-  <div class="filters">
-    <label>Date: </label><input type="date" name="date" class="btn filterButtons">
-    <label>Type: </label>
-    <select class="btn filterButtons">
-      <option *ngFor="let type of allTypesOfAppointments" value="type">{{ type }}</option>
-    </select>
-    <button class="btn filterButtons" (click)="enableDisableSearch()">Search</button>
-  </div>
 </div>
