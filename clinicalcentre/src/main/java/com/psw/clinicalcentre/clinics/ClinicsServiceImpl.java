@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -30,6 +31,14 @@ public class ClinicsServiceImpl implements ClinicsService {
 
     @Override
     public Set<Appointment> findByDateAndType(Date date, String type) {
-        return appointmentRepository.findByAppointmentDateAndType(date, type);
+        Set<Integer> clinicIds = new HashSet<>();
+        Set<Appointment> returnValue = new HashSet<>();
+        for (Appointment a : appointmentRepository.findByAppointmentDateAndType(date, type)) {
+            if(!clinicIds.contains(a.getClinic().getId())){
+                returnValue.add(a);
+                clinicIds.add(a.getClinic().getId());
+            }
+        }
+        return returnValue;
     }
 }
