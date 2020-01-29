@@ -289,4 +289,7 @@ update clinical_centre.users
 set score = 4
 where id = 4;
 
+update clinical_centre.appointments
+set time_of_appointment = '09:30'
+where id = 6;
 

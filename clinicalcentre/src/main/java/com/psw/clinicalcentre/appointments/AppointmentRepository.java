@@ -28,4 +28,13 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
             "and t.name = :type and a.scheduledFor is null ")
     Set<Appointment> findByAppointmentDateAndType(@Param("date") Date date, @Param("type") String type);
 
+    @Query("SELECT a \n" +
+            "FROM Appointment a \n" +
+            "inner join TypesOfAppointments t on t.id = a.type.id \n" +
+            "where a.dateOfAppointment = :date \n" +
+            "and a.clinic.id = :clinicId " +
+            "and t.name = :type and a.scheduledFor is null ")
+    Set<Appointment> findByAppointmentDateAndTypeAndClinic(@Param("date") Date date, @Param("type") String type,
+                                                           @Param("clinicId") Integer clinicId);
+
 }

@@ -40,4 +40,11 @@ public class AppointmentController {
                 HttpStatus.OK);
     }
 
+    @PostMapping("/doctors")
+    public ResponseEntity<Set<SearchDoctorsResponse>> findByClinicAndDateAndType(@RequestBody SearchDoctorsRequest request){
+        return new ResponseEntity<>(
+                appointmentService.findByClinicAndDateAndType(request.getClinicId(), request.getDate(), request.getType()),
+                HttpStatus.OK);
+    }
+
 }
