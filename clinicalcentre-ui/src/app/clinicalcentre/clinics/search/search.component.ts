@@ -11,7 +11,7 @@ import { Clinic } from 'src/app/clinicalcentre/clinic';
 export class SearchComponent implements OnInit {
 
   allTypesOfAppointments: [string];
-  clinics: [{
+  originalListOfClinics: Array<{
     appointmentId: number,
     date: string,
     clinicId: number,
@@ -20,9 +20,20 @@ export class SearchComponent implements OnInit {
     clinicScore: number,
     price: number,
     typeName: string
-  }];
+  }>;
+  clinics: Array<{
+     appointmentId: number,
+     date: string,
+     clinicId: number,
+     clinicName: string,
+     clinicAddress: string,
+     clinicScore: number,
+     price: number,
+     typeName: string
+   }>;
   stars: any[] = [];
   searched: boolean = false;
+  filtered: boolean = false;
 
   clinicsUrl: string = 'http://localhost:8080/clinics';
   typesUrl: string = 'http://localhost:8080/types';
@@ -64,7 +75,7 @@ export class SearchComponent implements OnInit {
       this.formValid = true;
       this.http.post(this.clinicsUrl + "/search",
           {date: form.value.date, type: form.value.type})
-      .subscribe((responseData: [{
+      .subscribe((responseData: Array<{
           appointmentId: number,
           date: string,
           clinicId: number,
@@ -73,9 +84,11 @@ export class SearchComponent implements OnInit {
           clinicScore: number,
           price: number,
           typeName: string
-        }]) => {
+        }>) => {
         this.clinics = responseData;
+        this.originalListOfClinics = responseData;
         this.searched = true;
+        this.filtered = true;
       }, error => {
         this.handleError(error);
       });
@@ -97,4 +110,44 @@ export class SearchComponent implements OnInit {
     }
     return this.stars;
   }
+
+  filter(name, score, address, price){
+    this.clinics = this.originalListOfClinics.filter((clinic) => {
+      return (this.checkName(name, clinic) && this.checkScore(score, clinic)
+        && this.checkAddress(address, clinic) && this.checkPrice(price, clinic) );
+    });
+  }
+
+  checkName(name, clinic){
+    if(name === '' || name === undefined){
+      return true;
+    }else{
+      return clinic.clinicName.toUpperCase().includes(name.toUpperCase());
+    }
+  }
+
+  checkScore(score, clinic){
+    if(score === undefined || score === ''){
+      return true;
+    }else {
+      return clinic.clinicScore == score;
+    }
+  }
+
+  checkAddress(address, clinic){
+    if(address === undefined || address === ''){
+      return true;
+    }else {
+      return clinic.clinicAddress.toUpperCase().includes(address.toUpperCase());
+    }
+  }
+
+  checkPrice(price, clinic){
+    if(price === undefined || price === ''){
+      return true;
+    }else {
+      return clinic.price == price;
+    }
+  }
+
 }

@@ -12,6 +12,16 @@
     <button class="btn filterButtons" type="submit">Search</button>
     <label *ngIf="!formValid" style="color:red;text-size:10px;">Both date and type should be filled in.</label>
   </form><br>
+  <div *ngIf="filtered">
+    <input class="input_field h5" type="text" name ="filterName" [(ngModel)]="filterName"
+           placeholder="Clinic name" (keyup)="filter(filterName, filterScore, filterAddress, filterPrice)">
+    <input class="input_field h5" type="text" name ="filterScore" [(ngModel)]="filterScore"
+           placeholder="Clinic score" (keyup)="filter(filterName, filterScore, filterAddress, filterPrice)">
+    <input class="input_field h5" type="text" name ="filterAddress" [(ngModel)]="filterAddress"
+           placeholder="Clinic address" (keyup)="filter(filterName, filterScore, filterAddress, filterPrice)">
+    <input class="input_field h5" type="text" name ="filterPrice" [(ngModel)]="filterPrice"
+           placeholder="Price" (keyup)="filter(filterName, filterScore, filterAddress, filterPrice)"><br>
+  </div>
   <table *ngIf="clinics !== undefined && clinics.length > 0 && searched">
     <tr>
       <th>Clinic name</th>

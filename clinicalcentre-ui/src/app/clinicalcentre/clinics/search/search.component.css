@@ -18,13 +18,13 @@
 
 table {
   border-collapse: collapse;
-  width: 600px;
+  width: 800px;
   margin-right: 20px;
 }
 
 td {
   border: 1px solid white;
-  width: 30%;
+  width: 25%;
 }
 
 tr {
@@ -41,4 +41,8 @@ tr {
 tr:hover {
   background-color: #808080;
   color: white;
+}
+
+.input_field {
+  width: 200px;
 }
