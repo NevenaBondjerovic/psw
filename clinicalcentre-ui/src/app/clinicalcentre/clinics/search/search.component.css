@@ -14,3 +14,31 @@
 .filters {
   margin-left: 20%;
 }
+
+
+table {
+  border-collapse: collapse;
+  width: 600px;
+  margin-right: 20px;
+}
+
+td {
+  border: 1px solid white;
+  width: 30%;
+}
+
+tr {
+  border: 1px solid white;
+  border-left: 15px solid white;
+  border-right: 15px solid white;
+  text-align: center;
+  padding: 8px;
+  background-color: #f2f2f2;
+  height: 40px;
+  font-size: 15px;
+}
+
+tr:hover {
+  background-color: #808080;
+  color: white;
+}

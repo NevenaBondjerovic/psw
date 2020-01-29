@@ -11,5 +11,30 @@
     </select>
     <button class="btn filterButtons" type="submit">Search</button>
     <label *ngIf="!formValid" style="color:red;text-size:10px;">Both date and type should be filled in.</label>
-  </form>
+  </form><br>
+  <table *ngIf="clinics !== undefined && clinics.length > 0 && searched">
+    <tr>
+      <th>Clinic name</th>
+      <th>Clinic score</th>
+      <th>Clinic address</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let clinic of clinics"
+        (click)="onSelect(appointment)">
+      <td>{{ clinic.clinicName }}</td>
+      <td><fa *ngFor="let i of convertScoreToStars(clinic.clinicScore)"
+              name="fas fa-star" aria-hidden="true"></fa></td>
+      <td>{{ clinic.clinicAddress }}</td>
+      <td>{{ clinic.price }}</td>
+    </tr>
+  </table>
+  <div *ngIf="(clinics === undefined || clinics === null || clinics.length === 0)
+      && searched && !errorMessage">
+    <h3 class="header">No results found for given date and type of the appointment.</h3>
+  </div>
+  <div *ngIf="clinics === undefined && errorMessage">
+    <div class="alert alert-danger info_block">
+      <p>{{ errorMessage }}</p>
+    </div><br>
+  </div>
 </div>

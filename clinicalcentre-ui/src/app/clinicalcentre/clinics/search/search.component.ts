@@ -11,7 +11,18 @@ import { Clinic } from 'src/app/clinicalcentre/clinic';
 export class SearchComponent implements OnInit {
 
   allTypesOfAppointments: [string];
-  clinics: [{clinic: Clinic, price: number}];
+  clinics: [{
+    appointmentId: number,
+    date: string,
+    clinicId: number,
+    clinicName: string,
+    clinicAddress: string,
+    clinicScore: number,
+    price: number,
+    typeName: string
+  }];
+  stars: any[] = [];
+  searched: boolean = false;
 
   clinicsUrl: string = 'http://localhost:8080/clinics';
   typesUrl: string = 'http://localhost:8080/types';
@@ -53,8 +64,18 @@ export class SearchComponent implements OnInit {
       this.formValid = true;
       this.http.post(this.clinicsUrl + "/search",
           {date: form.value.date, type: form.value.type})
-      .subscribe(responseData => {
-        console.log(responseData);
+      .subscribe((responseData: [{
+          appointmentId: number,
+          date: string,
+          clinicId: number,
+          clinicName: string,
+          clinicAddress: string,
+          clinicScore: number,
+          price: number,
+          typeName: string
+        }]) => {
+        this.clinics = responseData;
+        this.searched = true;
       }, error => {
         this.handleError(error);
       });
@@ -68,4 +89,12 @@ export class SearchComponent implements OnInit {
       return false;
   }
 
+
+  convertScoreToStars(score){
+    this.stars = [];
+    for(let i=1;i<=score;i++){
+      this.stars.push(i);
+    }
+    return this.stars;
+  }
 }
