@@ -30,7 +30,7 @@
       <th>Price</th>
     </tr>
     <tr *ngFor="let clinic of clinics"
-        (click)="onSelect(appointment)">
+        routerLink="/clinicalcentre/doctors">
       <td>{{ clinic.clinicName }}</td>
       <td><fa *ngFor="let i of convertScoreToStars(clinic.clinicScore)"
               name="fas fa-star" aria-hidden="true"></fa></td>
