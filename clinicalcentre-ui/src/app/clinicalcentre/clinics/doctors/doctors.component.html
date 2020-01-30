@@ -1,4 +1,4 @@
-<div *ngIf="doctors !== undefined && doctors.length > 0">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length > 0">
   <div class="overview">
     <h3 class="header">Available doctors</h3>
     <input class="input_field h6" type="text" name ="filterName" [(ngModel)]="filterName"
@@ -19,6 +19,9 @@
                   name="fas fa-star" aria-hidden="true"></fa></td>
         </tr>
       </table>
+    </div>
+    <div *ngIf="doctors.length === 0">
+      <h5 class="noResults">No results found for the given filters.</h5>
     </div>
   </div>
   <div class="details">
@@ -49,13 +52,13 @@
     </div>
   </div>
 </div>
-<div *ngIf="doctors === undefined">
+<div *ngIf="originalListOfDoctors === undefined">
   <h3 class="header">Loading...</h3>
 </div>
-<div *ngIf="doctors !== undefined && doctors.length === 0 && !errorMessage">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length === 0 && !errorMessage">
   <h4 class="header">There are no available doctors for the given time of period.</h4>
 </div>
-<div *ngIf="doctors !== undefined && doctors.length === 0 && errorMessage">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length === 0 && errorMessage">
   <div class="alert alert-danger info_block">
     <p>{{ errorMessage }}</p>
   </div><br>

@@ -100,3 +100,8 @@ tr:hover {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.noResults {
+  width: 600px;
+  margin-right: 20px;
+}

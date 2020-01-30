@@ -12,9 +12,23 @@ export class DoctorsComponent implements OnInit {
   clinicId: number;
   date: string;
   type: string;
-  doctors: any[];
+  doctors: Array<{
+    doctorId: number,
+    doctorName: string,
+    doctorSurname: string,
+    score: number,
+    availableTime: Array<string>
+  }>;
+  originalListOfDoctors: Array<{
+     doctorId: number,
+     doctorName: string,
+     doctorSurname: string,
+     score: number,
+     availableTime: Array<string>
+   }>;
   selectedDoctor = null;
-   stars: any[] = [];
+  stars: any[] = [];
+  filtered: boolean = false;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -35,8 +49,16 @@ export class DoctorsComponent implements OnInit {
       date: this.date,
       type: this.type
     })
-    .subscribe((responseData: any[]) => {
+    .subscribe((responseData: Array<{
+        doctorId: number,
+        doctorName: string,
+        doctorSurname: string,
+        score: number,
+        availableTime: Array<string>
+      }>) => {
       this.doctors = responseData;
+      this.originalListOfDoctors = responseData;
+      this.filtered = true;
     }, error => {
       this.handleError(error);
     });
@@ -63,6 +85,29 @@ export class DoctorsComponent implements OnInit {
       this.stars.push(i);
     }
     return this.stars;
+  }
+
+  filter(filterName, filterScore){
+    this.doctors = this.originalListOfDoctors.filter((doctor) => {
+      return (this.checkNameAndSurname(filterName, doctor) && this.checkScore(filterScore, doctor));
+    });
+  }
+
+  checkNameAndSurname(name, doctor){
+    if(name === '' || name === undefined){
+      return true;
+    }else{
+      return (doctor.doctorName.toUpperCase().includes(name.toUpperCase()))
+        || (doctor.doctorSurname.toUpperCase().includes(name.toUpperCase()));
+    }
+  }
+
+  checkScore(score, doctor){
+    if(score === undefined || score === ''){
+      return true;
+    }else {
+      return doctor.score == score;
+    }
   }
 
 }
