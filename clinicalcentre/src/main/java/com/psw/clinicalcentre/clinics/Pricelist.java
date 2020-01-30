@@ -1,7 +1,7 @@
 package com.psw.clinicalcentre.clinics;
 
 
-import com.psw.clinicalcentre.appointments.TypesOfAppointments;
+import com.psw.clinicalcentre.types.TypesOfAppointments;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -17,7 +17,7 @@ table {
 
 td {
   border: 1px solid white;
-  width: 30%;
+  width: 50%;
 }
 
 tr {
@@ -36,7 +36,7 @@ tr:hover {
   color: white;
 }
 
-.clinicSelected {
+.requestSelected {
   height: 50px;
   font-size: 20px;
   background-color: #808080;
@@ -84,10 +84,13 @@ tr:hover {
   text-align: center;
 }
 
-.searchButton {
+.filterButtons {
   color: white;
   background-color: gray;
-  position: absolute;
-  top: 5%;
-  left: 65%
+  margin: 0 2% 0 2%;
+}
+
+.reasonButton {
+  margin-top: 3%;
+  margin-right: 60%;
 }

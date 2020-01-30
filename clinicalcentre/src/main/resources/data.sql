@@ -263,3 +263,36 @@ INSERT INTO clinical_centre.appointments VALUES
   (4, '2020-02-27', ' 13:30' , 3, 7, 4, 7, 7, 2);
 INSERT INTO clinical_centre.appointments VALUES
   (5, '2020-02-27', ' 14:30' , 3, 8, 4, 8, 8, null);
+
+INSERT INTO clinical_centre.appointments VALUES
+  (6, '2020-02-26', ' 08:30' , 1, 3, 3, 1, 1, null);
+INSERT INTO clinical_centre.appointments VALUES
+  (7, '2020-02-26', ' 11:30' , 1, 1, 3, 1, 1, null);
+INSERT INTO clinical_centre.appointments VALUES
+  (8, '2020-02-26', ' 11:30' , 3, 6, 4, 7, 7, null);
+INSERT INTO clinical_centre.appointments VALUES
+  (9, '2020-02-26', ' 11:30' , 3, 6, 4, 5, 5, null);
+
+update clinical_centre.clinics
+set score = 4
+where id = 1;
+
+-----------Added score column to users table-----------
+ALTER TABLE clinical_centre.users
+ADD score INT DEFAULT NULL;
+
+update clinical_centre.users
+set score = 3
+where id = 3;
+
+update clinical_centre.users
+set score = 4
+where id = 4;
+
+update clinical_centre.appointments
+set time_of_appointment = '09:30'
+where id = 6;
+
+update clinical_centre.users
+set name = 'Zika'
+where id = 3;

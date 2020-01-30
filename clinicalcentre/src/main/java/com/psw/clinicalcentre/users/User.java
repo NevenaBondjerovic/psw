@@ -33,4 +33,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
     private UserType userType;
+
+    private Integer score;
 }

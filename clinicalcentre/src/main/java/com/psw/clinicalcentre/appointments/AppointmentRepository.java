@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,5 +18,23 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
             "where a.doctor.id = :id " +
             "and a.dateOfAppointment >= curdate() ")
     Set<Appointment> findAllFutureAppointmentsForDoctor(@Param("id") Integer id);
+
+    @Query("SELECT a \n" +
+            "FROM Appointment a \n" +
+            "inner join Clinic c on a.clinic.id = c.id \n" +
+            "inner join Pricelist p on p.id = a.pricelist.id \n" +
+            "inner join TypesOfAppointments t on t.id = a.type.id \n" +
+            "where a.dateOfAppointment = :date \n" +
+            "and t.name = :type and a.scheduledFor is null ")
+    Set<Appointment> findByAppointmentDateAndType(@Param("date") Date date, @Param("type") String type);
+
+    @Query("SELECT a \n" +
+            "FROM Appointment a \n" +
+            "inner join TypesOfAppointments t on t.id = a.type.id \n" +
+            "where a.dateOfAppointment = :date \n" +
+            "and a.clinic.id = :clinicId " +
+            "and t.name = :type and a.scheduledFor is null ")
+    Set<Appointment> findByAppointmentDateAndTypeAndClinic(@Param("date") Date date, @Param("type") String type,
+                                                           @Param("clinicId") Integer clinicId);
 
 }

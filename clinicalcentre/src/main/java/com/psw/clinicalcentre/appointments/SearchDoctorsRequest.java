@@ -5,19 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TypesOfAppointmentsDTO {
+public class SearchDoctorsRequest {
 
     @NotNull
-    private Integer id;
+    private Integer clinicId;
 
-    @NotBlank
-    private String name;
+    @NotNull
+    private Date date;
+
+    @NotNull
+    private String type;
 
 }

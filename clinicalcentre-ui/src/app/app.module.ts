@@ -20,6 +20,8 @@ import { HistoryComponent } from './clinicalcentre/myprofile/history/history.com
 import { MedicalrecordComponent } from './clinicalcentre/myprofile/medicalrecord/medicalrecord.component';
 import { AppointmentsComponent } from './clinicalcentre/appointments/appointments.component';
 import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalendar.component';
+import { SearchComponent } from './clinicalcentre/clinics/search/search.component';
+import { DoctorsComponent } from './clinicalcentre/clinics/doctors/doctors.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalenda
     HistoryComponent,
     MedicalrecordComponent,
     AppointmentsComponent,
-    WorkcalendarComponent
+    WorkcalendarComponent,
+    SearchComponent,
+    DoctorsComponent
   ],
   imports: [
     BrowserModule,

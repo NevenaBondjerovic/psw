@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Clinic } from 'src/app/clinicalcentre/clinic';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-clinics',
-  templateUrl: './clinics.component.html',
-  styleUrls: ['./clinics.component.css']
+  selector: 'app-doctors',
+  templateUrl: './doctors.component.html',
+  styleUrls: ['./doctors.component.css']
 })
-export class ClinicsComponent implements OnInit {
+export class DoctorsComponent implements OnInit {
 
-  clinics: [Clinic];
-  selectedClinic: {
-    id: number
-    name: string,
-    address: string,
-    score: number
-   };
-   clinicsUrl: string = 'http://localhost:8080/clinics';
+  clinicId: number;
+  date: string;
+  type: string;
+  doctors: any[];
+  selectedDoctor = null;
    stars: any[] = [];
-   loadingData: boolean = false;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -26,31 +22,29 @@ export class ClinicsComponent implements OnInit {
   httpStatusServerNotAvailable = 0;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
 
+  constructor(private http: HttpClient, private route:ActivatedRoute) {
 
-  constructor(private http: HttpClient) {
-    this.loadingData = true;
-    this.selectedClinic = null;
-    this.http.get(this.clinicsUrl)
-    .subscribe((responseData: [Clinic]) => {
-      this.clinics = responseData;
-    }, error => {
-      this.handleError(error);
-    });
-    this.loadingData = false;
   }
 
   ngOnInit() {
-  }
-
-  onSelect(clinic){
-    this.loadingData = true;
-    this.http.get(this.clinicsUrl + "/" + clinic.id)
-    .subscribe((responseData: Clinic) => {
-      this.selectedClinic = responseData;
-      this.loadingData = false;
+    this.clinicId = +this.route.snapshot.paramMap.get("clinicId");
+    this.date = this.route.snapshot.paramMap.get("date");
+    this.type = this.route.snapshot.paramMap.get("type");
+    this.http.post('http://localhost:8080/appointments/doctors', {
+      clinicId: this.clinicId,
+      date: this.date,
+      type: this.type
+    })
+    .subscribe((responseData: any[]) => {
+      this.doctors = responseData;
     }, error => {
       this.handleError(error);
     });
+  }
+
+  onSelect(doctor){
+    this.errorMessage = null;
+    this.selectedDoctor = doctor;
   }
 
   handleError(error){

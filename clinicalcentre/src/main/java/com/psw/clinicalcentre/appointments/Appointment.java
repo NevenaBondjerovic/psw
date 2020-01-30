@@ -3,6 +3,7 @@ package com.psw.clinicalcentre.appointments;
 import com.psw.clinicalcentre.clinics.Clinic;
 import com.psw.clinicalcentre.clinics.Hall;
 import com.psw.clinicalcentre.clinics.Pricelist;
+import com.psw.clinicalcentre.types.TypesOfAppointments;
 import com.psw.clinicalcentre.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

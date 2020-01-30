@@ -1,0 +1,58 @@
+<div *ngIf="doctors !== undefined && doctors.length > 0">
+  <div class="overview">
+    <h3 class="header">Available doctors</h3>
+    <div *ngFor="let doctor of doctors">
+      <table>
+        <tr>
+          <th>Name and surname</th>
+          <th>Score</th>
+        </tr>
+        <tr (click)="onSelect(doctor)"
+            [ngClass]="{selected: selectedDoctor !== null
+              && selectedDoctor.id === doctor.id}">
+          <td>{{ doctor.doctorName }} {{ doctor.doctorSurname }}</td>
+          <td><fa *ngFor="let i of convertScoreToStars(doctor.score)"
+                  name="fas fa-star" aria-hidden="true"></fa></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details">
+    <div *ngIf="selectedDoctor === null">
+      <h5 class="detailsNotSelected">Please select doctor to see more details.</h5>
+    </div>
+    <div *ngIf="selectedDoctor !== null">
+      <div>
+        <div class="alert alert-danger info_block" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div><br>
+        <h5>Details of the appointment</h5><br>
+        <div>
+          <div class="dataSection">
+            <label>Name: <b>{{ selectedDoctor.doctorName }}</b></label><br>
+            <label>Surname: <b>{{ selectedDoctor.doctorSurname }}</b></label><br>
+            <label>Score: <b><fa *ngFor="let i of convertScoreToStars(selectedDoctor.score)"
+                                 name="fas fa-star" aria-hidden="true"></fa></b></label><br>
+            <label>Available time: </label>
+            <select class="btn filterButtons" name="time" id="time" ngModel #time="ngModel">
+              <option *ngFor="let time of selectedDoctor.availableTime" value="{{ time }}">{{ time }}</option>
+            </select><br><br>
+            <button class="btn filterButtons reasonButton" type="submit"
+                    (click)="onSubmit()">Schedule</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="doctors === undefined">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="doctors !== undefined && doctors.length === 0 && !errorMessage">
+  <h4 class="header">There are no available doctors for the given time of period.</h4>
+</div>
+<div *ngIf="doctors !== undefined && doctors.length === 0 && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>

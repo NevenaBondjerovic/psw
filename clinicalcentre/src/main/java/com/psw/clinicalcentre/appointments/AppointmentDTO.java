@@ -3,6 +3,7 @@ package com.psw.clinicalcentre.appointments;
 import com.psw.clinicalcentre.clinics.ClinicDTO;
 import com.psw.clinicalcentre.clinics.HallDTO;
 import com.psw.clinicalcentre.clinics.PricelistDTO;
+import com.psw.clinicalcentre.types.TypesOfAppointmentsDTO;
 import com.psw.clinicalcentre.users.BasicUserDetailsDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

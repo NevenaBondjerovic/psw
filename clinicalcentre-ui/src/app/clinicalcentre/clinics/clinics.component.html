@@ -1,11 +1,12 @@
 <div *ngIf="clinics !== undefined && clinics.length > 0">
   <div class="overview">
     <h3 class="header">Clinics</h3>
+    <a class="btn searchButton" routerLink="/clinicalcentre/searchclinics">Search for appointment</a>
     <div *ngFor="let clinic of clinics">
       <table>
         <tr (click)="onSelect(clinic)"
             [ngClass]="{clinicSelected: selectedClinic !== null
-              && selectedClinic.id === clinic.id}">
+            && selectedClinic.id === clinic.id}">
           <td>{{ clinic.name }}</td>
           <td>{{ clinic.address }}</td>
           <td><fa *ngFor="let i of convertScoreToStars(clinic.score)"
