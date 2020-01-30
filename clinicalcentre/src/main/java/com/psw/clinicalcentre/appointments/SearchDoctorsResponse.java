@@ -17,6 +17,6 @@ public class SearchDoctorsResponse {
     private String doctorName;
     private String doctorSurname;
     private Integer score;
-    private Set<String> availableTime;
+    private Set<AppointmentDataDTO> appointmentData;
 
 }

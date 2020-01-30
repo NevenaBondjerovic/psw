@@ -296,3 +296,12 @@ where id = 6;
 update clinical_centre.users
 set name = 'Zika'
 where id = 3;
+
+update clinical_centre.appointments
+set date_of_appointment = '2020-02-27'
+where id = 6;
+
+
+update clinical_centre.appointments
+set time_of_appointment = '12:30'
+where id = 9;
