@@ -1,6 +1,10 @@
 <div *ngIf="doctors !== undefined && doctors.length > 0">
   <div class="overview">
     <h3 class="header">Available doctors</h3>
+    <input class="input_field h6" type="text" name ="filterName" [(ngModel)]="filterName"
+           placeholder="Name and surname" (keyup)="filter(filterName, filterScore)">
+    <input class="input_field h6" type="text" name ="filterScore" [(ngModel)]="filterScore"
+           placeholder="Score" (keyup)="filter(filterName, filterScore)">
     <div *ngFor="let doctor of doctors">
       <table>
         <tr>
