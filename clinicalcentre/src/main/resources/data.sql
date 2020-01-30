@@ -305,3 +305,18 @@ where id = 6;
 update clinical_centre.appointments
 set time_of_appointment = '12:30'
 where id = 9;
+
+
+update clinical_centre.users
+set type = 'DOCTOR', score = 5, name = 'Some Name', surname='Surname'
+where id = 5;
+
+INSERT INTO clinical_centre.clinics_doctors
+VALUES (3, 5, 1);
+
+INSERT INTO clinical_centre.appointments VALUES
+  (10, '2020-02-25', ' 10:30' , 1, 3, 5, 1, 1, null);
+
+update clinical_centre.appointments
+set type_id=2, pricelist_id=2
+where id = 10;

@@ -96,12 +96,17 @@ tr:hover {
 }
 
 .input_field {
-  width: 200px;
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .noResults {
   width: 600px;
   margin-right: 20px;
+}
+
+.addBorder {
+  border: 1px solid gray;
+  color: gray;
 }

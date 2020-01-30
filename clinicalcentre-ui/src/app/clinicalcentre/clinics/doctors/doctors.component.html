@@ -2,16 +2,24 @@
   <div class="overview">
     <h3 class="header">Available doctors</h3>
     <input class="input_field h6" type="text" name ="filterName" [(ngModel)]="filterName"
-           placeholder="Name and surname" (keyup)="filter(filterName, filterScore)">
+           placeholder="Name and surname" (keyup)="filter(filterName, filterScore, filterDate, filterType)">
     <input class="input_field h6" type="text" name ="filterScore" [(ngModel)]="filterScore"
-           placeholder="Score" (keyup)="filter(filterName, filterScore)">
-    <div *ngFor="let doctor of doctors">
-      <table>
+           placeholder="Score" (keyup)="filter(filterName, filterScore, filterDate, filterType)">
+    <input *ngIf="addMoreFilters" class="input_field btn addBorder" type="date" name ="filterDate" [(ngModel)]="filterDate"
+           placeholder="Date of appointment" (change)="filter(filterName, filterScore, filterDate, filterType)">
+    <select *ngIf="addMoreFilters" class="btn input_field addBorder"
+            (change)="filter(filterName, filterScore, filterDate, filterType)"
+            name="filterType" id="filterType" [(ngModel)]="filterType">
+      <option value="" selected>Choose type</option>
+      <option *ngFor="let type of types" value="{{type}}">{{ type }}</option>
+    </select><br><br>
+    <div>
+      <table *ngIf="doctors.length > 0">
         <tr>
           <th>Name and surname</th>
           <th>Score</th>
         </tr>
-        <tr (click)="onSelect(doctor)"
+        <tr  *ngFor="let doctor of doctors" (click)="onSelect(doctor)"
             [ngClass]="{selected: selectedDoctor !== null
               && selectedDoctor.id === doctor.id}">
           <td>{{ doctor.doctorName }} {{ doctor.doctorSurname }}</td>

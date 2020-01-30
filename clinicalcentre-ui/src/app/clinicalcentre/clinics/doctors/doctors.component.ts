@@ -18,6 +18,9 @@ export class DoctorsComponent implements OnInit {
   selectedDoctor = null;
   stars: any[] = [];
   filtered: boolean = false;
+  addMoreFilters: boolean = false;
+  types: Array<string> = [];
+  filterType: string;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -35,6 +38,8 @@ export class DoctorsComponent implements OnInit {
     this.date = this.date === "null" ? null : this.date;
     this.type = this.route.snapshot.paramMap.get("type");
     this.type = this.type === "null" ? null : this.type;
+    if(this.date === null && this.type === null)
+      this.addMoreFilters = true;
     this.http.post('http://localhost:8080/appointments/doctors', {
       clinicId: this.clinicId,
       date: this.date,
@@ -44,6 +49,7 @@ export class DoctorsComponent implements OnInit {
       this.doctors = responseData;
       this.originalListOfDoctors = responseData;
       this.filtered = true;
+      this.setTypes();
     }, error => {
       this.handleError(error);
     });
@@ -72,9 +78,10 @@ export class DoctorsComponent implements OnInit {
     return this.stars;
   }
 
-  filter(filterName, filterScore){
+  filter(filterName, filterScore, filterDate, filterType){
     this.doctors = this.originalListOfDoctors.filter((doctor) => {
-      return (this.checkNameAndSurname(filterName, doctor) && this.checkScore(filterScore, doctor));
+      return (this.checkNameAndSurname(filterName, doctor) && this.checkScore(filterScore, doctor)
+      && this.checkDate(filterDate, doctor) && this.checkType(filterType, doctor) );
     });
   }
 
@@ -93,6 +100,40 @@ export class DoctorsComponent implements OnInit {
     }else {
       return doctor.score == score;
     }
+  }
+
+  checkDate(date, doctor){
+    if(date === undefined || date === ''){
+      return true;
+    }else {
+      for(let appointment of doctor.appointmentData){
+        if(appointment.date == date)
+          return true;
+      }
+    }
+    return false
+  }
+
+  checkType(type, doctor){
+    if(type === undefined || type === ''){
+      return true;
+    }else {
+      for(let appointment of doctor.appointmentData){
+        if(appointment.type == type)
+          return true;
+      }
+    }
+    return false
+  }
+
+  setTypes(){
+    for(let doctor of this.originalListOfDoctors){
+      for(let appointment of doctor.appointmentData){
+        if(!this.types.includes(appointment.type))
+          this.types.push(appointment.type);
+      }
+    }
+    this.filterType = '';
   }
 
 }
