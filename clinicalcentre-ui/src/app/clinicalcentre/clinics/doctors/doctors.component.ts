@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Doctor } from 'src/app/clinicalcentre/clinics/doctors/doctor';
 
 @Component({
   selector: 'app-doctors',
@@ -12,20 +13,8 @@ export class DoctorsComponent implements OnInit {
   clinicId: number;
   date: string;
   type: string;
-  doctors: Array<{
-    doctorId: number,
-    doctorName: string,
-    doctorSurname: string,
-    score: number,
-    availableTime: Array<string>
-  }>;
-  originalListOfDoctors: Array<{
-     doctorId: number,
-     doctorName: string,
-     doctorSurname: string,
-     score: number,
-     availableTime: Array<string>
-   }>;
+  doctors: Array<Doctor>;
+  originalListOfDoctors: Array<Doctor>;
   selectedDoctor = null;
   stars: any[] = [];
   filtered: boolean = false;
@@ -43,19 +32,15 @@ export class DoctorsComponent implements OnInit {
   ngOnInit() {
     this.clinicId = +this.route.snapshot.paramMap.get("clinicId");
     this.date = this.route.snapshot.paramMap.get("date");
+    this.date = this.date === "null" ? null : this.date;
     this.type = this.route.snapshot.paramMap.get("type");
+    this.type = this.type === "null" ? null : this.type;
     this.http.post('http://localhost:8080/appointments/doctors', {
       clinicId: this.clinicId,
       date: this.date,
       type: this.type
     })
-    .subscribe((responseData: Array<{
-        doctorId: number,
-        doctorName: string,
-        doctorSurname: string,
-        score: number,
-        availableTime: Array<string>
-      }>) => {
+    .subscribe((responseData: Array<Doctor>) => {
       this.doctors = responseData;
       this.originalListOfDoctors = responseData;
       this.filtered = true;

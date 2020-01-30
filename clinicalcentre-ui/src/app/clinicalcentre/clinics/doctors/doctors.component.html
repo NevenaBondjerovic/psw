@@ -40,10 +40,23 @@
             <label>Surname: <b>{{ selectedDoctor.doctorSurname }}</b></label><br>
             <label>Score: <b><fa *ngFor="let i of convertScoreToStars(selectedDoctor.score)"
                                  name="fas fa-star" aria-hidden="true"></fa></b></label><br>
-            <label>Available time: </label>
-            <select class="btn filterButtons" name="time" id="time" ngModel #time="ngModel">
-              <option *ngFor="let time of selectedDoctor.availableTime" value="{{ time }}">{{ time }}</option>
-            </select><br><br>
+            <div *ngIf="date !== null && type !== null">
+              <label>Date of appointment: <b>{{ date }}</b></label><br>
+              <label>Available time: </label>
+              <select class="btn filterButtons" name="time" id="time" ngModel #time="ngModel">
+                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.time }}">
+                  {{ data.time }}</option>
+              </select><br>
+              <label>Type: <b>{{ type }}</b></label><br><br>
+            </div>
+
+            <div *ngIf="date === null || type === null">
+              <label>Appointment data: </label>
+              <select class="btn filterButtons" name="appointmentData" id="appointmentData" ngModel #appointmentData="ngModel">
+                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.id }}">
+                  {{ data.date }} {{ data.time }} - {{ data.type }}</option>
+              </select><br><br>
+            </div>
             <button class="btn filterButtons reasonButton" type="submit"
                     (click)="onSubmit()">Schedule</button>
           </div>
