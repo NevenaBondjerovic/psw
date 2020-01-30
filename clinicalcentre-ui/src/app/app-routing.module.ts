@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
     { path: 'searchclinics', component: SearchComponent },
-    { path: 'doctors', component: DoctorsComponent },
+    { path: 'doctors/:clinicId/:date/:type', component: DoctorsComponent },
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
     { path: 'appointments', component: AppointmentsComponent},

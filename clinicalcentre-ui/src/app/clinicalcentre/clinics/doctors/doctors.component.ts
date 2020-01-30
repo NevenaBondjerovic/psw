@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-doctors',
@@ -8,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DoctorsComponent implements OnInit {
 
+  clinicId: number;
+  date: string;
+  type: string;
   doctors: any[];
   selectedDoctor = null;
    stars: any[] = [];
@@ -18,21 +22,24 @@ export class DoctorsComponent implements OnInit {
   httpStatusServerNotAvailable = 0;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
 
-  constructor(private http: HttpClient) {
-    this.http.post('http://localhost:8080/appointments/doctors', {
-      clinicId: 1,
-      date: '2020-02-26',
-      type: 'General medical examination'
-    })
-    .subscribe((responseData: any[]) => {
-      this.doctors = responseData;
-      console.log(responseData);
-    }, error => {
-      this.handleError(error);
-    });
+  constructor(private http: HttpClient, private route:ActivatedRoute) {
+
   }
 
   ngOnInit() {
+    this.clinicId = +this.route.snapshot.paramMap.get("clinicId");
+    this.date = this.route.snapshot.paramMap.get("date");
+    this.type = this.route.snapshot.paramMap.get("type");
+    this.http.post('http://localhost:8080/appointments/doctors', {
+      clinicId: this.clinicId,
+      date: this.date,
+      type: this.type
+    })
+    .subscribe((responseData: any[]) => {
+      this.doctors = responseData;
+    }, error => {
+      this.handleError(error);
+    });
   }
 
   onSelect(doctor){

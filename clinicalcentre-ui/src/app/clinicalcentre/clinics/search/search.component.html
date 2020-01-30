@@ -30,7 +30,7 @@
       <th>Price</th>
     </tr>
     <tr *ngFor="let clinic of clinics"
-        routerLink="/clinicalcentre/doctors">
+        routerLink="/clinicalcentre/doctors/{{clinic.clinicId}}/{{clinic.date}}/{{clinic.typeName}}">
       <td>{{ clinic.clinicName }}</td>
       <td><fa *ngFor="let i of convertScoreToStars(clinic.clinicScore)"
               name="fas fa-star" aria-hidden="true"></fa></td>

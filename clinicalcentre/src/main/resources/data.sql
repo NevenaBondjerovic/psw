@@ -293,3 +293,6 @@ update clinical_centre.appointments
 set time_of_appointment = '09:30'
 where id = 6;
 
+update clinical_centre.users
+set name = 'Zika'
+where id = 3;
