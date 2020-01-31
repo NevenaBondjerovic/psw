@@ -1,0 +1,25 @@
+.info_block {
+  width: 90%;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 50px;
+  margin-left: 60px;
+}
+
+.dataSection {
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+
+.filterButtons {
+  color: white;
+  background-color: gray;
+  margin: 0 2% 0 2%;
+  margin-left: 10%;
+}
+
+.info {
+  color: blue;
+}
