@@ -1,1 +1,33 @@
-<p>schedule works!</p>
+<div>
+  <div *ngIf="selectedAppointment !== null">
+    <div class="alert alert-danger info_block" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div><br>
+    <div *ngIf="loadindData">
+      <h3 class="header">Loading...</h3>
+    </div>
+    <div *ngIf="loadingData === false">
+      <h3>Appointment details</h3><br>
+      <div>
+        <div class="dataSection">
+          <label>Date: <b>{{ selectedAppointment.dateOfAppointment }}</b></label><br>
+          <label>Time: <b>{{ selectedAppointment.timeOfAppointment }}</b></label><br>
+          <label>Clinic: <b>{{ selectedAppointment.clinic.name }}, {{ selectedAppointment.clinic.address }}</b></label><br>
+          <label>Hall: <b>{{ selectedAppointment.hall.name }}</b></label><br>
+          <label>Doctor: <b>{{ selectedAppointment.doctor.name }} {{ selectedAppointment.doctor.surname }}</b></label><br>
+          <label>Type of the appointment: <b>{{ selectedAppointment.type.name }}</b></label><br>
+          <label>Original price: <b>{{ selectedAppointment.pricelist.price }} </b>
+            <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+          <label>Discount: <b>{{ selectedAppointment.pricelist.discount }} % </b></label><br>
+          <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
+            <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+        </div>
+        <p class="info">On submit, the request will be sent to the administrator of the clinic and you will
+          be notified through the email about the details.</p>
+        <button class="btn filterButtons" type="submit"
+                (click)="onSubmit()">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div>
