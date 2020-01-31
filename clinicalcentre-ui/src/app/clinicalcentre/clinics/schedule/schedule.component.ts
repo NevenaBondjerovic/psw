@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/clinicalcentre/appointments/appointment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { User } from 'src/app/clinicalcentre/user';
 
 @Component({
   selector: 'app-schedule',
@@ -12,8 +14,11 @@ export class ScheduleComponent implements OnInit {
 
   selectedAppointment: Appointment;
   appointmentsUrl: string = 'http://localhost:8080/appointments';
+  requestsUrl: string = 'http://localhost:8080/appointmentrequests';
   finalPrice: number = null;
   loadingData: boolean = false;
+  loggedInUser: User = null;
+  requestProcessed: boolean = false;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -21,7 +26,10 @@ export class ScheduleComponent implements OnInit {
   httpStatusServerNotAvailable = 0;
   serviceNotAvailableErrorMessage = 'The service is not available at the moment. Please try again later.';
 
-  constructor(private http: HttpClient, private route:ActivatedRoute) { }
+  constructor(private http: HttpClient, private route:ActivatedRoute,
+        private globalVariables: GlobalVariablesService) {
+    this.loggedInUser = this.globalVariables.loggedInUser;
+   }
 
   ngOnInit() {
     this.loadingData = true;
@@ -47,7 +55,16 @@ export class ScheduleComponent implements OnInit {
   }
 
   onSubmit(){
-
+    this.loadingData = true;
+    this.http.post(this.requestsUrl,
+          { appointmentId: this.selectedAppointment.id , userId: this.loggedInUser.id } )
+    .subscribe(() => {
+      this.loadingData = false;
+      this.selectedAppointment = null;
+      this.requestProcessed = true;
+    }, error => {
+      this.handleError(error);
+    });
   }
 
 
