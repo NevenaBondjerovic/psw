@@ -94,3 +94,19 @@ tr:hover {
   margin-top: 3%;
   margin-right: 60%;
 }
+
+.input_field {
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.noResults {
+  width: 600px;
+  margin-right: 20px;
+}
+
+.addBorder {
+  border: 1px solid gray;
+  color: gray;
+}

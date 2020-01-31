@@ -1,13 +1,25 @@
-<div *ngIf="doctors !== undefined && doctors.length > 0">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length > 0">
   <div class="overview">
     <h3 class="header">Available doctors</h3>
-    <div *ngFor="let doctor of doctors">
-      <table>
+    <input class="input_field h6" type="text" name ="filterName" [(ngModel)]="filterName"
+           placeholder="Name and surname" (keyup)="filter(filterName, filterScore, filterDate, filterType)">
+    <input class="input_field h6" type="text" name ="filterScore" [(ngModel)]="filterScore"
+           placeholder="Score" (keyup)="filter(filterName, filterScore, filterDate, filterType)">
+    <input *ngIf="addMoreFilters" class="input_field btn addBorder" type="date" name ="filterDate" [(ngModel)]="filterDate"
+           placeholder="Date of appointment" (change)="filter(filterName, filterScore, filterDate, filterType)">
+    <select *ngIf="addMoreFilters" class="btn input_field addBorder"
+            (change)="filter(filterName, filterScore, filterDate, filterType)"
+            name="filterType" id="filterType" [(ngModel)]="filterType">
+      <option value="" selected>Choose type</option>
+      <option *ngFor="let type of types" value="{{type}}">{{ type }}</option>
+    </select><br><br>
+    <div>
+      <table *ngIf="doctors.length > 0">
         <tr>
           <th>Name and surname</th>
           <th>Score</th>
         </tr>
-        <tr (click)="onSelect(doctor)"
+        <tr  *ngFor="let doctor of doctors" (click)="onSelect(doctor)"
             [ngClass]="{selected: selectedDoctor !== null
               && selectedDoctor.id === doctor.id}">
           <td>{{ doctor.doctorName }} {{ doctor.doctorSurname }}</td>
@@ -15,6 +27,9 @@
                   name="fas fa-star" aria-hidden="true"></fa></td>
         </tr>
       </table>
+    </div>
+    <div *ngIf="doctors.length === 0">
+      <h5 class="noResults">No results found for the given filters.</h5>
     </div>
   </div>
   <div class="details">
@@ -33,25 +48,42 @@
             <label>Surname: <b>{{ selectedDoctor.doctorSurname }}</b></label><br>
             <label>Score: <b><fa *ngFor="let i of convertScoreToStars(selectedDoctor.score)"
                                  name="fas fa-star" aria-hidden="true"></fa></b></label><br>
-            <label>Available time: </label>
-            <select class="btn filterButtons" name="time" id="time" ngModel #time="ngModel">
-              <option *ngFor="let time of selectedDoctor.availableTime" value="{{ time }}">{{ time }}</option>
-            </select><br><br>
-            <button class="btn filterButtons reasonButton" type="submit"
-                    (click)="onSubmit()">Schedule</button>
+            <div *ngIf="date !== null && type !== null">
+              <label>Date of appointment: <b>{{ date }}</b></label><br>
+              <label>Available time: </label>
+              <select class="btn filterButtons" name="time" id="time" [(ngModel)]="time">
+                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.id }}">
+                  {{ data.time }}</option>
+              </select><br>
+              <label>Type: <b>{{ type }}</b></label><br><br>
+              <button class="btn filterButtons reasonButton" type="submit"
+                      [disabled]="time === undefined || time.value === ''"
+                      routerLink="/clinicalcentre/schedule/{{time}}">Schedule</button>
+            </div>
+
+            <div *ngIf="date === null || type === null">
+              <label>Appointment data: </label>
+              <select class="btn filterButtons" name="appointmentData" id="appointmentData" [(ngModel)]="appointmentData">
+                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.id }}">
+                  {{ data.date }} {{ data.time }} - {{ data.type }}</option>
+              </select><br><br>
+              <button class="btn filterButtons reasonButton" type="submit"
+                      [disabled]="appointmentData === undefined || appointmentData.value === ''"
+                      routerLink="/clinicalcentre/schedule/{{appointmentData}}">Schedule</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="doctors === undefined">
+<div *ngIf="originalListOfDoctors === undefined">
   <h3 class="header">Loading...</h3>
 </div>
-<div *ngIf="doctors !== undefined && doctors.length === 0 && !errorMessage">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length === 0 && !errorMessage">
   <h4 class="header">There are no available doctors for the given time of period.</h4>
 </div>
-<div *ngIf="doctors !== undefined && doctors.length === 0 && errorMessage">
+<div *ngIf="originalListOfDoctors !== undefined && originalListOfDoctors.length === 0 && errorMessage">
   <div class="alert alert-danger info_block">
     <p>{{ errorMessage }}</p>
   </div><br>

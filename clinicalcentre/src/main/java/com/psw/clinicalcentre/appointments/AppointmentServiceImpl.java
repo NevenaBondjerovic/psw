@@ -39,19 +39,51 @@ public class AppointmentServiceImpl implements AppointmentService{
         Set<Appointment> appointments = appointmentRepository.findByAppointmentDateAndTypeAndClinic(date, type, clinicId);
         appointments.forEach(appointment -> {
             if(!doctorsId.contains(appointment.getDoctor().getId())){
-                Set<String> availableTime = new HashSet<>();
-                availableTime.add(appointment.getTimeOfAppointment());
+                Set<AppointmentDataDTO> appointmentData = new HashSet<>();
+                appointmentData.add(AppointmentDataDTO.builder().id(appointment.getId()).date(date).time(appointment.getTimeOfAppointment())
+                        .type(type).build());
                 response.add(
                         SearchDoctorsResponse.builder().doctorId(appointment.getDoctor().getId())
                                 .doctorName(appointment.getDoctor().getName())
                                 .doctorSurname(appointment.getDoctor().getSurname())
                                 .score(appointment.getDoctor().getScore())
-                                .availableTime(availableTime).build());
+                                .appointmentData(appointmentData).build());
                 doctorsId.add(appointment.getDoctor().getId());
             } else {
                 response.forEach(r -> {
                     if(r.getDoctorId().equals(appointment.getDoctor().getId())){
-                        r.getAvailableTime().add(appointment.getTimeOfAppointment());
+                        r.getAppointmentData().add(AppointmentDataDTO.builder().id(appointment.getId()).date(date)
+                                .time(appointment.getTimeOfAppointment()).type(type).build());
+                    }
+                });
+            }
+        });
+        return response;
+    }
+
+    @Override
+    public Set<SearchDoctorsResponse> findByClinicId(Integer clinicId) {
+        Set<SearchDoctorsResponse> response = new HashSet<>();
+        Set<Integer> doctorsId = new HashSet<>();
+
+        Set<Appointment> appointments = appointmentRepository.findByClinicId(clinicId);
+        appointments.forEach(appointment -> {
+            if(!doctorsId.contains(appointment.getDoctor().getId())){
+                Set<AppointmentDataDTO> appointmentData = new HashSet<>();
+                appointmentData.add(AppointmentDataDTO.builder().id(appointment.getId()).date(appointment.getDateOfAppointment())
+                        .time(appointment.getTimeOfAppointment()).type(appointment.getType().getName()).build());
+                response.add(
+                        SearchDoctorsResponse.builder().doctorId(appointment.getDoctor().getId())
+                                .doctorName(appointment.getDoctor().getName())
+                                .doctorSurname(appointment.getDoctor().getSurname())
+                                .score(appointment.getDoctor().getScore())
+                                .appointmentData(appointmentData).build());
+                doctorsId.add(appointment.getDoctor().getId());
+            } else {
+                response.forEach(r -> {
+                    if(r.getDoctorId().equals(appointment.getDoctor().getId())){
+                        r.getAppointmentData().add(AppointmentDataDTO.builder().id(appointment.getId()).date(appointment.getDateOfAppointment())
+                                .time(appointment.getTimeOfAppointment()).type(appointment.getType().getName()).build());
                     }
                 });
             }
