@@ -51,22 +51,26 @@
             <div *ngIf="date !== null && type !== null">
               <label>Date of appointment: <b>{{ date }}</b></label><br>
               <label>Available time: </label>
-              <select class="btn filterButtons" name="time" id="time" ngModel #time="ngModel">
-                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.time }}">
+              <select class="btn filterButtons" name="time" id="time" [(ngModel)]="time">
+                <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.id }}">
                   {{ data.time }}</option>
               </select><br>
               <label>Type: <b>{{ type }}</b></label><br><br>
+              <button class="btn filterButtons reasonButton" type="submit"
+                      [disabled]="time === undefined || time.value === ''"
+                      routerLink="/clinicalcentre/schedule/{{time}}">Schedule</button>
             </div>
 
             <div *ngIf="date === null || type === null">
               <label>Appointment data: </label>
-              <select class="btn filterButtons" name="appointmentData" id="appointmentData" ngModel #appointmentData="ngModel">
+              <select class="btn filterButtons" name="appointmentData" id="appointmentData" [(ngModel)]="appointmentData">
                 <option *ngFor="let data of selectedDoctor.appointmentData" value="{{ data.id }}">
                   {{ data.date }} {{ data.time }} - {{ data.type }}</option>
               </select><br><br>
+              <button class="btn filterButtons reasonButton" type="submit"
+                      [disabled]="appointmentData === undefined || appointmentData.value === ''"
+                      routerLink="/clinicalcentre/schedule/{{appointmentData}}">Schedule</button>
             </div>
-            <button class="btn filterButtons reasonButton" type="submit"
-                    (click)="onSubmit()">Schedule</button>
           </div>
         </div>
       </div>
