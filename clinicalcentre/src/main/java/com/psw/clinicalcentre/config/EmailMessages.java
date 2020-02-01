@@ -1,5 +1,8 @@
 package com.psw.clinicalcentre.config;
 
+import com.psw.clinicalcentre.appointments.requests.AppointmentRequests;
+import com.psw.clinicalcentre.appointments.requests.AppointmentRequestsDTO;
+
 public class EmailMessages {
 
     public static String acceptedMessage(String linkAddress){
@@ -24,6 +27,20 @@ public class EmailMessages {
                 "\n" +
                 "Regards,\n" +
                 "Clinical Centre team\n";
+    }
+
+    public static String appointmentRequestArrived(AppointmentRequests request){
+        return "Hi,\n" +
+                "\n" +
+                "New appointment request has arrived.\n"
+                +"Details are shown below: \n"
+                +"Date and time of the appointment: " + request.getAppointment().getDateOfAppointment().toString()
+                +", " + request.getAppointment().getTimeOfAppointment() + "\n"
+                +"Clinic: "
+                + request.getAppointment().getClinic().getName() + ", "
+                + request.getAppointment().getClinic().getAddress() + "\n"
+                + "Type of the appointment: " + request.getAppointment().getType().getName() + "\n"
+                + "Patient: " + request.getUser().getName() + " " + request.getUser().getSurname() + "\n";
     }
 
 

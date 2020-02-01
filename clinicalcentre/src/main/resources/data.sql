@@ -348,3 +348,11 @@ where id = 6;
 
 insert into clinical_centre.clinics_doctors
 values (4, 6, 3);
+
+update clinical_centre.users
+set username = 'user15@email.com'
+where id = 4;
+
+update clinical_centre.users
+set username = 'nevenafakultet13@gmail.com'
+where id = 1;
