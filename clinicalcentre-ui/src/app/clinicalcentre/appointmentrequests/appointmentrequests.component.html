@@ -1,13 +1,21 @@
 <div *ngIf="requests !== undefined && requests.length > 0">
   <div class="overview">
     <h3 class="header">Appointment requests</h3>
-    <div *ngFor="let request of requests">
+    <div>
       <table>
-        <tr (click)="onSelect(request)"
+        <tr>
+          <th>Date and time</th>
+          <th>Type</th>
+          <th>Doctor</th>
+          <th>Patient</th>
+        </tr>
+        <tr *ngFor="let request of requests" (click)="onSelect(request)"
             [ngClass]="{requestSelected: selectedRequest !== null
-              && selectedRequest.username === request.username}">
-          <td>{{ request.username }}</td>
-          <td>{{ request.name }} {{ request.surname }}</td>
+              && selectedRequest.id === request.id}">
+          <td>{{ request.appointment.dateOfAppointment }} {{ request.appointment.timeOfAppointment }}</td>
+          <td>{{ request.appointment.type.name }}</td>
+          <td>{{ request.appointment.doctor.name }} {{ request.appointment.doctor.surname }}</td>
+          <td>{{ request.user.name }} {{ request.user.surname }}</td>
         </tr>
       </table>
     </div>
@@ -27,22 +35,18 @@
         <h5>Request details</h5><br>
         <div>
           <div class="dataSection">
-            <label>Username: <b>{{ selectedRequest.username }}</b></label><br>
-            <label>Name and surname: <b>{{ selectedRequest.name }} {{ selectedRequest.surname }}</b></label><br>
-            <label>Address: <b>{{ selectedRequest.address }}, {{ selectedRequest.city }}, {{ selectedRequest.state }}</b></label><br>
-            <label>Phone Number: <b>{{ selectedRequest.phoneNumber }}</b></label><br>
-            <label>Insurance Number: <b>{{ selectedRequest.insuranceNumber }}</b></label><br>
+            <label>Date: <b>{{ selectedRequest.appointment.dateOfAppointment }}</b></label><br>
+            <label>Time: <b>{{ selectedRequest.appointment.timeOfAppointment }}</b></label><br>
+            <label>Hall: <b>{{ selectedRequest.appointment.hall.name }}</b></label><br>
+            <label>Doctor: <b>{{ selectedRequest.appointment.doctor.name }}
+              {{ selectedRequest.appointment.doctor.surname }}</b></label><br>
+            <label>Type: <b>{{ selectedRequest.appointment.type.name }}</b></label><br>
+            <label>Request is from patient: <b>{{ selectedRequest.user.name }}
+              {{ selectedRequest.user.surname }}</b></label><br>
           </div>
           <div class="buttons">
             <button class="btn btn-sm btn-success buttonMargin" type="button" (click)="onAccept()">Accept</button>
             <button class="btn btn-sm btn-danger buttonMargin" type="button" (click)="onReject()">Reject</button>
-          </div>
-          <div class="reasonSection" *ngIf="rejected">
-            <p>Please enter reason for rejecting: </p>
-            <textarea class="form-control" type="text" name="reason" id="reason" ngModel #reasonInput="ngModel"></textarea>
-            <button class="btn btn-sm btn-success reasonButton" type="submit"
-                    [disabled]="reasonInput.value === '' || reasonInput.value === null || reasonInput.value === undefined"
-                    (click)="onReasonSubmit(reasonInput.value)">Submit</button>
           </div>
         </div>
       </div>
