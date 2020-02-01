@@ -16,6 +16,7 @@ import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalenda
 import { SearchComponent } from './clinicalcentre/clinics/search/search.component';
 import { DoctorsComponent } from './clinicalcentre/clinics/doctors/doctors.component';
 import { ScheduleComponent } from './clinicalcentre/clinics/schedule/schedule.component';
+import { AppointmentrequestsComponent } from './clinicalcentre/appointmentrequests/appointmentrequests.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'schedule/:appointmentId', component: ScheduleComponent },
     { path: 'clinics', component: ClinicsComponent },
     { path: 'requests', component: RequestsComponent },
+    { path: 'appointmentrequests', component: AppointmentrequestsComponent },
     { path: 'appointments', component: AppointmentsComponent},
     { path: 'workcalendar', component: WorkcalendarComponent},
     { path: 'myprofile', component: MyprofileComponent, children: [

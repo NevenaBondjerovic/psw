@@ -23,6 +23,7 @@ import { WorkcalendarComponent } from './clinicalcentre/workcalendar/workcalenda
 import { SearchComponent } from './clinicalcentre/clinics/search/search.component';
 import { DoctorsComponent } from './clinicalcentre/clinics/doctors/doctors.component';
 import { ScheduleComponent } from './clinicalcentre/clinics/schedule/schedule.component';
+import { AppointmentrequestsComponent } from './clinicalcentre/appointmentrequests/appointmentrequests.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ScheduleComponent } from './clinicalcentre/clinics/schedule/schedule.co
     WorkcalendarComponent,
     SearchComponent,
     DoctorsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    AppointmentrequestsComponent
   ],
   imports: [
     BrowserModule,

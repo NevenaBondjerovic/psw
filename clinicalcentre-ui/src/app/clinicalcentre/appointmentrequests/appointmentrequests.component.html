@@ -1,0 +1,68 @@
+<div *ngIf="requests !== undefined && requests.length > 0">
+  <div class="overview">
+    <h3 class="header">Appointment requests</h3>
+    <div *ngFor="let request of requests">
+      <table>
+        <tr (click)="onSelect(request)"
+            [ngClass]="{requestSelected: selectedRequest !== null
+              && selectedRequest.username === request.username}">
+          <td>{{ request.username }}</td>
+          <td>{{ request.name }} {{ request.surname }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details">
+    <div class="alert alert-success info_block" *ngIf="requestProcessed">
+      <p>The appointment request has successfully been processed.</p>
+    </div>
+    <div *ngIf="!requestProcessed && selectedRequest === null">
+      <h5 class="detailsNotSelected">Please select request to see more details.</h5>
+    </div>
+    <div *ngIf="selectedRequest !== null">
+      <div *ngIf="!processingRequest">
+        <div class="alert alert-danger info_block" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div><br>
+        <h5>Request details</h5><br>
+        <div>
+          <div class="dataSection">
+            <label>Username: <b>{{ selectedRequest.username }}</b></label><br>
+            <label>Name and surname: <b>{{ selectedRequest.name }} {{ selectedRequest.surname }}</b></label><br>
+            <label>Address: <b>{{ selectedRequest.address }}, {{ selectedRequest.city }}, {{ selectedRequest.state }}</b></label><br>
+            <label>Phone Number: <b>{{ selectedRequest.phoneNumber }}</b></label><br>
+            <label>Insurance Number: <b>{{ selectedRequest.insuranceNumber }}</b></label><br>
+          </div>
+          <div class="buttons">
+            <button class="btn btn-sm btn-success buttonMargin" type="button" (click)="onAccept()">Accept</button>
+            <button class="btn btn-sm btn-danger buttonMargin" type="button" (click)="onReject()">Reject</button>
+          </div>
+          <div class="reasonSection" *ngIf="rejected">
+            <p>Please enter reason for rejecting: </p>
+            <textarea class="form-control" type="text" name="reason" id="reason" ngModel #reasonInput="ngModel"></textarea>
+            <button class="btn btn-sm btn-success reasonButton" type="submit"
+                    [disabled]="reasonInput.value === '' || reasonInput.value === null || reasonInput.value === undefined"
+                    (click)="onReasonSubmit(reasonInput.value)">Submit</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="processingRequest">
+        <h5>Processing request...</h5><br>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="requests === undefined">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="requests !== undefined && requests.length === 0 && !errorMessage">
+  <div class="alert alert-success info_block" *ngIf="requestProcessed">
+    <p>The registration request has successfully been processed.</p>
+  </div>
+  <h4 class="header">There are no requests at the moment.</h4>
+</div>
+<div *ngIf="requests !== undefined && requests.length === 0 && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>
