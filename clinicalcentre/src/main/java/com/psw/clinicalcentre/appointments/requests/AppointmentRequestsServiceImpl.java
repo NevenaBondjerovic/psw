@@ -62,6 +62,30 @@ public class AppointmentRequestsServiceImpl implements AppointmentRequestsServic
         return repository.findUnprocessedByAdmin(adminId);
     }
 
+    @Override
+    @Transactional
+    public void acceptAppointmentRequest(Integer appointmentId) {
+        AppointmentRequests request = repository.findByAppointment(appointmentId)
+                .orElseThrow(() -> new NotFoundException("Request not found."));
+        request.setAccepted(Boolean.TRUE);
+        repository.save(request);
+    }
+
+    @Override
+    @Transactional
+    public void declineAppointmentRequest(Integer appointmentId) {
+        AppointmentRequests request = repository.findByAppointment(appointmentId)
+                .orElseThrow(() -> new NotFoundException("Request not found."));
+        request.setAccepted(Boolean.FALSE);
+        repository.save(request);
+
+        Appointment appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new NotFoundException("Appointment not found."));
+        appointment.setScheduledFor(null);
+        appointmentRepository.save(appointment);
+
+    }
+
 
     private void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

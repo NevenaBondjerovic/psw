@@ -1,5 +1,8 @@
 <div class="background_image">
-  <div *ngIf="loggedInUser === null">
+  <div class="alert alert-success info_block" *ngIf="successMessage">
+    <p>{{ successMessage }}</p>
+  </div>
+  <div *ngIf="loggedInUser === null && successMessage === null">
     <h3 class="welcome_header">Please login</h3><br>
     <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>
@@ -18,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="loggedInUser !== null">
+  <div *ngIf="loggedInUser !== null && successMessage === null">
     <h3 class="welcome_header">Confirmation of the appointment request</h3><br>
     <div class="login_block">
       <div class="dataSection">

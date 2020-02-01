@@ -32,4 +32,15 @@ public class AppointmentRequestsController {
                 .collect(Collectors.toSet()), HttpStatus.OK);
     }
 
+    @PutMapping("/confirm")
+    @ResponseStatus(HttpStatus.OK)
+    public void acceptOrDeclineAppointmentRequest(@RequestBody @Valid ConfirmationDTO request){
+        if(request.getAccepted()){
+            appointmentRequestsService.acceptAppointmentRequest(request.getAppointmentId());
+        }
+        if(!request.getAccepted()) {
+            appointmentRequestsService.declineAppointmentRequest(request.getAppointmentId());
+        }
+    }
+
 }

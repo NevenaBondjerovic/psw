@@ -17,9 +17,11 @@ export class AppointmentconfirmationComponent implements OnInit {
   password: string = null;
   appointment: Appointment = null;
   finalPrice: number = 0;
+  successMessage: string = null;
 
   loginUrl: string = 'http://localhost:8080/users/login';
   appointmentsUrl: string = 'http://localhost:8080/appointments';
+  confirmUrl: string = 'http://localhost:8080/appointmentrequests/confirm';
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -75,6 +77,24 @@ export class AppointmentconfirmationComponent implements OnInit {
       } else {
         this.errorMessage = error.error.message;
       }
+  }
+
+  onAccept(){
+    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, approved: null, accepted: true})
+     .subscribe(() => {
+      this.successMessage = 'The request is successfully accepted. '
+     }, error => {
+       this.handleError(error);
+     });
+  }
+
+  onReject(){
+    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, approved: null, accepted: false})
+     .subscribe(() => {
+      this.successMessage = 'The request is successfully rejected. '
+     }, error => {
+       this.handleError(error);
+     });
   }
 
 }
