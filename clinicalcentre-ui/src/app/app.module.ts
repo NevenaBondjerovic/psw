@@ -24,6 +24,7 @@ import { SearchComponent } from './clinicalcentre/clinics/search/search.componen
 import { DoctorsComponent } from './clinicalcentre/clinics/doctors/doctors.component';
 import { ScheduleComponent } from './clinicalcentre/clinics/schedule/schedule.component';
 import { AppointmentrequestsComponent } from './clinicalcentre/appointmentrequests/appointmentrequests.component';
+import { AppointmentconfirmationComponent } from './appointmentconfirmation/appointmentconfirmation.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AppointmentrequestsComponent } from './clinicalcentre/appointmentreques
     SearchComponent,
     DoctorsComponent,
     ScheduleComponent,
-    AppointmentrequestsComponent
+    AppointmentrequestsComponent,
+    AppointmentconfirmationComponent
   ],
   imports: [
     BrowserModule,

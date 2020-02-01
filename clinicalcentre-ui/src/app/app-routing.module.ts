@@ -17,6 +17,7 @@ import { SearchComponent } from './clinicalcentre/clinics/search/search.componen
 import { DoctorsComponent } from './clinicalcentre/clinics/doctors/doctors.component';
 import { ScheduleComponent } from './clinicalcentre/clinics/schedule/schedule.component';
 import { AppointmentrequestsComponent } from './clinicalcentre/appointmentrequests/appointmentrequests.component';
+import { AppointmentconfirmationComponent } from './appointmentconfirmation/appointmentconfirmation.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'activation/:id', component: ActivationpageComponent},
+  { path: 'confirmation/:id', component: AppointmentconfirmationComponent},
   { path: 'clinicalcentre', redirectTo: '/clinicalcentre/home', pathMatch: 'full' },
   { path: 'clinicalcentre', component: ClinicalcentreComponent, children: [
     { path: 'home', component: HomeComponent },
