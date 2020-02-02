@@ -83,3 +83,14 @@ tr:hover {
   width: 90%;
   text-align: center;
 }
+
+.filterButtons {
+  color: white;
+  background-color: gray;
+  margin: 0 2% 0 2%;
+}
+
+.reasonButton {
+  margin-top: 3%;
+  margin-right: 60%;
+}

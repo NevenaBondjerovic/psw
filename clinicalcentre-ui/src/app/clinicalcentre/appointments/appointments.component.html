@@ -46,7 +46,9 @@
               <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
             <label>Discount: <b>{{ selectedAppointment.pricelist.discount }} % </b></label><br>
             <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
-              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+              <fa name="fas fa-euro" aria-hidden="true"></fa></label><br><br>
+            <button class="btn filterButtons reasonButton" type="submit"
+                    routerLink="/clinicalcentre/schedule/{{selectedAppointment.id}}">Schedule</button>
           </div>
         </div>
 
