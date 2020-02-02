@@ -1,0 +1,46 @@
+<div class="background_image">
+  <div class="alert alert-success info_block" *ngIf="successMessage">
+    <p>{{ successMessage }}</p>
+  </div>
+  <div *ngIf="loggedInUser === null && successMessage === null">
+    <h3 class="welcome_header">Please login</h3><br>
+    <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <div class="login_block">
+      <h3 class="align_center">Login</h3><br>
+      <label class="label_field h5">Username</label>
+      <input class="input_field h5" type="text" name ="username" [(ngModel)]="username"
+             (keydown.enter)="onLogin()"><br>
+
+      <label class="label_field h5">Password</label>
+      <input class="input_field h5" type="password" name ="password" [(ngModel)]="password"
+             (keydown.enter)="onLogin()"><br><br>
+      <div class="align_center">
+        <button class="btn btn-lg btn-primary" type="button" (click)="onLogin()">Login</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loggedInUser !== null && successMessage === null">
+    <h3 class="welcome_header">Confirmation of the appointment request</h3><br>
+    <div class="login_block">
+      <div class="dataSection">
+        <label>Date: <b>{{ appointment.dateOfAppointment }}</b></label><br>
+        <label>Time: <b>{{ appointment.timeOfAppointment }}</b></label><br>
+        <label>Clinic: <b>{{ appointment.clinic.name }}, {{ appointment.clinic.address }}</b></label><br>
+        <label>Hall: <b>{{ appointment.hall.name }}</b></label><br>
+        <label>Doctor: <b>{{ appointment.doctor.name }} {{ appointment.doctor.surname }}</b></label><br>
+        <label>Type of the appointment: <b>{{ appointment.type.name }}</b></label><br>
+        <label>Original price: <b>{{ appointment.pricelist.price }} </b>
+          <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+        <label>Discount: <b>{{ appointment.pricelist.discount }} % </b></label><br>
+        <label>Final price (price with discount included): <b>{{ finalPrice }} </b>
+          <fa name="fas fa-euro" aria-hidden="true"></fa></label><br>
+      </div><br>
+      <div class="buttons">
+        <button class="btn btn-sm btn-success buttonMargin" type="button" (click)="onAccept()">Accept</button>
+        <button class="btn btn-sm btn-danger buttonMargin" type="button" (click)="onReject()">Reject</button>
+      </div>
+    </div>
+  </div>
+</div>

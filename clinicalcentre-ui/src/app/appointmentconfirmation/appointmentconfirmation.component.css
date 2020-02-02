@@ -1,0 +1,71 @@
+.background_image {
+  height: 100%;
+  background-size: cover;
+  background-image: url(src/assets/img/login_backgroud_image.png);
+  width: 100%;
+  position: fixed;
+}
+
+.welcome_header {
+   margin: 5% 0 2% 10%;
+}
+
+.align_center {
+  text-align: center;
+}
+
+.login_block {
+  background-color: white;
+  position: absolute;
+  margin-left: 15%;
+  padding: 2% 2% 2% 2%;
+  width: 35%;
+}
+
+.align_center {
+  text-align: center;
+}
+
+.registration_button{
+  position: absolute;
+  top: 5%;
+  right: 3%;
+}
+
+.label_field {
+  width: 25%;
+  text-align: center;
+}
+
+.input_field {
+  width: 70%
+}
+
+.white_text {
+  color: white;
+}
+
+.error_block {
+  width: 35%;
+  left: 15%;
+}
+
+.dataSection {
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+
+.buttons {
+  padding-left: 20%;
+}
+
+.buttonMargin {
+  margin: 5px;
+}
+
+.info_block {
+  width: 50%;
+  text-align: center;
+  margin-top: 2%;
+  margin-left:2%;
+}

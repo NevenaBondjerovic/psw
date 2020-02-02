@@ -1,0 +1,72 @@
+<div *ngIf="requests !== undefined && requests.length > 0">
+  <div class="overview">
+    <h3 class="header">Appointment requests</h3>
+    <div>
+      <table>
+        <tr>
+          <th>Date and time</th>
+          <th>Type</th>
+          <th>Doctor</th>
+          <th>Patient</th>
+        </tr>
+        <tr *ngFor="let request of requests" (click)="onSelect(request)"
+            [ngClass]="{requestSelected: selectedRequest !== null
+              && selectedRequest.id === request.id}">
+          <td>{{ request.appointment.dateOfAppointment }} {{ request.appointment.timeOfAppointment }}</td>
+          <td>{{ request.appointment.type.name }}</td>
+          <td>{{ request.appointment.doctor.name }} {{ request.appointment.doctor.surname }}</td>
+          <td>{{ request.user.name }} {{ request.user.surname }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="details">
+    <div class="alert alert-success info_block" *ngIf="successMessage">
+      <p>The appointment request has successfully been processed.</p>
+    </div>
+    <div *ngIf="!successMessage && selectedRequest === null">
+      <h5 class="detailsNotSelected">Please select request to see more details.</h5>
+    </div>
+    <div *ngIf="selectedRequest !== null">
+      <div *ngIf="!processingRequest">
+        <div class="alert alert-danger info_block" *ngIf="errorMessage">
+          <p>{{ errorMessage }}</p>
+        </div><br>
+        <h5>Request details</h5><br>
+        <div>
+          <div class="dataSection">
+            <label>Date: <b>{{ selectedRequest.appointment.dateOfAppointment }}</b></label><br>
+            <label>Time: <b>{{ selectedRequest.appointment.timeOfAppointment }}</b></label><br>
+            <label>Hall: <b>{{ selectedRequest.appointment.hall.name }}</b></label><br>
+            <label>Doctor: <b>{{ selectedRequest.appointment.doctor.name }}
+              {{ selectedRequest.appointment.doctor.surname }}</b></label><br>
+            <label>Type: <b>{{ selectedRequest.appointment.type.name }}</b></label><br>
+            <label>Request is from patient: <b>{{ selectedRequest.user.name }}
+              {{ selectedRequest.user.surname }}</b></label><br>
+          </div>
+          <div class="buttons">
+            <button class="btn btn-sm btn-success buttonMargin" type="button" (click)="onAccept()">Accept</button>
+            <button class="btn btn-sm btn-danger buttonMargin" type="button" (click)="onReject()">Reject</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="processingRequest">
+        <h5>Processing request...</h5><br>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="requests === undefined">
+  <h3 class="header">Loading...</h3>
+</div>
+<div *ngIf="requests !== undefined && requests.length === 0 && !errorMessage">
+  <div class="alert alert-success info_block" *ngIf="successMessage">
+    <p>The appointment request has successfully been processed.</p>
+  </div>
+  <h4 class="header">There are no requests at the moment.</h4>
+</div>
+<div *ngIf="requests !== undefined && requests.length === 0 && errorMessage">
+  <div class="alert alert-danger info_block">
+    <p>{{ errorMessage }}</p>
+  </div><br>
+</div>

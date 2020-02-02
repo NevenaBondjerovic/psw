@@ -320,3 +320,39 @@ INSERT INTO clinical_centre.appointments VALUES
 update clinical_centre.appointments
 set type_id=2, pricelist_id=2
 where id = 10;
+
+----------APPOINTMENT REQUESTS table---------------
+
+CREATE TABLE clinical_centre.appointment_requests (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  appointment_id INT NOT NULL,
+  admin_id INT NOT NULL,
+  user_id INT NOT NULL,
+  approved_by_admin boolean DEFAULT NULL,
+  accepted boolean DEFAULT NULL,
+
+  FOREIGN KEY (appointment_id) REFERENCES appointments(id),
+  FOREIGN KEY (admin_id) REFERENCES users(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-------------update users-------------------
+
+update clinical_centre.users
+set type='CLINIC_ADMIN'
+where id = 3;
+
+update clinical_centre.users
+set type='CLINIC_ADMIN', score = 4
+where id = 6;
+
+insert into clinical_centre.clinics_doctors
+values (4, 6, 3);
+
+update clinical_centre.users
+set username = 'user15@email.com'
+where id = 4;
+
+update clinical_centre.users
+set username = 'nevenafakultet13@gmail.com'
+where id = 1;

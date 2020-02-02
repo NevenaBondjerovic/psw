@@ -36,7 +36,7 @@ tr:hover {
   color: white;
 }
 
-.selected {
+.requestSelected {
   height: 50px;
   font-size: 20px;
   background-color: #808080;
@@ -82,15 +82,4 @@ tr:hover {
 .info_block {
   width: 90%;
   text-align: center;
-}
-
-.filterButtons {
-  color: white;
-  background-color: gray;
-  margin: 0 2% 0 2%;
-}
-
-.reasonButton {
-  margin-top: 3%;
-  margin-right: 60%;
 }

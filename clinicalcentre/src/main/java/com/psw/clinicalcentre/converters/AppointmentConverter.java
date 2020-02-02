@@ -2,7 +2,6 @@ package com.psw.clinicalcentre.converters;
 
 import com.psw.clinicalcentre.appointments.Appointment;
 import com.psw.clinicalcentre.appointments.AppointmentDTO;
-import com.psw.clinicalcentre.appointments.SearchDoctorsResponse;
 import com.psw.clinicalcentre.clinics.SearchClinicsResponse;
 
 public class AppointmentConverter {

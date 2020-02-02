@@ -1,8 +1,15 @@
 <div>
+  <div class="alert alert-success info_block" *ngIf="requestProcessed">
+    <p>The request has successfully been processed.<br>
+      You will get a notification on your email when the request is approved. </p>
+  </div>
+  <div class="alert alert-danger info_block" *ngIf="errorMessage && selectedAppointment === null">
+    <p>{{ errorMessage }}</p>
+  </div>
   <div *ngIf="selectedAppointment !== null">
     <div class="alert alert-danger info_block" *ngIf="errorMessage">
-      <p>{{ errorMessage }}</p>
-    </div><br>
+      <p>{{ errorMessage }}</p><br>
+    </div>
     <div *ngIf="loadindData">
       <h3 class="header">Loading...</h3>
     </div>
