@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Set;
 
-import static com.psw.clinicalcentre.config.EmailMessages.appointmentRequestArrived;
+import static com.psw.clinicalcentre.config.EmailMessages.*;
 
 @Service
 public class AppointmentRequestsServiceImpl implements AppointmentRequestsService {
@@ -84,6 +84,35 @@ public class AppointmentRequestsServiceImpl implements AppointmentRequestsServic
         appointment.setScheduledFor(null);
         appointmentRepository.save(appointment);
 
+    }
+
+    @Override
+    @Transactional
+    public void approveRequestByAdmin(Integer requestId) {
+        AppointmentRequests request = repository.findById(requestId)
+                .orElseThrow(() -> new NotFoundException("Request not found."));
+        request.setApprovedByAdmin(Boolean.TRUE);
+        repository.save(request);
+
+        String text = String.format(template.getText(), appointmentRequestApproved(request));
+        sendSimpleMessage(request.getUser().getUsername(), SUBJECT, text);
+    }
+
+    @Override
+    @Transactional
+    public void declineRequestByAdmin(Integer requestId) {
+        AppointmentRequests request = repository.findById(requestId)
+                .orElseThrow(() -> new NotFoundException("Request not found."));
+        request.setApprovedByAdmin(Boolean.FALSE);
+        repository.save(request);
+
+        Appointment appointment = appointmentRepository.findById(request.getAppointment().getId())
+                .orElseThrow(() -> new NotFoundException("Appointment not found."));
+        appointment.setScheduledFor(null);
+        appointmentRepository.save(appointment);
+
+        String text = String.format(template.getText(), appointmentRequestDeclined(request));
+        sendSimpleMessage(request.getUser().getUsername(), SUBJECT, text);
     }
 
 

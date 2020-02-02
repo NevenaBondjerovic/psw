@@ -18,7 +18,10 @@ export class AppointmentrequestsComponent implements OnInit {
     adminId: number,
     user: User
   };
+  successMessage: string = null;
   requestsUrl: string = 'http://localhost:8080/appointmentrequests';
+  approveUrl: string = 'http://localhost:8080/appointmentrequests/approve';
+  processingRequest: boolean = false;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -51,7 +54,37 @@ export class AppointmentrequestsComponent implements OnInit {
   }
 
   onSelect(request){
+    this.successMessage = null;
     this.errorMessage = null;
     this.selectedRequest = request;
   }
+
+  onAccept(){
+    this.processingRequest = true;
+    this.http.put(this.approveUrl, {requestId: this.selectedRequest.id, approved: true})
+     .subscribe(() => {
+      this.successMessage = 'The request is successfully accepted. ';
+      this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
+      this.selectedRequest = null;
+      this.processingRequest = false;
+     }, error => {
+       this.handleError(error);
+       this.processingRequest = false;
+     });
+  }
+
+  onReject(){
+    this.processingRequest = true;
+    this.http.put(this.approveUrl, {requestId: this.selectedRequest.id, approved: false})
+     .subscribe(() => {
+      this.successMessage = 'The request is successfully rejected. ';
+      this.requests.splice(this.requests.indexOf(this.selectedRequest), 1);
+      this.selectedRequest = null;
+      this.processingRequest = false;
+     }, error => {
+       this.handleError(error);
+       this.processingRequest = false;
+     });
+  }
+
 }

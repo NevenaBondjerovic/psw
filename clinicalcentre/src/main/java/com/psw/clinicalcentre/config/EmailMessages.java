@@ -43,6 +43,24 @@ public class EmailMessages {
                 + "Patient: " + request.getUser().getName() + " " + request.getUser().getSurname() + "\n";
     }
 
+    public static String appointmentRequestApproved(AppointmentRequests request){
+        return "Hi, \n\n"
+                + "Your request has been approved.\n\n"
+                + "Please go to the following link to accept the request proposal: \n"
+                + "http://localhost:4200/confirmation/" + request.getAppointment().getId()
+                + "\n\n"
+                + "Regards,\n"
+                + "Clinical centre team\n";
+    }
 
+    public static String appointmentRequestDeclined(AppointmentRequests request){
+        return "Hi, \n\n"
+                + "Your request has been declined.\n"
+                + "There is no free slot for the wanted appointment.\n"
+                + "Please try another day."
+                + "\n\n"
+                + "Regards,\n"
+                + "Clinical centre team\n";
+    }
 
 }

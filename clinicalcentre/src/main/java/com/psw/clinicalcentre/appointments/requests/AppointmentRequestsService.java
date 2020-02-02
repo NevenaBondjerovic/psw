@@ -8,5 +8,7 @@ public interface AppointmentRequestsService {
     Set<AppointmentRequests> findAllUnprocessedByAdmin(Integer adminId);
     void acceptAppointmentRequest(Integer appointmentId);
     void declineAppointmentRequest(Integer appointmentId);
+    void approveRequestByAdmin(Integer requestId);
+    void declineRequestByAdmin(Integer requestId);
 
 }

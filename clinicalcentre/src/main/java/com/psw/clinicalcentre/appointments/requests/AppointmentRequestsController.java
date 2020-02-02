@@ -43,4 +43,15 @@ public class AppointmentRequestsController {
         }
     }
 
+    @PutMapping("/approve")
+    @ResponseStatus(HttpStatus.OK)
+    public void approveOrDeclineByAdmin(@RequestBody @Valid ApproveRequestDTO request){
+        if(request.getApproved()){
+            appointmentRequestsService.approveRequestByAdmin(request.getRequestId());
+        }
+        if(!request.getApproved()) {
+            appointmentRequestsService.declineRequestByAdmin(request.getRequestId());
+        }
+    }
+
 }

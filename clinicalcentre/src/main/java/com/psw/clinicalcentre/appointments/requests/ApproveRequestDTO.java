@@ -11,12 +11,11 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ConfirmationDTO {
+public class ApproveRequestDTO {
 
     @NotNull
-    private Integer appointmentId;
+    private Integer requestId;
 
     @NotNull
-    private Boolean accepted;
-
+    private Boolean approved;
 }

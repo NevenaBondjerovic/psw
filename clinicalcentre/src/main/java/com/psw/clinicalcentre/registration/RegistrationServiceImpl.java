@@ -64,7 +64,7 @@ public class RegistrationServiceImpl implements RegistrationService{
         if(registrationRequest.isPresent()) {
             String text = String.format(template.getText(), acceptedMessage(ACTIVATION_LINK + registrationRequest.get().getUser().getId()));
             registrationRepository.acceptRegistrationRequest(request.getUsername());
-            //sendSimpleMessage(request.getUsername(), SUBJECT, text);
+            sendSimpleMessage(request.getUsername(), SUBJECT, text);
         } else {
             throw new NotFoundException(NOT_FOUND_ERROR_MESSAGE);
         }
@@ -78,7 +78,7 @@ public class RegistrationServiceImpl implements RegistrationService{
         if(registrationRepository.findByUserUsername(request.getUsername()).isPresent()) {
             String text = String.format(template.getText(), rejectedMessage(request.getDeclineReason()));
             registrationRepository.rejectRegistrationRequest(request.getUsername(), request.getDeclineReason());
-            //sendSimpleMessage(request.getUsername(), SUBJECT, text);
+            sendSimpleMessage(request.getUsername(), SUBJECT, text);
         } else {
             throw new NotFoundException(NOT_FOUND_ERROR_MESSAGE);
         }

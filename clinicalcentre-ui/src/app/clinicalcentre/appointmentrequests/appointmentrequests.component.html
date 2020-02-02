@@ -21,10 +21,10 @@
     </div>
   </div>
   <div class="details">
-    <div class="alert alert-success info_block" *ngIf="requestProcessed">
+    <div class="alert alert-success info_block" *ngIf="successMessage">
       <p>The appointment request has successfully been processed.</p>
     </div>
-    <div *ngIf="!requestProcessed && selectedRequest === null">
+    <div *ngIf="!successMessage && selectedRequest === null">
       <h5 class="detailsNotSelected">Please select request to see more details.</h5>
     </div>
     <div *ngIf="selectedRequest !== null">
@@ -60,8 +60,8 @@
   <h3 class="header">Loading...</h3>
 </div>
 <div *ngIf="requests !== undefined && requests.length === 0 && !errorMessage">
-  <div class="alert alert-success info_block" *ngIf="requestProcessed">
-    <p>The registration request has successfully been processed.</p>
+  <div class="alert alert-success info_block" *ngIf="successMessage">
+    <p>The appointment request has successfully been processed.</p>
   </div>
   <h4 class="header">There are no requests at the moment.</h4>
 </div>

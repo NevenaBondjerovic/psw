@@ -40,9 +40,7 @@ export class AppointmentconfirmationComponent implements OnInit {
     this.http.post(this.loginUrl, {username: this.username, password: this.password})
       .subscribe((responseData: User) => {
         if(responseData.activated === true){
-          //this.globalVariables.loggedInUser = responseData;
           this.errorMessage = null;
-          //this.router.navigate(['/clinicalcentre/home']);
           this.http.get(this.appointmentsUrl + "/" + (+this.route.snapshot.paramMap.get("id")))
            .subscribe((appointmentData: Appointment) => {
             if(appointmentData.scheduledFor.id === responseData.id){
@@ -57,7 +55,6 @@ export class AppointmentconfirmationComponent implements OnInit {
              this.handleError(error);
            });
         } else {
-          //this.globalVariables.loggedInUser = null;
           this.errorMessage = "User is still not activated.";
         }
       }, error => {
@@ -80,7 +77,7 @@ export class AppointmentconfirmationComponent implements OnInit {
   }
 
   onAccept(){
-    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, approved: null, accepted: true})
+    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, accepted: true})
      .subscribe(() => {
       this.successMessage = 'The request is successfully accepted. '
      }, error => {
@@ -89,7 +86,7 @@ export class AppointmentconfirmationComponent implements OnInit {
   }
 
   onReject(){
-    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, approved: null, accepted: false})
+    this.http.put(this.confirmUrl, {appointmentId: this.appointment.id, accepted: false})
      .subscribe(() => {
       this.successMessage = 'The request is successfully rejected. '
      }, error => {
