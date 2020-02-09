@@ -1,5 +1,25 @@
 <div>
-
-  <h3 class="header">History of your appointments and operations</h3><br>
+  <div class="overview">
+    <h3 class="header">History of appointments and operations</h3>
+    <div>
+      <table>
+        <tr>
+          <th>Date and time</th>
+          <th>Clinic</th>
+          <th>Doctor</th>
+          <th>Type</th>
+        </tr>
+        <tr *ngFor="let score of scores"
+            (click)="onSelect(clinic)"
+            [ngClass]="{selected: selectedAppointment !== null
+            && selectedAppointment.id === score.id}">
+          <td>{{ score.appointmentDTO.dateOfAppointment }} {{ score.appointmentDTO.timeOfAppointment }}</td>
+          <td>{{ score.appointmentDTO.clinic.name }}, {{ score.appointmentDTO.clinic.address }}</td>
+          <td>{{ score.appointmentDTO.doctor.name }} {{ score.appointmentDTO.doctor.surname }}</td>
+          <td>{{ score.appointmentDTO.type.name }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
 </div>
