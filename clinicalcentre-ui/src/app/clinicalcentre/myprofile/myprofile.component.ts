@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { User } from 'src/app/clinicalcentre/user';
 
 @Component({
   selector: 'app-myprofile',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyprofileComponent implements OnInit {
 
-  constructor() { }
+  loggedInUser: User = null;
+
+  constructor(private globalVariables: GlobalVariablesService) {
+    this.loggedInUser = this.globalVariables.loggedInUser;
+  }
 
   ngOnInit() {
   }

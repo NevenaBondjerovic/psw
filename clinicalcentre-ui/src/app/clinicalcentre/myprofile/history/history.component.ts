@@ -25,7 +25,9 @@ export class HistoryComponent implements OnInit {
    selectedScore: {
       appointmentDTO: Appointment,
       scoreForDoctor: number,
-      scoreForClinic: number
+      scoreForClinic: number,
+      givenDoctorScore: number,
+      givenClinicScore: number
     } = null;
     doctorScore: number = null;
     clinicScore: number = null;
@@ -47,6 +49,10 @@ export class HistoryComponent implements OnInit {
       givenClinicScore: number
     }>) => {
       this.scores = responseData;
+      for(let s of this.scores){
+        s.givenDoctorScore = null;
+        s.givenClinicScore = null;
+      }
     }, error => {
       this.handleError(error);
     });
@@ -57,23 +63,20 @@ export class HistoryComponent implements OnInit {
 
   submitScore(score){
     this.selectedScore = score;
-    this.selectedScore.scoreForClinic = score.givenClinicScore;
-    this.selectedScore.scoreForDoctor = score.givenDoctorScore;
+    if(this.selectedScore.scoreForClinic === null){
+      this.selectedScore.scoreForClinic = score.givenClinicScore;
+    }
+    if(this.selectedScore.scoreForDoctor === null ){
+      this.selectedScore.scoreForDoctor = score.givenDoctorScore;
+    }
     this.http.post(this.scoreUrl, this.selectedScore)
     .subscribe(() => {
       this.selectedScore = null;
       for(let s of this.scores){
         if(s.appointmentDTO.id == score.appointmentDTO.id){
-          if(score.givenDoctorScore !== undefined){
-            s.scoreForDoctor = score.givenDoctorScore;
-           }else {
-            s.scoreForDoctor = null;
-           }
-          if(score.givenClinicScore !== undefined){
-            s.scoreForClinic = score.givenClinicScore;
-          }else {
-            s.scoreForClinic = null;
-          }
+          s = this.selectedScore;
+          s.givenClinicScore = null;
+          s.givenDoctorScore = null;
         }
       }
     }, error => {

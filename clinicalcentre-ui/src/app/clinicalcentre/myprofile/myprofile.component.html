@@ -1,9 +1,11 @@
 <div>
   <ul><a routerLink="/clinicalcentre/myprofile/profile"
          routerLinkActive="selected">Profile</a></ul>
-  <ul><a routerLink="/clinicalcentre/myprofile/history"
+  <ul *ngIf="loggedInUser.userType==='PATIENT'">
+    <a routerLink="/clinicalcentre/myprofile/history"
          routerLinkActive="selected">History</a></ul>
-  <ul><a routerLink="/clinicalcentre/myprofile/medicalrecord"
+  <ul *ngIf="loggedInUser.userType==='PATIENT'">
+    <a routerLink="/clinicalcentre/myprofile/medicalrecord"
        routerLinkActive="selected">Medical record</a></ul>
 </div>
 <div class="content">
