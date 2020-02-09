@@ -5,7 +5,7 @@
     <button class="btn btn-lg btn-primary" type="button" routerLink="/registration">Registration</button>
   </div>
 
-  <div class="alert alert-danger text-center error_block" *ngIf="errorMessage">
+  <div class="alert alert-danger text-center error_block" id="errorMessage" *ngIf="errorMessage">
     <p>{{ errorMessage }}</p>
   </div>
   <div class="login_block">
@@ -18,7 +18,7 @@
     <input class="input_field h5" type="password" name ="password" [(ngModel)]="password"
            (keydown.enter)="onLogin()"><br><br>
     <div class="align_center">
-      <button class="btn btn-lg btn-primary" type="button" (click)="onLogin()">Login</button>
+      <button name="submit" class="btn btn-lg btn-primary" type="button" (click)="onLogin()">Login</button>
     </div>
   </div>
 
