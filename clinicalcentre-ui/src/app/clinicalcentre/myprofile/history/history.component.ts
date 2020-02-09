@@ -17,13 +17,17 @@ export class HistoryComponent implements OnInit {
    scores: Array<{
       appointmentDTO: Appointment,
       scoreForDoctor: number,
-      scoreForClinic: number
+      scoreForClinic: number,
+      givenDoctorScore: number,
+      givenClinicScore: number
     }> = [];
-   selectedAppointment: {
+   selectedScore: {
       appointmentDTO: Appointment,
       scoreForDoctor: number,
       scoreForClinic: number
     } = null;
+    doctorScore: number = null;
+    clinicScore: number = null;
 
   errorMessage = null;
   httpStatusInternalServerError = 500;
@@ -37,7 +41,9 @@ export class HistoryComponent implements OnInit {
     .subscribe((responseData: Array<{
       appointmentDTO: Appointment,
       scoreForDoctor: number,
-      scoreForClinic: number
+      scoreForClinic: number,
+      givenDoctorScore: number,
+      givenClinicScore: number
     }>) => {
       this.scores = responseData;
     }, error => {
@@ -46,6 +52,14 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  addScore(score){
+    this.selectedScore = score;
+  }
+
+  submitScore(score){
+    console.log(score);
   }
 
   handleError(error){
