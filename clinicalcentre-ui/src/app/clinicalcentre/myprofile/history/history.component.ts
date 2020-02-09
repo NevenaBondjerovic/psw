@@ -13,6 +13,7 @@ export class HistoryComponent implements OnInit {
 
   loggedInUser: User = null;
    appointmentUrl: string = 'http://localhost:8080/appointments/user';
+   scoreUrl: string = 'http://localhost:8080/score';
    stars: any[] = [];
    scores: Array<{
       appointmentDTO: Appointment,
@@ -54,12 +55,30 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  addScore(score){
-    this.selectedScore = score;
-  }
-
   submitScore(score){
-    console.log(score);
+    this.selectedScore = score;
+    this.selectedScore.scoreForClinic = score.givenClinicScore;
+    this.selectedScore.scoreForDoctor = score.givenDoctorScore;
+    this.http.post(this.scoreUrl, this.selectedScore)
+    .subscribe(() => {
+      this.selectedScore = null;
+      for(let s of this.scores){
+        if(s.appointmentDTO.id == score.appointmentDTO.id){
+          if(score.givenDoctorScore !== undefined){
+            s.scoreForDoctor = score.givenDoctorScore;
+           }else {
+            s.scoreForDoctor = null;
+           }
+          if(score.givenClinicScore !== undefined){
+            s.scoreForClinic = score.givenClinicScore;
+          }else {
+            s.scoreForClinic = null;
+          }
+        }
+      }
+    }, error => {
+      this.handleError(error);
+    });
   }
 
   handleError(error){

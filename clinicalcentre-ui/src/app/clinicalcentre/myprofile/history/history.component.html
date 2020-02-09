@@ -18,12 +18,14 @@
           <td>
             <div *ngIf="score.scoreForClinic !== null">
               Clinic score:
+              <br>
               <fa *ngFor="let i of convertScoreToStars(score.scoreForClinic)"
                   name="fas fa-star" aria-hidden="true"></fa>
               <br>
             </div>
             <div *ngIf="score.scoreForClinic === null">
               Clinic score:
+              <br>
               <input type="number" max="5" min="1" style="width: 50px;"
                      [(ngModel)]="score.givenClinicScore">
               <br>
@@ -31,18 +33,20 @@
 
             <div *ngIf="score.scoreForDoctor !== null">
               Doctor score:
+              <br>
               <fa *ngFor="let i of convertScoreToStars(score.scoreForDoctor)"
                   name="fas fa-star" aria-hidden="true"></fa>
               <br>
             </div>
             <div *ngIf="score.scoreForDoctor === null">
               Doctor score:
+              <br>
               <input type="number" max="5" min="1" style="width: 50px;"
                      [(ngModel)]="score.givenDoctorScore">
               <br>
             </div>
-            <button [disabled]="score.scoreForDoctor !== null
-                  && score.scoreForClinic !== null"
+            <button *ngIf="score.scoreForDoctor === null
+                  || score.scoreForClinic === null"
               name="showScore" class="btn btn-primary" type="button"
                     (click)="submitScore(score)">Add score</button>
           </td>
