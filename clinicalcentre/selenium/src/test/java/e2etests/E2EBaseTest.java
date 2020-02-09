@@ -1,4 +1,4 @@
-package basetests;
+package e2etests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.Arrays;
 import java.util.Collection;
 
-public abstract class BaseTest {
+public abstract class E2EBaseTest {
 
     private static final String CHROMEDRIVER_PATH = "src/libs/chromedriver";
     private static final String FIREFOXDRIVER_PATH = "src/libs/geckodriver";
