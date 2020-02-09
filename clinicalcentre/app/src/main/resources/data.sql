@@ -356,3 +356,31 @@ where id = 4;
 update clinical_centre.users
 set username = 'nevenafakultet13@gmail.com'
 where id = 1;
+
+------------SCORES TABLE----------
+
+CREATE TABLE clinical_centre.scores (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  doctor_id INT DEFAULT NULL,
+  doctor_score INT DEFAULT NULL,
+  clinic_id INT DEFAULT NULL,
+  clinic_score INT DEFAULT NULL,
+  user_id INT NOT NULL,
+  appointment_id INT NOT NULL,
+
+  FOREIGN KEY (doctor_id) REFERENCES users(id),
+  FOREIGN KEY (clinic_id) REFERENCES clinics(id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (appointment_id) REFERENCES appointments(id)
+);
+
+-------------update appointments----------
+
+INSERT INTO clinical_centre.appointments VALUES
+  (11, '2020-02-01', ' 10:30' , 1, 3, 5, 1, 1, 2);
+
+INSERT INTO clinical_centre.appointments VALUES
+  (12, '2020-01-15', ' 10:30' , 1, 3, 3, 1, 1, 2);
+
+INSERT INTO clinical_centre.appointments VALUES
+  (13, '2020-02-02', ' 11:30' , 3, 6, 4, 5, 5, 2);

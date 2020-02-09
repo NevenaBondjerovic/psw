@@ -1,6 +1,9 @@
 package com.psw.clinicalcentre.appointments;
 
+import com.psw.clinicalcentre.converters.AppointmentConverter;
 import com.psw.clinicalcentre.exceptions.NotFoundException;
+import com.psw.clinicalcentre.scores.Score;
+import com.psw.clinicalcentre.scores.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,9 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+
+    @Autowired
+    private ScoreRepository scoreRepository;
 
     @Override
     public Set<Appointment> findAllAvailable() {
@@ -87,5 +93,25 @@ public class AppointmentServiceImpl implements AppointmentService{
             }
         });
         return response;
+    }
+
+    @Override
+    public Set<AppointmentWithScoreDTO> findAllPastAppointmentsForUser(Integer id) {
+        Set<Appointment> appointments = appointmentRepository.findAllPastAppointmentsForUser(id);
+        Set<Score> scores = scoreRepository.findAllForUserId(id);
+        Set<AppointmentWithScoreDTO> returnValue = new HashSet<>();
+
+        appointments.forEach(appointment -> {
+            AppointmentWithScoreDTO dto = new AppointmentWithScoreDTO();
+            dto.setAppointmentDTO(AppointmentConverter.appointmentToAppointmentDTO(appointment));
+            scores.forEach(score -> {
+                if(score.getAppointment().getId().equals(appointment.getId())){
+                    dto.setScoreForClinic(score.getClinicScore());
+                    dto.setScoreForDoctor(score.getDoctorScore());
+                }
+            });
+            returnValue.add(dto);
+        });
+        return returnValue;
     }
 }

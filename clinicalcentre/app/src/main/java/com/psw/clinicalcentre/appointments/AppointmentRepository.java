@@ -43,4 +43,9 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
             "where cd.clinic.id = :clinicId and a.dateOfAppointment >= curdate() and a.scheduledFor is null ")
     Set<Appointment> findByClinicId(@Param("clinicId") Integer id);
 
+
+    @Query("select a from Appointment a " +
+            "where a.scheduledFor.id = :id " +
+            "and a.dateOfAppointment < curdate() ")
+    Set<Appointment> findAllPastAppointmentsForUser(@Param("id") Integer id);
 }

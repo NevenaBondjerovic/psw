@@ -52,4 +52,9 @@ public class AppointmentController {
                 HttpStatus.OK);
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Set<AppointmentWithScoreDTO>> findAllPastAppointmentsForUser(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(appointmentService.findAllPastAppointmentsForUser(id), HttpStatus.OK);
+    }
+
 }

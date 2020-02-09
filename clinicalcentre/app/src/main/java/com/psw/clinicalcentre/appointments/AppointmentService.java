@@ -10,4 +10,5 @@ public interface AppointmentService {
     Set<Appointment> findAllFutureForDoctor(Integer id);
     Set<SearchDoctorsResponse> findByClinicAndDateAndType(Integer clinicId, Date date, String type);
     Set<SearchDoctorsResponse> findByClinicId(Integer clinicId);
+    Set<AppointmentWithScoreDTO> findAllPastAppointmentsForUser(Integer id);
 }

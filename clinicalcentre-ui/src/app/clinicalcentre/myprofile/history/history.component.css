@@ -1,4 +1,34 @@
+.overview {
+  margin: 0 2% 5% 10%;
+}
 
 .header {
    margin: 2% 0 2% 7%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin-right: 20px;
+}
+
+td {
+  border: 1px solid gray;
+  width: 10%;
+}
+
+tr {
+  border: 1px solid gray;
+  border-left: 15px solid gray;
+  border-right: 15px solid gray;
+  text-align: center;
+  padding: 8px;
+  background-color: white;
+  height: 40px;
+  font-size: 15px;
+}
+
+tr:hover {
+  background-color: #808080;
+  color: white;
 }
